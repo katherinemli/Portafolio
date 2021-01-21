@@ -1,0 +1,139 @@
+// app global css in SCSS form
+.box-1{
+    height: 100%;
+    width: 100%;
+    background-color: $accent;
+}
+.box-2{
+    height: 100%;
+    width: 100%;
+    background-color: $info;
+}
+.box-3{
+    height: 100%;
+    width: 100%;
+    background-color: $warning;
+}
+.body-app {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+.index-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.index-left {
+    font-size: 4.8vw;
+    font-weight: 400;
+}
+.index-right {
+
+}
+.transition {
+    -webkit-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+.work-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: left;
+    padding-top: 5%;
+  }
+  
+.my-card{
+    width: 100%;
+    max-width: 300px;
+    height: 20%;
+    margin: 0 5% 0 0;
+  }
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 5%;
+}
+.about-left {
+    font-size: 3vw;
+    font-weight: 400;
+    flex: 1 0 33%;
+    margin: 2%;
+}
+.about-right {
+    font-size: 3vw;
+    font-weight: 400;
+    flex: 1 0 33%;
+    margin: 2%;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+  .container {
+    height: 300vh;
+  }
+  
+  .img-container {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    position: relative;
+    top: 60vh;
+    background: #ffe6c5;
+    width: 450px;
+    height: 600px;
+    margin: 15px 0;
+    padding: 15px;
+    overflow: hidden;
+  }
+  
+  .phone {
+    position: relative;
+    left: 20px;
+    transform: scale(1);
+  }
+  
+  #trigger {
+    position: absolute;
+    top: 25vh;
+  }
+  .wherex-parent {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+  .wherex-child {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: -moz-available;
+    margin-top: 3%;
+    height: 25vh;
+  }
+  .wherex-child-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .wherex-child-right {
+    flex: 2;
+}
+.wherex-child-text {
+    align-self: center;
+}
+  
