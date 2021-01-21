@@ -1,6 +1,6 @@
 <template>
   <q-page class="wherex-parent">
-    <div class="wherex-child">
+    <div class="citiapps-child">
       <div class="wherex-child-left">
           <div class="wherex-child-text" >Tecnologias</div>
           <div class="wherex-child-text"
@@ -16,7 +16,7 @@
         <div>Full Stack Engineer</div>
       </div>
     </div>
-    <div class="wherex-child">
+    <div class="citiapps-child">
       <div class="wherex-child-left">
         <div class="wherex-child-text">The Brief</div>
       </div>
@@ -24,7 +24,7 @@
         <div>{{parrafo1}}</div>
       </div>
     </div>
-    <div class="wherex-child">
+    <div class="citiapps-child">
       <div class="wherex-child-left">
         <div class="wherex-child-text">The Solution</div>
       </div>
@@ -32,7 +32,7 @@
         <div>{{textParrafo}}</div>
       </div>
     </div>
-    <div class="wherex-child">
+    <div class="citiapps-child">
       <Step/>
     </div>
     <div style="width: 100%;" class="work-content">
