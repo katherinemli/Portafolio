@@ -17,10 +17,8 @@
         icon="settings"
         :done="done1"
       >
-        For each ad campaign that you create, you can control how much you're willing to
-        spend on clicks and conversions, which networks and geographical locations you want
-        your ads to show on, and more.
-
+        Se creó un sistema centralizado que conecta los sistemas de la empresa
+        distribuidora Tradis con los pedidos hechos en la página web Falabella.com
       </q-step>
 
       <q-step
@@ -29,9 +27,8 @@
         icon="create_new_folder"
         :done="done2"
       >
-        For each ad campaign that you create, you can control how much you're willing to
-        spend on clicks and conversions, which networks and geographical locations you want
-        your ads to show on, and more.
+        Usando API Google Maps, Vue y Go se diseño un sistema que se adecua a el
+        lenguaje y los modismos de Chile.
 
       </q-step>
 
@@ -41,9 +38,15 @@
         icon="add_comment"
         :done="done3"
       >
-        For each ad campaign that you create, you can control how much you're willing to
-        spend on clicks and conversions, which networks and geographical locations you want
-        your ads to show on, and more.
+        Se diseñó un algortimo de planificación en Go que permite tomar en
+        consideración las variables que se presentan durante todo el proceso de
+        entrega como por ejemplo ferias, tiempo de estacionamiento, horario o
+        congestión vehicular.
+        Se diseño la vista que permitia crear, modificar y ver la planificación
+        para los distintos participantes del proceso.
+        The dispatch unit optimizes delivery routes based on drop-off locations,
+        goods needed to be transported, and driver capabilities — all with an eye
+        towards minimizing costs.
       </q-step>
       <q-step
         :name="4"
@@ -51,9 +54,9 @@
         icon="add_comment"
         :done="done4"
       >
-        For each ad campaign that you create, you can control how much you're willing to
-        spend on clicks and conversions, which networks and geographical locations you want
-        your ads to show on, and more.
+      En este paso se permite agregar automaticamente a los choferes las rutas
+      planificadas tomando en consideración la cantidad de choferes disponibles y
+      sus antiguas rutas y zonas de despacho.
       </q-step>
             <q-step
         :name="5"
@@ -61,10 +64,9 @@
         icon="add_comment"
         :done="done5"
       >
-        For each ad campaign that you create, you can control how much you're willing to
-        spend on clicks and conversions, which networks and geographical locations you want
-        your ads to show on, and more.
-
+        This is the step where orders and requests are monitored both by the
+        sender and the end recipient, who is likely following the status of
+        their delivery through a tracking number.
       </q-step>
     </q-stepper>
   </div>

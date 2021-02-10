@@ -16,7 +16,7 @@
             Katherine
           </router-link>
         </q-toolbar-title>
-        <q-tabs v-model="selected" align="center" vertical>
+        <q-tabs style="color: #3DFFBE;" v-model="selected" align="center" vertical>
         <q-tab name="me" v-on:click="scrollToPortada" label="Me"/>
         <q-tab name="about" v-on:click="scrollToAbout" label="about"/>
         <q-tab name="work" v-on:click="scrollToWork" label="work"/>

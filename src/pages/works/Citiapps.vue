@@ -21,7 +21,7 @@
         <div class="wherex-child-text">The Brief</div>
       </div>
       <div class="wherex-child-right">
-        <div>{{parrafo1}}</div>
+        <div>{{parrafo}}</div>
       </div>
     </div>
     <div class="citiapps-child">
@@ -29,7 +29,7 @@
         <div class="wherex-child-text">The Solution</div>
       </div>
       <div class="wherex-child-right">
-        <div>{{textParrafo}}</div>
+        <div>{{textParrafo}}{{parrafo1}}</div>
       </div>
     </div>
     <div class="citiapps-child">
@@ -53,9 +53,10 @@ export default {
   data() {
     return {
       heightValue: 700,
-      parrafo1: 'Web platform for quotes and tenders that aims to transform the acquisition processes of big companies.',
-      textParrafo: 'Allow Suppliers to have new business opportunities through access to more buyers; and to the Buyers to ensure a higher level of competence, efficiency and control in their procurement processes, generating significant benefits.',
-      tecnologias: ['Angular', 'twig', 'php'],
+      parrafo: 'Plataformas para gestión de voluntarios y entidades gubernamentales ante situaciones de catastrofes nacionales como terremotos o maremotos',
+      parrafo1: 'Implemented new user-facing features using Vue.js, JavaScript, HTML, CSS3, Sass, D3 and Google Maps.',
+      textParrafo: 'Worked closely with a small team of developers to create optimized application for maximum speed and scalability and ensured the technical feasibility of UI/UX designs',
+      tecnologias: ['Vue', 'Google Maps API', 'D3', 'Twitter APIS'],
       widthValue: 800,
     };
   },

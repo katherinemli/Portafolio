@@ -21,7 +21,7 @@
         <div class="wherex-child-text">The Brief</div>
       </div>
       <div class="wherex-child-right">
-        <div>{{parrafo1}}</div>
+        <div>{{brief_1}}</div>
       </div>
     </div>
     <div class="citiapps-child">
@@ -29,12 +29,12 @@
         <div class="wherex-child-text">The Solution</div>
       </div>
       <div class="wherex-child-right">
-        <div>{{textParrafo}}</div>
+        <div class="citiapps-child">
+          <Step/>
+        </div>
       </div>
     </div>
-    <div class="citiapps-child">
-      <Step/>
-    </div>
+
     <div style="width: 100%;" class="work-content">
         <div> <router-link  to="citiapps" class="text-h6">Prev</router-link ></div>
         <div> <router-link  to="/#work" fragment="work" class="text-h6">All</router-link ></div>
@@ -53,9 +53,11 @@ export default {
   data() {
     return {
       heightValue: 500,
-      parrafo1: 'Web platform for quotes and tenders that aims to transform the acquisition processes of big companies.',
-      textParrafo: 'Allow Suppliers to have new business opportunities through access to more buyers; and to the Buyers to ensure a higher level of competence, efficiency and control in their procurement processes, generating significant benefits.',
-      tecnologias: ['Angular', 'twig', 'php'],
+      parrafo1: ' Geosort project, software responsible for planning, tracking and geocoding orders from Falabella.com.',
+      textParrafo: 'Developed web user interface with Vue from scratch, Implemented maintainable, scalable, responsive code, Able to solve problems efficiently, think creatively and deliver user focused software solutions in a timely manner, Engaged with clients for suggestions and feedback throughout development and implementation process  ',
+      tecnologias: ['Vue', 'Google Maps API', 'vue-chartjs'],
+      brief_1: 'I designed and developed a web interface using VUE from scratch with a maintainable, scalable and responsive code',
+      brief_2: '',
       widthValue: 500,
     };
   },

@@ -10,10 +10,20 @@
           </div>
       </div>
       <div class="wherex-child-right">
-        <div>Wherex</div>
-        <div>Tender Management Platform</div>
-        <div>Sep-2020 to Now</div>
-        <div>Full Stack Engineer</div>
+        <div>EVIC 2018</div>
+        <div>Ganadora Primer Lugar Hackathon Falabella</div>
+        <div>
+          Profesora y Ayudante de la Universidad de Santiago de Chile
+        </div>
+        <div>
+          Profesora particular
+        </div>
+        <div>Voluntaria SUBE</div>
+        <div>SmarthHouse Project</div>
+        <div>Miembro del centro de alumnos del departamento de ingenieria informatica</div>
+        <div>Viajera</div>
+        <div>Photographer</div>
+        <div>March-2013 to Now</div>
       </div>
     </div>
     <div class="citiapps-child">
@@ -21,7 +31,7 @@
         <div class="wherex-child-text">The Brief</div>
       </div>
       <div class="wherex-child-right">
-        <div>{{parrafo1}}</div>
+        <div></div>
       </div>
     </div>
     <div class="citiapps-child">
@@ -29,11 +39,10 @@
         <div class="wherex-child-text">The Solution</div>
       </div>
       <div class="wherex-child-right">
-        <div>{{textParrafo}}</div>
+        <div></div>
       </div>
     </div>
     <div class="citiapps-child">
-      <Step/>
     </div>
     <div style="width: 100%;" class="work-content">
         <div> <router-link  to="falabella" class="text-h6">Prev</router-link ></div>
@@ -43,19 +52,15 @@
   </q-page>
 </template>
 <script>
-import Step from './Step.vue';
 
 export default {
   name: 'Teacher',
-  components: {
-    Step,
-  },
   data() {
     return {
       heightValue: 700,
-      parrafo1: 'Web platform for quotes and tenders that aims to transform the acquisition processes of big companies.',
-      textParrafo: 'Allow Suppliers to have new business opportunities through access to more buyers; and to the Buyers to ensure a higher level of competence, efficiency and control in their procurement processes, generating significant benefits.',
-      tecnologias: ['Angular', 'twig', 'php'],
+      parrafo1: 'Profesora ',
+      textParrafo: '',
+      tecnologias: ['Python', 'Design & Analysis of Algorithm', 'Distributed Computing', 'Full Stack Development', 'Java', 'C++', 'Maths', 'Chemistry'],
       widthValue: 800,
     };
   },
