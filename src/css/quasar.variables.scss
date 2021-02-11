@@ -11,7 +11,7 @@
 // It's highly recommended to change the default colors
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
-
+    
 $primary   : white;
 $secondary : #26A69A;
 $accent    : white;
@@ -30,4 +30,5 @@ $negative  : #C10015;
 @custom-media --laptop only screen and (min-width: #{em(1025)});
 @custom-media --desktop only screen and (min-width: #{em(1280)});
 @custom-media --monitor only screen and (min-width: #{em(1448)});
+
 
