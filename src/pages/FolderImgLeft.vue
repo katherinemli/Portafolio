@@ -1,25 +1,24 @@
 <template>
-  <div class="grid-container">
-    <div class="item-1">{{title}}</div>
-    <div class="item-6"
+  <div class="grid-container-left">
+    <div class="item-1-left">{{title}}</div>
+    <div class="item-6-left"
     style=
-    "width: 79%;
-    height: 86%;
-    margin: 15% 0% 0% 5%;
+    "width: 82%;
+    height: 82%;
+    margin: 14% 0% 0% 0%;
     box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
     "
     >
     </div>
-    <div class="item-3">3</div>
-    <div class="item-4">4</div>
-    <div class="item-5 sub-right">{{subtitle}}</div>
-    <div class="item-7">{{subtext}}</div>
-    <div class="item-2">
+    <div class="item-5-left sub-right">{{subtitle}}</div>
+    <div class="item-7-left">{{subtext}}</div>
+    <div class="item-2-left">
       <img
         src="~assets/hakaton.jpeg"
         id="companyLogo"
         style=
-        "width: 98%;
+        "object-fit: cover;
+        width: 100%;
         max-height: 100%;"
       /></div>
   </div>

@@ -5,7 +5,9 @@
     ref="portada"
     class="box-1"
   >
-    <div v-intersection="onIntersectionIndex"/>
+    <div
+     style="padding: 8%;"
+     v-intersection="onIntersectionIndex"/>
     <Index />
     </q-page>
 

@@ -1,34 +1,32 @@
 <template>
-  <q-page class="index-content">
-    <div style="height: 100hv;  width: 100vh;">
-      <div class="mama tia">
-        <div class="child child-img">
-            <div class="index-tittle">{{ title }}</div>
-        </div>
-        <div class="child child-2-img">
-            <div class="index-top">{{toptext}}</div>
-            <div class="index-right">{{subtitle}}</div>
-            <div class="sub-right">{{subtext}}</div>
-        </div>
-        <div class="child-3-img">
-            <div class="content-logo">
-                <img id="companyLogo"
-                class="img-hidden"
-                src="~assets/yo.jpg"
-                />
-            </div>
-        </div>
-        </div>
-      </div>
-  </q-page>
+  <div>
+    <FolderImg
+    v-bind:marginTop="marginTop"
+    v-bind:marginLeft="marginLeft"
+    v-bind:subtitle="subtitle"
+    v-bind:toptext="toptext"
+    v-bind:subtext="subtext"
+    v-bind:marginLeftTxt="marginLeftTxt"
+    v-bind:urlPicture="'home'"
+    v-bind:id="1"
+    v-bind:title="title"
+    />
+  </div>
 </template>
 
 <script>
+import FolderImg from './FolderImg.vue';
 
 export default {
   name: 'Index',
+  components: {
+    FolderImg,
+  },
   data() {
     return {
+      marginTop: '2%',
+      marginLeft: '20%',
+      marginLeftTxt: '50.6vw',
       title: 'KATHERINE',
       toptext: 'katherine.lib.ira@gmail.com',
       subtitle: ' I\'m a FrontEnd Developer and Software Engineer',
