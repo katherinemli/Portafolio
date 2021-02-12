@@ -8,7 +8,7 @@
     v-bind:subtext="users[0].about"
     v-bind:marginLeftTxt="marginLeftTxt"
     v-bind:urlPicture="users[0].url"
-    v-bind:id="1"
+    v-bind:id="'1'"
     />
     <FolderImgLeft
     v-bind:marginTop="'-4vw'"
@@ -28,7 +28,7 @@
     v-bind:subtext="users[2].about"
     v-bind:marginLeftTxt="marginLeftTxt"
     v-bind:urlPicture="users[2].url"
-    v-bind:id="3"
+    v-bind:id="'3'"
     />
     <FolderImgLeft
     v-bind:marginTop="'-4vw'"

@@ -1,70 +1,35 @@
 <template>
   <div
-  v-on:click="scrollToWorkSelelected(urlPicture)"
+  style="cursor: default;"
   class="grid-container">
+    <div class="item-1">{{title}}</div>
+    <div class="item-6"
+    style=
+    "width: 79%;
+    height: 83.3%;
+    margin: 15% 0% 0% 5%;
+    box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
+    "
+    >
+    </div>
     <div class="item-3">3</div>
     <div class="item-4">4</div>
     <div class="item-5 sub-right">{{subtitle}}</div>
     <div class="item-7">{{subtext}}</div>
     <div class="item-2">
       <img
-        v-if="id==='1'"
-        src="~assets/sube2.jpg"
+        src="~assets/yo.jpg"
         id="companyLogo"
         style=
-        "object-fit: cover;
-        width: 100%;
+        "width: 98%;
         max-height: 100%;"
-      />
-      <img
-        v-if="id==='3'"
-        src="~assets/hakaton2.jpg"
-        id="companyLogo"
-        style=
-        "object-fit: cover;
-        width: 100%;
-        max-height: 100%;"
-      />
-    </div>
-    <div
-    style=
-    "grid-column: col 3/span 3;
-     grid-row: row 4/ span 1;
-     margin-left: 2%;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow1"
-        style=
-        "object-fit: cover;
-        width: 11%;
-        transform: scaleX(-1);
-        max-height: 100%;"
-      />
-    </div>
-        <div
-    style=
-    "grid-column: col 3/span 3;
-     grid-row: row 4/ span 1;
-     margin-top: 12%;
-     margin-left: 2%;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow2"
-        style=
-        "object-fit: cover;
-        width: 11%;
-        transform: scaleX(-1);
-        max-height: 100%;"
-      />
-    </div>
+      /></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FolderImg',
+  name: 'FolderImgIndex',
   props: {
     title: {
       type: String,

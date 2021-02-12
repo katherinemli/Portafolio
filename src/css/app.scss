@@ -268,7 +268,8 @@ code {
   display: grid;
   //grid-template: repeat(4, [row] 1fr) / repeat(5, [col] 1fr);
   grid-template-columns: [col] 1fr [col] 1fr [col] 0.1fr [col] 1fr [col] 0.1fr;
-  grid-template-rows: [row] 0.5fr [row] 0.4fr [row] 0.5fr [row] 1fr;;
+  grid-template-rows: [row] 0.5fr [row] 0.4fr [row] 0.1fr [row] 1fr;
+  cursor: pointer;
 }
 .item-1,
 .item-2,
@@ -327,7 +328,7 @@ code {
 .item-7 {
   grid-column: col 1 / span 2;
   grid-row: row 4 / span 2;
-  font-size: calc(3em + 1vw);
+  font-size: calc(2em + 1vw);
   text-align: justify;
 }
 
@@ -336,7 +337,8 @@ code {
   display: grid;
   //grid-template: repeat(4, [row] 1fr) / repeat(5, [col] 1fr);
   grid-template-columns: [col] 0.1fr [col] 1fr [col] 0.1fr [col] 1fr [col] 1fr;
-  grid-template-rows: [row] 0.5fr [row] 0.4fr [row] 0.5fr [row] 1fr;;
+  grid-template-rows: [row] 0.5fr [row] 0.4fr [row] 0.1fr [row] 1fr;
+  cursor: pointer;
 }
 .item-1-left,
 .item-2-left,
@@ -383,7 +385,6 @@ code {
 .item-5-left {
   grid-column: col 4 / span 1;
   grid-row: row 3;
-  display: flex;
   font-size: calc(3em + 1vw);
 }
 
@@ -396,4 +397,5 @@ code {
   grid-row: row 4 / span 2;
   font-size: calc(3em + 0vw);
   text-align: justify;
+  margin-left: 5%;
 }

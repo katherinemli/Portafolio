@@ -6,18 +6,18 @@
     class="box-1"
   >
     <div
-     style="padding: 8%;"
+     style="margin-top: -2%;"
      v-intersection="onIntersectionIndex"/>
     <Index />
     </q-page>
 
-    <q-page
+    <!-- <q-page
     id="about"
     ref="about"
     class="box-2"
   >
     <About v-intersection="onIntersectionAbout"/>
-    </q-page>
+    </q-page> -->
 
         <q-page
     id="work"
@@ -32,11 +32,15 @@
 <script>
 import Index from 'pages/Index.vue';
 import Work from 'pages/Works.vue';
-import About from 'pages/About.vue';
+// import About from 'pages/About.vue';
 
 export default {
   name: 'Main',
-  components: { Index, Work, About },
+  components: {
+    Index,
+    Work,
+    // About
+  },
   data() {
     return {
       position: 150,

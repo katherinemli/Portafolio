@@ -1,26 +1,26 @@
 <template>
   <div>
-    <FolderImg
+    <FolderImgIndex
     v-bind:marginTop="marginTop"
     v-bind:marginLeft="marginLeft"
     v-bind:subtitle="subtitle"
     v-bind:toptext="toptext"
     v-bind:subtext="subtext"
     v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="'home'"
-    v-bind:id="1"
+    v-bind:urlPicture="'/'"
+    v-bind:id="'-1'"
     v-bind:title="title"
     />
   </div>
 </template>
 
 <script>
-import FolderImg from './FolderImg.vue';
+import FolderImgIndex from './FolderImgIndex.vue';
 
 export default {
   name: 'Index',
   components: {
-    FolderImg,
+    FolderImgIndex,
   },
   data() {
     return {
@@ -30,7 +30,7 @@ export default {
       title: 'KATHERINE',
       toptext: 'katherine.lib.ira@gmail.com',
       subtitle: ' I\'m a FrontEnd Developer and Software Engineer',
-      subtext: 'With an eye for intuitive, well designed and user-friendly websites, I love to build websites that not only look great, but also feel great to use, regardless of how the final user access the web.',
+      subtext: 'I\'m passionate about building engaging experiences that contribute to the overall growth of a company. I possess a Bachelor’s Degree in Computer Science and I have industry experience building websites and web applications using Vue. With an eye for intuitive, well designed and user-friendly websites, I love to build websites that not only look great, but also feel great to use, regardless of how the final user access the web.',
       tecnologias: ['Vue', 'Angular', 'Twig', 'Python'],
     };
   },
