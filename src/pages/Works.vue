@@ -1,6 +1,6 @@
 <template>
   <div>
-     <FolderImg
+    <FolderImg
     v-bind:marginTop="marginTop"
     v-bind:marginLeft="marginLeft"
     v-bind:subtitle="users[0].name"
@@ -30,75 +30,6 @@
     v-bind:urlPicture="users[2].url"
     v-bind:id="'3'"
     />
-    <!--<div>b</div>
-    <div>c</div>
-    <div>d</div>
-     <FolderImg
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="users[0].name"
-    v-bind:toptext="users[0].company"
-    v-bind:subtext="users[0].about"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="users[0].url"
-    v-bind:id="1"
-    />
-    <FolderImg
-    v-bind:marginTop="'-4vw'"
-    v-bind:marginLeft="'58.6vw'"
-    v-bind:subtitle="users[1].name"
-    v-bind:toptext="users[1].company"
-    v-bind:subtext="users[1].about"
-    v-bind:marginLeftTxt="'-51.4vw'"
-    v-bind:urlPicture="users[1].url"
-    v-bind:id="2"
-    />
-    <FolderImg
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="users[2].name"
-    v-bind:toptext="users[2].company"
-    v-bind:subtext="users[2].about"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="users[2].url"
-    v-bind:id="3"
-    />
-    <FolderImg
-    v-bind:marginTop="'-4vw'"
-    v-bind:marginLeft="'58.6vw'"
-    v-bind:subtitle="users[3].name"
-    v-bind:toptext="users[3].company"
-    v-bind:subtext="users[3].about"
-    v-bind:marginLeftTxt="'-51.4vw'"
-    v-bind:urlPicture="users[3].url"
-    v-bind:id="4"
-    /> -->
-
-<!--     <q-card
-    class="my-card"
-    v-for="user in users"
-    :key="user.guid"
-    v-bind:style="{ cursor: selectedCursor }"
-    flat
-    bordered>
-      <div
-      v-on:click="scrollToWorkSelelected(user.url)">
-        <q-img
-          src="https://cdn.quasar.dev/img/parallax2.jpg"
-        />
-        <q-card-section>
-          <div class="text-overline text-orange-9">{{user.company}}</div>
-          <div class="text-h5 q-mt-sm q-mb-xs">{{user.tittle}}</div>
-          <div class="text-caption text-grey">
-              <div class="text-subtitle2">{{user.name}} - {{user.company}}</div>
-              <div class="text-subtitle2">
-                {{formatDate(user.fechaInicio)}} to
-                {{formatDate(user.fechaFinal)}}
-              </div>
-          </div>
-        </q-card-section>
-      </div>
-    </q-card> -->
   </div>
 </template>
 <script>

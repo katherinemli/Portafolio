@@ -1,11 +1,45 @@
 <template>
   <div
   v-on:click="scrollToWorkSelelected(urlPicture)"
-  class="grid-container-left">
-    <div class="item-5-left sub-right">{{subtitle}}</div>
-    <div class="item-7-left">{{subtext}}</div>
-    <div class="item-2-left">
-      {{id}}
+  style="padding-top: 4%; padding-bottom: 4%;"
+  class="grid-container-left ">
+    <div
+    style=
+    "box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
+    grid-area: 1 row / 1 col / span 3 / span 2;
+    height: 70%;"
+    >
+    </div>
+    <div
+    style="
+    grid-column: col 4/span 1;
+    grid-row: 1 row;
+    font-size: calc(2em + 1vw);"
+    class="sub-right">{{subtitle}}</div>
+    <div
+    style="
+    grid-row: 2 row/ span 4;
+    grid-column: 4 col;
+    font-size: calc(0.5em + 1vw);"
+    class="item-7">
+      <div>{{subtext}}</div>
+      <div v-for="lenguaje in tecnologias" :key="lenguaje">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: cover;
+        width: 7%;
+        max-height: 100%;"
+      />
+        <code>{{lenguaje}}</code>
+      </div>
+    </div>
+    <div
+    style="
+    grid-row: 2 row / span 2;
+    grid-column: 2 col / span 2;"
+    class="item-2-left">
       <img
         v-if="id===2"
         src="~assets/falabella.jpeg"
@@ -26,37 +60,6 @@
         max-height: 100%;"
       />
 
-    </div>
-    <div
-    style=
-    "grid-column: col 3/span 3;
-     grid-row: row 4/ span 1;
-     margin-left: 2%;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow1"
-        style=
-        "object-fit: cover;
-        width: 7%;
-        max-height: 100%;"
-      />
-    </div>
-        <div
-    style=
-    "grid-column: col 3/span 3;
-     grid-row: row 4/ span 1;
-     margin-top: 12%;
-     margin-left: 2%;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow2"
-        style=
-        "object-fit: cover;
-        width: 7%;
-        max-height: 100%;"
-      />
     </div>
   </div>
 </template>

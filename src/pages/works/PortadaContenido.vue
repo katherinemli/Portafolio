@@ -24,7 +24,7 @@
     style="grid-row: row 3 / span 2;"
     class="item-2">
       <img
-        src="~assets/yo.jpg"
+        src="~assets/hakaton.jpeg"
         id="companyLogo"
         style=
         "width: 98%;

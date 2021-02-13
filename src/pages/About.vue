@@ -13,39 +13,55 @@
       line-height: 5vh;
       font-family: 'Amatic SC';
       ">About Me</div>
-      <q-intersection
-        v-for="index in 6"
+      <div
+        v-for="( tecnologia, index ) in aboutMePar"
         :key="index"
-        :root="listEl"
-        transition="scale"
         class="example-item"
       >
-        <q-card class="q-ma-sm">
-          <img src="https://cdn.quasar.dev/img/mountains.jpg">
-
-          <q-card-section>
-            <div class="text-h6">Card #{{ index }}</div>
-            <div class="text-subtitle2">by John Doe</div>
-          </q-card-section>
-        </q-card>
-      </q-intersection>
+        <FolderText
+        v-bind:marginTop="marginTop"
+        v-bind:marginLeft="marginLeft"
+        v-bind:subtitle="subtitle"
+        v-bind:toptext="toptext"
+        v-bind:subtext="subtext"
+        v-bind:marginLeftTxt="marginLeftTxt"
+        v-bind:urlPicture="'/'"
+        v-bind:id="2"
+        v-bind:title="title"
+        />
+      </div>
+      <div
+      v-for="tecnologia in aboutMeImpar"
+      :key="tecnologia"
+      transition="jump-left"
+      class="example-item"
+      >
+        <FolderText
+        v-bind:marginTop="marginTop"
+        v-bind:marginLeft="marginLeft"
+        v-bind:subtitle="subtitle"
+        v-bind:toptext="toptext"
+        v-bind:subtext="subtext"
+        v-bind:marginLeftTxt="marginLeftTxt"
+        v-bind:urlPicture="'/'"
+        v-bind:id="4"
+        v-bind:title="title"
+        />
+      </div>
     </div>
 </template>
 <script>
 import usersData from './myWork.json';
 import FolderImg from './FolderImg.vue';
-import FolderImgLeft from './FolderImgLeft.vue';
+import FolderText from './FolderText.vue';
 /* eslint-disable */
 export default {
   name: 'About',
   components: {
     FolderImg,
-    FolderImgLeft,
+    FolderText,
   },
   computed: {
-    listEl () {
-      return this.$refs.myList ? this.$refs.myList.$el : null
-    }
   },
   data() {
     return {
@@ -56,7 +72,8 @@ export default {
       users: usersData,
       heightValue: 700,
       widthValue: 800,
-
+      aboutMePar: [2],
+      aboutMeImpar: [4],
       urlPicture: 'hakaton.jpeg',
       urlPicture2: 'hakaton2.jpg',
       urlPicture3: 'sube1.jpg',

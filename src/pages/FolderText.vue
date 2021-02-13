@@ -1,41 +1,80 @@
 <template>
   <div
-  style=
-  "cursor: default;
-  grid-template-columns: [col] 0.5fr [col] 0.8fr [col] 0.1fr [col] 1fr [col] 0.1fr;
-  grid-template-rows: [row] 0.3fr [row] 0.3fr [row] 0.1fr [row] 1fr;"
-  class="grid-container">
-    <div class="item-1">{{title}}</div>
+  v-on:click="scrollToWorkSelelected(urlPicture)"
+  class="grid-container-left">
+    <div class="item-5-left sub-right">{{subtitle}}</div>
+    <div class="item-7-left">{{subtext}}</div>
+    <div
+    style="
+    grid-column: col 2;
+    grid-row: row 4;"
+    class="item-2-left">
+      <div
+        v-if="id===2"
+        id="companyLogo1"
+        style=
+        "object-fit: cover;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        max-height: 100%;"
+      >hola mundo</div>
+      <div
+        v-if="id===4"
+        id="companyLogo2"
+        style=
+        "object-fit: cover;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        max-height: 100%;"
+      >Chao mundo</div>
+    </div>
+    <div
+    style=
+    "grid-column: col 2 / span 3;
+      grid-row: row 4;"
+    class="item-2-left">
+      <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: cover;
+        width: 7%;
+        max-height: 100%;"
+      />
+    </div>
+    <div
+    style=
+    "grid-column: col 2 / span 3;
+      grid-row: row 4;"
+    class="item-2-left">
+      <img
+        src="~assets/arrow.svg"
+        id="arrow2"
+        style=
+        "object-fit: cover;
+        width: 7%;
+        max-height: 100%;"
+      />
+    </div>
     <div class="item-6"
     style=
-    "width: 79%;
-    height: 83.3%;
-    margin: 15% 0% 0% 5%;
+    "object-fit: cover;
+    width: 100%;
+    max-height: 100%;
     box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
-    grid-row: row 3 / span 3;
+    grid-column: col 2;
+    grid-row: row 1/ span 6;
     "
     >
     </div>
-    <div class="item-3">3</div>
-    <div class="item-4">4</div>
-    <div class="item-5 sub-right">{{subtitle}}</div>
-    <div class="item-7">{{subtext}}</div>
-    <div
-    style="grid-row: row 3 / span 2;"
-    class="item-2">
-      <img
-        src="~assets/yo.jpg"
-        id="companyLogo"
-        style=
-        "width: 98%;
-        max-height: 100%;"
-      /></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FolderImgIndex',
+  name: 'FolderImg',
   props: {
     title: {
       type: String,
@@ -70,8 +109,7 @@ export default {
       default: '',
     },
     id: {
-      type: String,
-      default: '',
+      type: Number,
     },
   },
   data() {

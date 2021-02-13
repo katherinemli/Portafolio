@@ -1,41 +1,72 @@
 <template>
   <div
-  style=
-  "cursor: default;
-  grid-template-columns: [col] 0.5fr [col] 0.8fr [col] 0.1fr [col] 1fr [col] 0.1fr;
-  grid-template-rows: [row] 0.3fr [row] 0.3fr [row] 0.1fr [row] 1fr;"
-  class="grid-container">
-    <div class="item-1">{{title}}</div>
-    <div class="item-6"
+  v-on:click="scrollToWorkSelelected(urlPicture)"
+  style="padding-top: 4%; padding-bottom: 4%;"
+  class="grid-container-left ">
+    <div
     style=
-    "width: 79%;
-    height: 83.3%;
-    margin: 15% 0% 0% 5%;
-    box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
-    grid-row: row 3 / span 3;
-    "
+    "box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
+    grid-area: 1 row / 1 col / span 3 / span 2;
+    height: 70%;"
     >
     </div>
-    <div class="item-3">3</div>
-    <div class="item-4">4</div>
-    <div class="item-5 sub-right">{{subtitle}}</div>
-    <div class="item-7">{{subtext}}</div>
     <div
-    style="grid-row: row 3 / span 2;"
-    class="item-2">
+    style="
+    grid-column: col 4/span 1;
+    grid-row: 1 row;
+    font-size: calc(2em + 1vw);"
+    class="sub-right">{{subtitle}}</div>
+    <div
+    style="
+    grid-row: 2 row/ span 4;
+    grid-column: 4 col;
+    font-size: calc(0.5em + 1vw);"
+    class="item-7">
+      <div>{{subtext}}</div>
+<!--       <div v-for="lenguaje in tecnologias" :key="lenguaje">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: cover;
+        width: 7%;
+        max-height: 100%;"
+      />
+        <code>{{lenguaje}}</code>
+      </div> -->
+    </div>
+    <div
+    style="
+    grid-row: 2 row / span 2;
+    grid-column: 2 col / span 2;"
+    class="item-2-left">
       <img
-        src="~assets/yo.jpg"
+        v-if="id===2"
+        src="~assets/falabella.jpeg"
         id="companyLogo"
         style=
-        "width: 98%;
+        "object-fit: cover;
+        width: 100%;
         max-height: 100%;"
-      /></div>
+      />
+
+      <img
+        v-if="id===4"
+        src="~assets/hakaton.jpeg"
+        id="companyLogo"
+        style=
+        "object-fit: cover;
+        width: 100%;
+        max-height: 100%;"
+      />
+
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'FolderImgIndex',
+  name: 'ImgLeftFolder',
   props: {
     title: {
       type: String,
@@ -70,8 +101,7 @@ export default {
       default: '',
     },
     id: {
-      type: String,
-      default: '',
+      type: Number,
     },
   },
   data() {

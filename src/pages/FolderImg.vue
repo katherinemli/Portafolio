@@ -2,9 +2,45 @@
   <div
   v-on:click="scrollToWorkSelelected(urlPicture)"
   class="grid-container">
-    <div class="item-5 sub-right">{{subtitle}}</div>
-    <div class="item-7">{{subtext}}</div>
-    <div class="item-2">
+    <div
+    style=
+    "box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
+    height: 80%;
+    grid-row: 1 row / span 2;
+    grid-column: 4 col / span 2;"
+    >
+    </div
+    ><div
+    style="
+    grid-column: col 2/span 1;
+    grid-row: 1 row;
+    font-size: calc(2em + 1vw);"
+    class="sub-right">{{subtitle}}</div>
+    <div
+    style="
+    grid-column: col 2/span 1;
+    grid-row: 2 row;
+    font-size: calc(0.5em + 1vw);"
+    class="item-7">
+      <div>{{subtext}}</div>
+      <div v-for="lenguaje in tecnologias" :key="lenguaje">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: cover;
+        width: 7%;
+        max-height: 100%;"
+      />
+        <code>{{lenguaje}}</code>
+      </div>
+    </div>
+
+    <div
+    style="
+    grid-row: row 2 ;
+    grid-column: 3 col/ span 2;"
+    class="item-2">
       <img
         v-if="id==='1'"
         src="~assets/licitacion.png"
@@ -12,7 +48,8 @@
         style=
         "object-fit: cover;
         width: 100%;
-        max-height: 100%;"
+        max-height: 100%;
+        grid-row: row 4;"
       />
       <img
         v-if="id==='3'"
@@ -21,39 +58,6 @@
         style=
         "object-fit: cover;
         width: 100%;
-        max-height: 100%;"
-      />
-    </div>
-    <div
-    style=
-    "grid-column: col 3/span 3;
-     grid-row: row 4/ span 1;
-     margin-left: 2%;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow1"
-        style=
-        "object-fit: cover;
-        width: 11%;
-        transform: scaleX(-1);
-        max-height: 100%;"
-      />
-    </div>
-        <div
-    style=
-    "grid-column: col 3/span 3;
-     grid-row: row 4/ span 1;
-     margin-top: 12%;
-     margin-left: 2%;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow2"
-        style=
-        "object-fit: cover;
-        width: 11%;
-        transform: scaleX(-1);
         max-height: 100%;"
       />
     </div>
