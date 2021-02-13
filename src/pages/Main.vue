@@ -10,15 +10,6 @@
      v-intersection="onIntersectionIndex"/>
     <Index />
     </q-page>
-
-    <!-- <q-page
-    id="about"
-    ref="about"
-    class="box-2"
-  >
-    <About v-intersection="onIntersectionAbout"/>
-    </q-page> -->
-
         <q-page
     id="work"
     ref="work"
@@ -27,19 +18,26 @@
     <Work/>
     <div v-intersection="onIntersectionWork"/>
     </q-page>
+    <q-page
+    id="about"
+    ref="about"
+    class="box-2"
+  >
+    <About v-intersection="onIntersectionAbout"/>
+    </q-page>
     </div>
 </template>
 <script>
 import Index from 'pages/Index.vue';
 import Work from 'pages/Works.vue';
-// import About from 'pages/About.vue';
+import About from 'pages/About.vue';
 
 export default {
   name: 'Main',
   components: {
     Index,
     Work,
-    // About
+    About,
   },
   data() {
     return {

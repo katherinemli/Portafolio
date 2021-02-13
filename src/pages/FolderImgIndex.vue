@@ -1,6 +1,9 @@
 <template>
   <div
-  style="cursor: default;"
+  style=
+  "cursor: default;
+  grid-template-columns: [col] 0.5fr [col] 0.8fr [col] 0.1fr [col] 1fr [col] 0.1fr;
+  grid-template-rows: [row] 0.3fr [row] 0.3fr [row] 0.1fr [row] 1fr;"
   class="grid-container">
     <div class="item-1">{{title}}</div>
     <div class="item-6"
@@ -16,7 +19,9 @@
     <div class="item-4">4</div>
     <div class="item-5 sub-right">{{subtitle}}</div>
     <div class="item-7">{{subtext}}</div>
-    <div class="item-2">
+    <div
+    style="grid-row: row 3 / span 2;"
+    class="item-2">
       <img
         src="~assets/yo.jpg"
         id="companyLogo"

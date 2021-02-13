@@ -10,6 +10,8 @@
     height: 100%;
     width: 100%;
     background-color: $accent;
+    display: flex;
+    justify-content: center;
 }
 .box-3{
     height: 100%;
@@ -268,7 +270,7 @@ code {
   display: grid;
   //grid-template: repeat(4, [row] 1fr) / repeat(5, [col] 1fr);
   grid-template-columns: [col] 1fr [col] 1fr [col] 0.1fr [col] 1fr [col] 0.1fr;
-  grid-template-rows: [row] 0.5fr [row] 0.4fr [row] 0.1fr [row] 1fr;
+  grid-template-rows: [row] 0.1fr [row] 1fr;
   cursor: pointer;
 }
 .item-1,
@@ -337,7 +339,7 @@ code {
   display: grid;
   //grid-template: repeat(4, [row] 1fr) / repeat(5, [col] 1fr);
   grid-template-columns: [col] 0.1fr [col] 1fr [col] 0.1fr [col] 1fr [col] 1fr;
-  grid-template-rows: [row] 0.5fr [row] 0.4fr [row] 0.1fr [row] 1fr;
+  grid-template-rows: [row] 0.1fr [row] 1fr;
   cursor: pointer;
 }
 .item-1-left,
@@ -398,4 +400,8 @@ code {
   font-size: calc(3em + 0vw);
   text-align: justify;
   margin-left: 5%;
+}
+.example-item {
+  height: 75vh;
+  width: 40vw;
 }

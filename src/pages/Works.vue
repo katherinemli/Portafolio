@@ -30,16 +30,6 @@
     v-bind:urlPicture="users[2].url"
     v-bind:id="'3'"
     />
-    <FolderImgLeft
-    v-bind:marginTop="'-4vw'"
-    v-bind:marginLeft="'58.6vw'"
-    v-bind:subtitle="users[3].name"
-    v-bind:toptext="users[3].company"
-    v-bind:subtext="users[3].about"
-    v-bind:marginLeftTxt="'-51.4vw'"
-    v-bind:urlPicture="users[3].url"
-    v-bind:id="4"
-    />
     <!--<div>b</div>
     <div>c</div>
     <div>d</div>

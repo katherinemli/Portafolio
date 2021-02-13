@@ -8,7 +8,7 @@
       {{id}}
       <img
         v-if="id===2"
-        src="~assets/sube1.jpg"
+        src="~assets/falabella.jpeg"
         id="companyLogo"
         style=
         "object-fit: cover;

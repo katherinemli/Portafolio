@@ -2,14 +2,12 @@
   <div
   v-on:click="scrollToWorkSelelected(urlPicture)"
   class="grid-container">
-    <div class="item-3">3</div>
-    <div class="item-4">4</div>
     <div class="item-5 sub-right">{{subtitle}}</div>
     <div class="item-7">{{subtext}}</div>
     <div class="item-2">
       <img
         v-if="id==='1'"
-        src="~assets/sube2.jpg"
+        src="~assets/licitacion.png"
         id="companyLogo"
         style=
         "object-fit: cover;
@@ -18,7 +16,7 @@
       />
       <img
         v-if="id==='3'"
-        src="~assets/hakaton2.jpg"
+        src="~assets/volunteering.jpg"
         id="companyLogo"
         style=
         "object-fit: cover;
