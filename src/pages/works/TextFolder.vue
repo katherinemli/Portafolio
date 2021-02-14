@@ -2,8 +2,12 @@
   <div
   v-on:click="scrollToWorkSelelected(urlPicture)"
   class="grid-container-left">
-    <div class="item-5-left sub-right">{{subtitle}}</div>
-    <div class="item-7-left">{{subtext}}</div>
+    <div
+    style="font-size: calc(3em + 1vw);"
+    class="item-5-left sub-right">{{subtitle}}</div>
+    <div
+    style="font-size: calc(1.8em + 1vw);"
+    class="item-7-left">{{subtext}}</div>
     <div
     style="
     grid-column: col 2;
@@ -16,6 +20,7 @@
         "object-fit: cover;
         width: 100%;
         display: flex;
+        font-size: calc(1em + 1vw);
         justify-content: center;
         max-height: 100%;"
       >hola mundo</div>
@@ -25,6 +30,7 @@
         style=
         "object-fit: cover;
         width: 100%;
+        font-size: calc(1em + 1vw);
         display: flex;
         justify-content: center;
         max-height: 100%;"

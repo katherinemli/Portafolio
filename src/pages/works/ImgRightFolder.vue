@@ -12,15 +12,15 @@
     </div
     ><div
     style="
-    grid-column: col 2/span 1;
+    grid-column: col 1/span 2;
     grid-row: 1 row;
-    font-size: calc(2em + 1vw);"
+    font-size: calc(3em + 1vw);"
     class="sub-right">{{subtitle}}</div>
     <div
     style="
-    grid-column: col 2/span 1;
+    grid-column: col 1/span 2;
     grid-row: 2 row;
-    font-size: calc(0.5em + 1vw);"
+    font-size: calc(1.8em + 1vw);"
     class="item-7">
       <div>{{subtext}}</div>
 <!--       <div v-for="lenguaje in tecnologias" :key="lenguaje">
