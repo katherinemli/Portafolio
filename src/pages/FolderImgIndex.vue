@@ -18,7 +18,7 @@
     </div>
     <div class="item-3">3</div>
     <div class="item-4">4</div>
-    <div class="item-5 sub-right">{{subtitle}}</div>
+    <div class="item-5">{{subtitle}}</div>
     <div class="item-7">{{subtext}}</div>
     <div
     style="grid-row: row 3 / span 2;"

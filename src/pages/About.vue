@@ -4,14 +4,16 @@
     display: flex;
     flex-direction: column;">
       <div style="
-      align-items: center;
-      justify-items: center;
-      font-size: 5em;
-      font-weight: 400;
-      line-height: 19.2px;
       color: rgb(39, 52, 96);
       line-height: 5vh;
-      font-family: 'Amatic SC';
+      font-family: 'Alegreya Sans', sans-serif;
+      font-size: calc(1rem + ((1vw - 0.48rem) * 0.6944));
+      display: grid;
+      justify-content: flex-end;
+      align-items: end;
+      font-weight: 800;
+      font-size: calc((25 * 1px) + (100 - 25) * ((100vw - 420px) / (1200 - 420)));
+
       ">About Me</div>
       <div
         v-for="( tecnologia, index ) in aboutMePar"

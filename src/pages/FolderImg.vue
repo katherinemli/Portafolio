@@ -14,6 +14,7 @@
     style="
     grid-column: col 2/span 1;
     grid-row: 1 row;
+    font-weight: 100;
     font-size: calc(2em + 1vw);"
     class="sub-right">{{subtitle}}</div>
     <div

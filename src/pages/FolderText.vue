@@ -1,63 +1,6 @@
 <template>
   <div
-  v-on:click="scrollToWorkSelelected(urlPicture)"
   class="grid-container-left">
-    <div class="item-5-left sub-right">{{subtitle}}</div>
-    <div class="item-7-left">{{subtext}}</div>
-    <div
-    style="
-    grid-column: col 2;
-    grid-row: row 4;"
-    class="item-2-left">
-      <div
-        v-if="id===2"
-        id="companyLogo1"
-        style=
-        "object-fit: cover;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        max-height: 100%;"
-      >hola mundo</div>
-      <div
-        v-if="id===4"
-        id="companyLogo2"
-        style=
-        "object-fit: cover;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        max-height: 100%;"
-      >Chao mundo</div>
-    </div>
-    <div
-    style=
-    "grid-column: col 2 / span 3;
-      grid-row: row 4;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow1"
-        style=
-        "object-fit: cover;
-        width: 7%;
-        max-height: 100%;"
-      />
-    </div>
-    <div
-    style=
-    "grid-column: col 2 / span 3;
-      grid-row: row 4;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow2"
-        style=
-        "object-fit: cover;
-        width: 7%;
-        max-height: 100%;"
-      />
-    </div>
     <div class="item-6"
     style=
     "object-fit: cover;
@@ -69,10 +12,19 @@
     "
     >
     </div>
+    <div
+    style="grid-column:col 2/span 4; margin-left:5%;"
+    class="item-5-left">{{subtitle}}</div>
+    <div
+    style="grid-column: col 2/span 4; margin-left:5%;"
+    class="item-7-left">{{subtext}}</div>
+    <div
+    class="item-2-left">
+    </div>
   </div>
 </template>
-
 <script>
+
 export default {
   name: 'FolderImg',
   props: {
@@ -115,6 +67,7 @@ export default {
   data() {
     return {
       tecnologias: ['Vue', 'Angular', 'Twig', 'Python'],
+
     };
   },
   methods: {
@@ -132,6 +85,10 @@ export default {
       console.log('entro?1: ', this.marginTop);
       console.log('entro?2: ', this.marginLeft);
       return `@/assets/${this.urlPicture}`;
+    },
+    getBgImg() {
+      const src = '../~assets/background.jpg';
+      return { backgroundImage: `url(${src})` };
     },
     scrollToWorkSelelected(url) {
       console.log('que se esta mandando?', url);

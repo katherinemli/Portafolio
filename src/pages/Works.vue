@@ -1,16 +1,31 @@
 <template>
   <div>
-    <FolderImg
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="users[0].name"
-    v-bind:toptext="users[0].company"
-    v-bind:subtext="users[0].about"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="users[0].url"
-    v-bind:id="'1'"
-    />
-    <FolderImgLeft
+      <div style=
+      "color: rgb(39, 52, 96);
+      line-height: 5vh;
+      font-family: 'Alegreya Sans', sans-serif;
+      font-size: calc(1rem + ((1vw - 0.48rem) * 0.6944));
+      display: grid;
+      justify-content: flex-start;
+      align-items: top;
+      font-weight: 800;
+      font-size: calc((25 * 1px) + (100 - 25) * ((100vw - 420px) / (1200 - 420)));">
+      MY WORKS</div>
+      <div style=
+      "margin-top: 6%;">
+        <FolderImg
+        v-bind:marginTop="marginTop"
+        v-bind:marginLeft="marginLeft"
+        v-bind:subtitle="users[0].name"
+        v-bind:toptext="users[0].company"
+        v-bind:subtext="users[0].about"
+        v-bind:marginLeftTxt="marginLeftTxt"
+        v-bind:urlPicture="users[0].url"
+        v-bind:id="'1'"
+        />
+      </div>
+      <div>
+     <FolderImgLeft
     v-bind:marginTop="'-4vw'"
     v-bind:marginLeft="'58.6vw'"
     v-bind:subtitle="users[1].name"
@@ -20,6 +35,8 @@
     v-bind:urlPicture="users[1].url"
     v-bind:id="2"
     />
+    </div>
+    <div>
     <FolderImg
     v-bind:marginTop="marginTop"
     v-bind:marginLeft="marginLeft"
@@ -30,6 +47,7 @@
     v-bind:urlPicture="users[2].url"
     v-bind:id="'3'"
     />
+    </div>
   </div>
 </template>
 <script>

@@ -1,69 +1,6 @@
 <template>
   <div
-  v-on:click="scrollToWorkSelelected(urlPicture)"
   class="grid-container-left">
-    <div
-    style="font-size: calc(3em + 1vw);"
-    class="item-5-left sub-right">{{subtitle}}</div>
-    <div
-    style="font-size: calc(1.8em + 1vw);"
-    class="item-7-left">{{subtext}}</div>
-    <div
-    style="
-    grid-column: col 2;
-    grid-row: row 4;"
-    class="item-2-left">
-      <div
-        v-if="id===2"
-        id="companyLogo1"
-        style=
-        "object-fit: cover;
-        width: 100%;
-        display: flex;
-        font-size: calc(1em + 1vw);
-        justify-content: center;
-        max-height: 100%;"
-      >hola mundo</div>
-      <div
-        v-if="id===4"
-        id="companyLogo2"
-        style=
-        "object-fit: cover;
-        width: 100%;
-        font-size: calc(1em + 1vw);
-        display: flex;
-        justify-content: center;
-        max-height: 100%;"
-      >Chao mundo</div>
-    </div>
-    <div
-    style=
-    "grid-column: col 2 / span 3;
-      grid-row: row 4;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow1"
-        style=
-        "object-fit: cover;
-        width: 7%;
-        max-height: 100%;"
-      />
-    </div>
-    <div
-    style=
-    "grid-column: col 2 / span 3;
-      grid-row: row 4;"
-    class="item-2-left">
-      <img
-        src="~assets/arrow.svg"
-        id="arrow2"
-        style=
-        "object-fit: cover;
-        width: 7%;
-        max-height: 100%;"
-      />
-    </div>
     <div class="item-6"
     style=
     "object-fit: cover;
@@ -74,6 +11,89 @@
     grid-row: row 1/ span 6;
     "
     >
+    </div>
+    <div
+    class="item-5-left sub-right">{{subtitle}}</div>
+    <div
+    class="item-7-left">{{subtext}}</div>
+    <div
+    style="
+    grid-column: col 2;
+    grid-row: row 3;"
+    class="item-2-left">
+      <div
+        v-if="id===2"
+        id="companyLogo1"
+        class="size-font"
+        style=
+        "object-fit: cover;
+        width: 100%;
+        justify-content: center;
+        max-height: 100%;"
+      >hola mundo</div>
+      <div
+        v-if="id===4"
+        id="companyLogo2"
+        class="size-font"
+        style=
+        "object-fit: cover;
+        width: 100%;
+        justify-content: center;
+        max-height: 100%;"
+      >Chao mundo</div>
+      <div
+        v-if="id===5"
+        id="companyLogo5"
+        class="size-font"
+        style=
+        "object-fit: cover;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        max-height: 100%;"
+      >
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        <div>Importar</div>
+      </div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        Geocodificar</div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        Planificar</div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        Rutas</div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        Seguimiento</div>
+      </div>
     </div>
   </div>
 </template>

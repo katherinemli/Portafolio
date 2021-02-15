@@ -16,8 +16,7 @@
 .box-3{
     height: 100%;
     width: 100%;
-    padding: 8%;
-    background-image: url("~assets/background.jpg");
+    background-image: url("̣~assets/background.jpg");
 }
 .body-app {
     height: 100%;
@@ -41,12 +40,12 @@
   font-size: 3.5em;
   line-height: 1.3em;
   font-weight: 600;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Alegreya Sans', sans-serif;
 }
 .index-tittle {
   color: #061033;
   font-size: 20px;
-  font-family: 'Nosifer', cursive;
+  font-family: 'Alegreya Sans', sans-serif;
   line-height: 1.2em;
 }
 .transition {
@@ -81,8 +80,8 @@
     flex-direction: column;
     justify-content: center;
     padding-top: 5%;
-    font-family: 'Pacifico', cursive;
-}
+    font-family: 'Alegreya Sans', sans-serif;
+  }
 .about-left {
     font-size: 3vw;
     font-weight: 400;
@@ -166,22 +165,21 @@
   
 code {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 300;
     line-height: 19.2px;
     color: rgb(39, 52, 96);
     position: relative;
     text-decoration: none;
     display: inline-block;
-    font-family: 'Amatic SC';
+    font-family: 'Alegreya Sans', sans-serif;
     font-size: calc(0.1em + 1vw);
   }
 
 .sub-right {
-  font-weight: 400;
   line-height: 19.2px;
   color: rgb(39, 52, 96);
   line-height: 5vh;
-  font-family: 'Amatic SC';
+  font-family: 'Alegreya Sans', sans-serif;
 }
 
 .mama {
@@ -265,7 +263,7 @@ code {
   background-color: #b4b8b9;
   border: 1px solid #ffffff;
   padding: 1rem;
-  font-family: arial;
+  font-family: 'Alegreya Sans', sans-serif;
   color: white;
   text-align: center;
 }
@@ -285,20 +283,20 @@ code {
 .item-7 {
   align-items: center;
   justify-items: center;
-  font-size: 2em;
-  font-weight: 400;
   line-height: 19.2px;
   color: rgb(39, 52, 96);
-  line-height: 5vh;
-  font-family: 'Amatic SC';
+  font-family: 'Alegreya Sans', sans-serif;
 }
 .item-1 {
   grid-column: col 2 / span 2;
+  font-family: 'Alegreya Sans', sans-serif;
   grid-row: row 1;
+  font-size: calc(1rem + ((1vw - 0.48rem) * 0.6944));
   display: grid;
   justify-content: flex-end;
   align-items: end;
-  font-size: calc(4em + 12vw);
+  font-weight: 800;
+  font-size: calc((25 * 1px) + (100 - 25) * ((100vw - 420px) / (1200 - 420)));
 }
 
 .item-2 {
@@ -322,8 +320,10 @@ code {
   grid-column: col 1 / span 2;
   grid-row: row 3;
   display: flex;
-  font-size: calc(3em + 2vw);
+  font-size: calc((25 * 1px) + (40 - 25) * ((100vw - 420px) / (1200 - 420)));
   justify-content: flex-start;
+  line-height: 10vh;
+  font-weight: 300;
 }
 
 .item-6 {
@@ -333,8 +333,10 @@ code {
 .item-7 {
   grid-column: col 1 / span 2;
   grid-row: row 4 / span 2;
-  font-size: calc(2em + 1vw);
+  font-size: calc((25 * 1px) + (28 - 25) * ((40vw - 420px) / (1200 - 420)));
   text-align: justify;
+  line-height: 6vh;
+  font-weight: 100;
 }
 
 
@@ -355,11 +357,10 @@ code {
   align-items: center;
   justify-items: center;
   font-size: 2em;
-  font-weight: 400;
   line-height: 19.2px;
   color: rgb(39, 52, 96);
   line-height: 5vh;
-  font-family: 'Amatic SC';
+  font-family: 'Alegreya Sans', sans-serif;
 }
 .item-1-left {
   grid-column: col 2 / span 2;
@@ -371,8 +372,8 @@ code {
 }
 
 .item-2-left {
-  grid-column: col 1 / span 3;
-  grid-row: row 3 / span 2;
+  grid-column: col 2;
+  grid-row: row 3;
 }
 
 .item-3-left {
@@ -385,24 +386,30 @@ code {
 .item-4-left {
   grid-column: col 3 / span 2;
   grid-row: row 2 / span 3;
+  font-weight: 100;
+
 }
 
 .item-5-left {
   grid-column: col 4 / span 1;
-  grid-row: row 3;
-  font-size: calc(1em + 1vw);
-
+  grid-row: row 2;
+  font-weight: 500;
+  font-size: calc((25 * 1px) + (45 - 25) * ((100vw - 420px) / (1200 - 420)));
 }
-
+.size-font {
+  font-weight: 300;
+  font-size: calc((25 * 1px) + (30 - 25) * ((100vw - 420px) / (1200 - 420)));
+}
 .item-6-left {
   grid-column: col 1 / span 2;
   grid-row: row 2 / span 3;
 }
 .item-7-left {
   grid-column: col 4 / span 2;
-  grid-row: row 4 / span 2;
-  font-size: calc(0.5em + 1vw);
+  grid-row: row 3;
+  font-size: calc((25 * 1px) + (30 - 25) * ((100vw - 420px) / (1200 - 420)));
   text-align: justify;
+  font-weight: 100;
 }
 .example-item {
   height: 75vh;
