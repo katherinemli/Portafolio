@@ -1,26 +1,15 @@
 <template>
-    <div ref="myList"
-    style="
-    display: flex;
-    flex-direction: column;">
-      <div style="
-      color: rgb(39, 52, 96);
-      line-height: 5vh;
-      font-family: 'Alegreya Sans', sans-serif;
-      font-size: calc(1rem + ((1vw - 0.48rem) * 0.6944));
-      display: grid;
-      justify-content: flex-end;
-      align-items: end;
-      font-weight: 800;
-      font-size: calc((25 * 1px) + (100 - 25) * ((100vw - 420px) / (1200 - 420)));
-
-      ">About Me</div>
+    <div ref="myList">
       <div
+        style="
+        display: flex;
+        justify-content: center;"
         v-for="( tecnologia, index ) in aboutMePar"
         :key="index"
         class="example-item"
       >
         <FolderText
+        style="justify-content: flex-end;"
         v-bind:marginTop="marginTop"
         v-bind:marginLeft="marginLeft"
         v-bind:subtitle="subtitle"
@@ -29,24 +18,6 @@
         v-bind:marginLeftTxt="marginLeftTxt"
         v-bind:urlPicture="'/'"
         v-bind:id="2"
-        v-bind:title="title"
-        />
-      </div>
-      <div
-      v-for="tecnologia in aboutMeImpar"
-      :key="tecnologia"
-      transition="jump-left"
-      class="example-item"
-      >
-        <FolderText
-        v-bind:marginTop="marginTop"
-        v-bind:marginLeft="marginLeft"
-        v-bind:subtitle="subtitle"
-        v-bind:toptext="toptext"
-        v-bind:subtext="subtext"
-        v-bind:marginLeftTxt="marginLeftTxt"
-        v-bind:urlPicture="'/'"
-        v-bind:id="4"
         v-bind:title="title"
         />
       </div>
@@ -69,8 +40,8 @@ export default {
     return {
       title: 'KATHERINE',
       toptext: 'katherine.lib.ira@gmail.com',
-      subtitle: ' I\'m a FrontEnd Developer and Software Engineer',
-      subtext: 'With an eye for intuitive, well designed and user-friendly websites, I love to build websites that not only look great, but also feel great to use, regardless of how the final user access the web.',
+      subtitle: ' Have something cool to share? Pop me a message!',
+      subtext: 'katherine.lib.ira@gmail.com',
       users: usersData,
       heightValue: 700,
       widthValue: 800,

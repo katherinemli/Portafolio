@@ -2,21 +2,18 @@
 
 // declare a class which applies it
 .box-1{
-    height: 100%;
-    width: 100%;
-    background-color: $accent;
+  height: 125vh;
+  width: 100%;
+  background-color: $accent;
 }
 .box-2{
-    height: 100%;
-    width: 100%;
-    background-color: $accent;
-    display: flex;
-    justify-content: center;
+  min-height: 0%;
+  width: 100%;
+  background-color: $accent;
 }
 .box-3{
-    height: 100%;
-    width: 100%;
-    background-image: url("̣~assets/background.jpg");
+  width: 100%;
+  background-image: url("̣~assets/background.jpg");
 }
 .body-app {
     height: 100%;
@@ -273,6 +270,10 @@ code {
   grid-template-columns: [col] 1fr [col] 1fr [col] 0.1fr [col] 1fr [col] 0.1fr;
   grid-template-rows: [row] 0.1fr [row] 0.1fr;
   cursor: pointer;
+  height: 67vh;
+  padding-top:2%;
+  padding-right: 2%;
+  column-gap: 3%;
 }
 .item-1,
 .item-2,
@@ -291,7 +292,6 @@ code {
   grid-column: col 2 / span 2;
   font-family: 'Alegreya Sans', sans-serif;
   grid-row: row 1;
-  font-size: calc(1rem + ((1vw - 0.48rem) * 0.6944));
   display: grid;
   justify-content: flex-end;
   align-items: end;
@@ -346,6 +346,8 @@ code {
   grid-template-columns: [col] 0.1fr [col] 1fr [col] 0.1fr [col] 1fr [col] 1fr;
   grid-template-rows: [row] 0.1fr [row] 0.1fr [row] 1fr;
   cursor: pointer;
+  column-gap: 3%;
+  padding-left: 2%;
 }
 .item-1-left,
 .item-2-left,
@@ -412,7 +414,8 @@ code {
   font-weight: 100;
 }
 .example-item {
-  height: 75vh;
-  width: 40vw;
-  padding-top: 5%;
+}
+.titulo-estilo {
+  font-weight: 300;
+  font-size: calc((25 * 1px) + (40 - 25) * ((100vw - 420px) / (1200 - 420)));
 }

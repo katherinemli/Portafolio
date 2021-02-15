@@ -1,17 +1,6 @@
 <template>
   <div
   class="grid-container-left">
-    <div class="item-6"
-    style=
-    "object-fit: cover;
-    width: 100%;
-    max-height: 100%;
-    box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
-    grid-column: col 2;
-    grid-row: row 1/ span 6;
-    "
-    >
-    </div>
     <div
     style="grid-column:col 2/span 4; margin-left:5%;"
     class="item-5-left">{{subtitle}}</div>

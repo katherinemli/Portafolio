@@ -14,13 +14,12 @@
     style="
     grid-column: col 4/span 1;
     grid-row: 1 row;
-    font-size: calc(2em + 1vw);"
-    class="sub-right">{{subtitle}}</div>
+    font-weight: 300;"
+    class="sub-right titulo-estilo">{{subtitle}}</div>
     <div
     style="
     grid-row: 2 row/ span 4;
-    grid-column: 4 col;
-    font-size: calc(0.5em + 1vw);"
+    grid-column: 4 col;"
     class="item-7">
       <div>{{subtext}}</div>
       <div v-for="lenguaje in tecnologias" :key="lenguaje">

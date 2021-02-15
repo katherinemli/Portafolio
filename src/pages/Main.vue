@@ -22,6 +22,7 @@
     id="about"
     ref="about"
     class="box-2"
+    style="min-height: 0; margin-top:2%;"
   >
     <About v-intersection="onIntersectionAbout"/>
     </q-page>
