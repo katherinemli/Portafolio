@@ -10,7 +10,7 @@
       align-items: top;
       font-weight: 800;
       font-size: calc((25 * 1px) + (100 - 25) * ((100vw - 420px) / (1200 - 420)));">
-      MY WORKS</div>
+      WORKS</div>
       <div style=
       "margin-top: 6%;">
         <FolderImg
