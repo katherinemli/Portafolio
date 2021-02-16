@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <FolderImgIndex
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitle"
-    v-bind:toptext="toptext"
-    v-bind:subtext="subtext"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="'/'"
-    v-bind:id="'-1'"
-    v-bind:title="title"
-    />
-  </div>
+  <FolderImgIndex
+  v-bind:marginTop="marginTop"
+  v-bind:marginLeft="marginLeft"
+  v-bind:subtitle="subtitle"
+  v-bind:toptext="toptext"
+  v-bind:subtext="subtext"
+  v-bind:marginLeftTxt="marginLeftTxt"
+  v-bind:urlPicture="'/'"
+  v-bind:id="'-1'"
+  v-bind:title="title"
+  />
 </template>
 
 <script>

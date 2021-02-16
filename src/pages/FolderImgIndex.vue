@@ -35,45 +35,73 @@
         style=
         "width: 98%;
         max-height: 100%;"
-      /></div>
+      />
+    </div>
   </div>
-    <div
-  v-if="plataformaMobile"
-  style=
-  "cursor: default;
-  grid-template-columns: [col] 1fr;
-  grid-template-rows: [row] 3fr [row] 1fr [row] 1fr;"
-  class="grid-container">
+  <div v-if="plataformaMobile">
     <div
     style="
     font-family: 'Alegreya Sans', sans-serif;
-    grid-row: row 1;
-    padding-top: 4%;
-    display: grid;
     line-height: 6vh;
-    justify-content: center;
     font-weight: 800;
-    font-size: 18.5vw"
+    color: rgb(39, 52, 96);
+    font-size: 18.5vw;
+    display: flex;
+    justify-items: center;
+    padding-left: 3%;
+    padding-top: 5%;"
     >{{title}}</div>
     <div
     style="
-    font-weight: 300;
+    display: flex;
+    padding: 5%
+    font-family: 'Alegreya Sans', sans-serif;
+    flex-direction: column;">
+    <div
+    style="font-weight: 300;
     line-height: 6vh;
-    padding: 4%;
     font-size: 8vw
     text-align: justify;
-    color: rgb(39, 52, 96);
-    grid-row: row 2;">
-    {{subtitle}}</div>
-    <div style="
-    padding: 4%;
-    grid-row: row 3;
-    font-size: calc((25 * 1px) + (20 - 25) * ((40vw - 420px) / (1200 - 420)));
+    color: rgb(39, 52, 96);"
+    >{{subtitle}}</div>
+    <div
+    style="font-size: calc((25 * 1px) + (50 - 25) * ((40vw - 420px) / (1200 - 420)));
     text-align: justify;
-    line-height: 6vh;
+    line-height: 5vh;
     color: rgb(39, 52, 96);
-    font-weight: 100;"
-    >{{subtext}}</div>
+    font-weight: 100;
+    ">{{subtext}}</div>
+    </div>
+    <div
+    style="
+    display: grid;
+    grid-template-columns: 0 auto auto 8vw 10vw;
+    grid-template-rows: 2vh 5vh auto 3vh 15vh;">
+      <div
+      style="
+      box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
+      width: 100%;
+      grid-column-start: 2;
+      grid-column-end: 5;
+      grid-row-start: 3;
+      grid-row-end: 5;"
+      />
+      <div
+      style="
+      grid-column-start: 1;
+      grid-column-end: span 3;
+      grid-row-start: 2;
+      grid-row-end: span 2;"
+      >
+        <img
+          src="~assets/yo.jpg"
+          id="companyLogo"
+          style=
+          "width: 100%;
+          max-height: 100%;"
+        />
+      </div>
+    </div>
   </div>
   </div>
 </template>

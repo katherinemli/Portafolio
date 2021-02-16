@@ -5,9 +5,7 @@
     ref="portada"
     class="box-1"
   >
-    <div
-     style="margin-top: -2%;"
-     v-intersection="onIntersectionIndex"/>
+    <div v-intersection="onIntersectionIndex"/>
     <Index />
     </q-page>
         <q-page

@@ -1,9 +1,14 @@
 <template>
-  <div
-  class="grid-container-left">
+  <div>
     <div
-    style="grid-column:col 2/span 4; margin-left:5%;"
-    class="item-5-left">{{subtitle}}</div>
+    style="font-size: 2em;
+    line-height: 19.2px;
+    color: rgb(39, 52, 96);
+    line-height: 5vh;
+    font-family: 'Alegreya Sans', sans-serif;">
+    <div>{{toptext}}</div>
+    <div>{{subtitle}}</div>
+    </div>
     <div
     style="grid-column: col 2/span 4; margin-left:5%;"
     class="item-7-left">{{subtext}}</div>
