@@ -57,7 +57,7 @@
     line-height: 6vh;
     font-weight: 800;
     color: rgb(39, 52, 96);
-    font-size: 18.5vw;
+    font-size: 15vw;
     display: flex;
     justify-items: center;
     padding-left: 3%;
@@ -72,17 +72,20 @@
     <div
     style="font-weight: 300;
     line-height: 6vh;
-    font-size: 8vw
+    font-size: 6.5vw
     text-align: justify;
     color: rgb(39, 52, 96);"
-    >{{subtitle}}</div>
+    >Full Stack Engineer</div>
     <div
     style="font-size: calc((25 * 1px) + (50 - 25) * ((40vw - 420px) / (1200 - 420)));
     text-align: justify;
     line-height: 5vh;
     color: rgb(39, 52, 96);
     font-weight: 100;
-    ">{{subtext}}</div>
+    ">Web platform for quotes
+    and tenders that aims to
+    transform the acquisition processes
+    of big companies.</div>
     </div>
     <div
     style="
@@ -122,7 +125,7 @@
     line-height: 6vh;
     font-weight: 800;
     color: rgb(39, 52, 96);
-    font-size: 18.5vw;
+    font-size: 15vw;
     display: flex;
     justify-items: center;
     padding-left: 3%;
@@ -137,17 +140,18 @@
     <div
     style="font-weight: 300;
     line-height: 6vh;
-    font-size: 8vw
+    font-size: 6.5vw
     text-align: justify;
     color: rgb(39, 52, 96);"
-    >{{subtitle}}</div>
+    >Product Manager</div>
     <div
     style="font-size: calc((25 * 1px) + (50 - 25) * ((40vw - 420px) / (1200 - 420)));
     text-align: justify;
     line-height: 5vh;
     color: rgb(39, 52, 96);
     font-weight: 100;
-    ">{{subtext}}</div>
+    ">Geosort project, software responsible for planning,
+    tracking and geocoding orders from Falabella.com.</div>
     </div>
     <div
     style="
@@ -187,7 +191,7 @@
     line-height: 6vh;
     font-weight: 800;
     color: rgb(39, 52, 96);
-    font-size: 18.5vw;
+    font-size: 15vw;
     display: flex;
     justify-items: center;
     padding-left: 3%;
@@ -202,17 +206,20 @@
     <div
     style="font-weight: 300;
     line-height: 6vh;
-    font-size: 8vw
+    font-size: 6.5vw
     text-align: justify;
     color: rgb(39, 52, 96);"
-    >{{subtitle}}</div>
+    >Front End Developer</div>
     <div
     style="font-size: calc((25 * 1px) + (50 - 25) * ((40vw - 420px) / (1200 - 420)));
     text-align: justify;
     line-height: 5vh;
     color: rgb(39, 52, 96);
     font-weight: 100;
-    ">{{subtext}}</div>
+    ">Platforms for managing volunteers
+    and government entities in situations
+    of national catastrophes such as earthquakes
+    or tsunamis.</div>
     </div>
     <div
     style="
