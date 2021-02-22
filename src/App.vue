@@ -11,16 +11,14 @@
             class="text-white"
             style="text-decoration: none;">
             <q-avatar>
-              <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
             </q-avatar>
-            Katherine
           </router-link>
         </q-toolbar-title>
         <q-tabs
         v-model="selected" align="center"
         horizontal>
         <q-tab name="me" v-on:click="scrollToPortada" label="Me"/>
-        <q-tab name="about" v-on:click="scrollToAbout" label="About"/>
+        <!-- <q-tab name="about" v-on:click="scrollToAbout" label="About"/> -->
         <q-tab name="work" v-on:click="scrollToWork" label="Work"/>
       </q-tabs>
       </q-toolbar>
