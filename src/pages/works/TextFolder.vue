@@ -33,14 +33,57 @@
       >hola mundo</div>
       <div
         v-if="id===4"
-        id="companyLogo2"
+        id="companyLogo5"
         class="size-font"
         style=
         "object-fit: cover;
         width: 100%;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
         max-height: 100%;"
-      >Chao mundo</div>
+      >
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        <div>Angular</div>
+      </div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        Twig</div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        PHP 5.3</div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        Go</div>
+      <div style="display:flex; flex-direction: row;">
+        <img
+        src="~assets/arrow.svg"
+        id="arrow1"
+        style=
+        "object-fit: fit;
+        max-height: 100%;"/>
+        MongoDB Atlas</div>
+      </div>
       <div
         v-if="id===5"
         id="companyLogo5"
@@ -59,7 +102,7 @@
         style=
         "object-fit: fit;
         max-height: 100%;"/>
-        <div>Importar</div>
+        <div>Vue</div>
       </div>
       <div style="display:flex; flex-direction: row;">
         <img
@@ -68,7 +111,7 @@
         style=
         "object-fit: fit;
         max-height: 100%;"/>
-        Geocodificar</div>
+        Google Maps</div>
       <div style="display:flex; flex-direction: row;">
         <img
         src="~assets/arrow.svg"
@@ -76,7 +119,7 @@
         style=
         "object-fit: fit;
         max-height: 100%;"/>
-        Planificar</div>
+        Chart.js</div>
       <div style="display:flex; flex-direction: row;">
         <img
         src="~assets/arrow.svg"
@@ -84,7 +127,7 @@
         style=
         "object-fit: fit;
         max-height: 100%;"/>
-        Rutas</div>
+        View Design</div>
       <div style="display:flex; flex-direction: row;">
         <img
         src="~assets/arrow.svg"
@@ -92,7 +135,7 @@
         style=
         "object-fit: fit;
         max-height: 100%;"/>
-        Seguimiento</div>
+        Process design</div>
       </div>
     </div>
   </div>

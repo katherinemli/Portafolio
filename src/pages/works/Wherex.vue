@@ -20,23 +20,6 @@
     v-bind:title="title"
     />
     </q-page>
-        <q-page
-    id="work"
-    ref="work"
-    class="box-3"
-  >
-    <ImgLeftFolder
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitle"
-    v-bind:toptext="toptext"
-    v-bind:subtext="textParrafo"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="'/'"
-    v-bind:id="2"
-    />
-    <div v-intersection="onIntersectionWork"/>
-    </q-page>
     <q-page
     id="work2"
     ref="work2"
@@ -46,50 +29,28 @@
     padding: 8%;
     min-height: 0%;"
   >
-    <ImgRightFolder
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitleRight"
-    v-bind:toptext="toptext"
-    v-bind:subtext="subtext"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="'/'"
-    v-bind:id="'1'"
-    />
-    <div v-intersection="onIntersectionWork"/>
-    </q-page>
-    <q-page
-    id="about"
-    ref="about"
-    style="min-height: 0%;"
-    class="box-3"
-  >
     <TextFolder
     v-bind:marginTop="marginTop"
     v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitle"
-    v-bind:toptext="toptext"
-    v-bind:subtext="subtext"
+    v-bind:subtitle="'The Solution'"
+    v-bind:toptext="'The Solution'"
+    v-bind:subtext="textParrafo"
     v-bind:marginLeftTxt="marginLeftTxt"
     v-bind:urlPicture="'/'"
     v-bind:id="4"
-    v-bind:title="title"
+    v-bind:title="'The Solution'"
     />
     </q-page>
     </div>
 </template>
 <script>
 import PortadaContenido from './PortadaContenido.vue';
-import ImgLeftFolder from './ImgLeftFolder.vue';
-import ImgRightFolder from './ImgRightFolder.vue';
 import TextFolder from './TextFolder.vue';
 
 export default {
   name: 'Wherex',
   components: {
     PortadaContenido,
-    ImgLeftFolder,
-    ImgRightFolder,
     TextFolder,
   },
   data() {

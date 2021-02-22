@@ -23,6 +23,18 @@
       </q-tabs>
       </q-toolbar>
     </q-header>
+    <q-footer>
+        <q-toolbar>
+          <q-toolbar-title
+          v-on:click="openURL(urlGmail)"
+          style="cursor: pointer; display: flex;color: rgb(39, 52, 96);justify-content: center;">
+            Have something cool to share?
+            Pop me a message!
+            katherine.lib.ira@gmail.com
+          </q-toolbar-title>
+        </q-toolbar>
+      </q-footer>
+
     <q-page-container>
       <transition name="fade">
         <router-view />
@@ -31,6 +43,7 @@
   </q-layout>
 </template>
 <script>
+import { openURL } from 'quasar';
 import EventBus from './event-bus';
 
 export default {
@@ -42,6 +55,7 @@ export default {
       visibleAbout: false,
       visibleWork: false,
       selected: 't_1',
+      urlGmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=katherine.lib.ira@gmail.com&su=I%20have%20a%20project%20in%20mind&body=I%20hope%20hear%20from%20you%20soon!',
       visibleClass: 'bg-accent text-white transition',
     };
   },
@@ -58,6 +72,7 @@ export default {
     });
   },
   methods: {
+    openURL,
     scrollToPortada() {
       this.$router.push('/#portada').then(() => window.scrollTo({ top: 0, behavior: 'smooth' }));
       /* const el = this.$refs.app.$el;

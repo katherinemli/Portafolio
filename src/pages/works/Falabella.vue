@@ -20,44 +20,6 @@
     v-bind:title="title"
     />
     </q-page>
-        <q-page
-    id="work"
-    ref="work"
-    class="box-3"
-  >
-    <ImgLeftFolder
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitle"
-    v-bind:toptext="toptext"
-    v-bind:subtext="textParrafo"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="'/'"
-    v-bind:id="2"
-    />
-    <div v-intersection="onIntersectionWork"/>
-    </q-page>
-    <q-page
-    id="work2"
-    ref="work2"
-    style="background-color: #ffffff;
-    height: 100%;
-    width: 100%;
-    padding: 8%;
-    min-height: 0%;"
-  >
-    <ImgRightFolder
-    v-bind:marginTop="marginTop"
-    v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitleRight"
-    v-bind:toptext="toptext"
-    v-bind:subtext="subtext"
-    v-bind:marginLeftTxt="marginLeftTxt"
-    v-bind:urlPicture="'/'"
-    v-bind:id="'1'"
-    />
-    <div v-intersection="onIntersectionWork"/>
-    </q-page>
     <q-page
     id="about"
     ref="about"
@@ -67,7 +29,7 @@
     <TextFolder
     v-bind:marginTop="marginTop"
     v-bind:marginLeft="marginLeft"
-    v-bind:subtitle="subtitle"
+    v-bind:subtitle="'The Solution'"
     v-bind:toptext="toptext"
     v-bind:subtext="subtext"
     v-bind:marginLeftTxt="marginLeftTxt"
@@ -75,25 +37,18 @@
     v-bind:id="5"
     v-bind:title="title"
     />
-    <Step/>
     </q-page>
     </div>
 </template>
 <script>
 import PortadaContenido from './PortadaContenido.vue';
-import ImgLeftFolder from './ImgLeftFolder.vue';
-import ImgRightFolder from './ImgRightFolder.vue';
 import TextFolder from './TextFolder.vue';
-import Step from './Step.vue';
 
 export default {
   name: 'Falabella',
   components: {
     PortadaContenido,
-    ImgLeftFolder,
-    ImgRightFolder,
     TextFolder,
-    Step,
   },
   data() {
     return {

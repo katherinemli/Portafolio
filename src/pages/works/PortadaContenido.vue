@@ -14,10 +14,10 @@
     class="item-6"
     style=
     "width: 79%;
-    height: 163.3%;
+    height: 72.3%;
     margin: 15% 0% 0% 5%;
     box-shadow: rgb(61, 255, 190) 0px 0px 0px 8px;
-    grid-row: row 3;
+    grid-row: row 3 / span 2;
     "
     >
     </div>
