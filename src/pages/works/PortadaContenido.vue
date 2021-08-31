@@ -3,7 +3,7 @@
   <div
   v-if="plataformaEscritorio"
   style=
-  "height: 125vh;
+  "height: 100vh;
   padding: 5%;
   cursor: default;
   grid-template-columns: [col] 0.5fr [col] 0.8fr [col] 0.1fr [col] 1fr [col] 0.1fr;
@@ -29,6 +29,8 @@
     <div
     style="grid-row: row 3 / span 2;"
     class="item-2">
+    <Maps/>
+
       <img
         src="~assets/licitacion.png"
         id="companyLogo"
@@ -107,8 +109,13 @@
 </template>
 
 <script>
+import Maps from './Maps.vue';
+
 export default {
   name: 'FolderImgIndex',
+  components: {
+    Maps,
+  },
   props: {
     title: {
       type: String,
@@ -155,6 +162,18 @@ export default {
     };
   },
   methods: {
+    zoomUpdate(zoom) {
+      this.currentZoom = zoom;
+    },
+    centerUpdate(center) {
+      this.currentCenter = center;
+    },
+    showLongText() {
+      this.showParagraph = !this.showParagraph;
+    },
+    innerClick() {
+      alert('Click!');
+    },
     bodyMargin() {
       console.log('entro?1: ', this.marginTop);
       console.log('entro?2: ', this.marginLeft);

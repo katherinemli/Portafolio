@@ -1,6 +1,5 @@
 <template>
   <div
-  v-on:click="scrollToWorkSelelected(urlPicture)"
   style="padding-top: 4%; padding-bottom: 4%;"
   class="grid-container-left ">
     <div

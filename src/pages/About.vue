@@ -39,9 +39,9 @@ export default {
   data() {
     return {
       title: 'KATHERINE',
-      toptext: 'Have something cool to share?',
-      subtitle: 'Pop me a message!',
-      subtext: 'katherine.lib.ira@gmail.com',
+      toptext: 'Im currently looking for a Job',
+      subtitle: '',
+      subtext: '',
       users: usersData,
       heightValue: 700,
       widthValue: 800,

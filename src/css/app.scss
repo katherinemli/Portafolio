@@ -329,6 +329,10 @@ code {
   grid-column: col 3 / span 2;
   grid-row: row 2 / span 3;
 }
+.item-6 .q-icon{
+  align-items: flex-start;
+  justify-content: flex-end;
+}
 .item-7 {
   grid-column: col 1 / span 2;
   grid-row: row 4 / span 2;
@@ -417,4 +421,15 @@ code {
 .titulo-estilo {
   font-weight: 300;
   font-size: calc((25 * 1px) + (40 - 25) * ((100vw - 420px) / (1200 - 420)));
+}
+.slow {
+  -webkit-animation-duration : 1s;
+}
+.mail-info {
+  display: flex;
+  flex-direction: row;
+  font-size: calc(0.5em + 1vw);
+}
+.mail-title {
+  margin-left: 5%;
 }

@@ -1,9 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import { latLng } from 'leaflet';
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'animate.css/animate.min.css';
 import routes from './routes';
 
 Vue.use(VueRouter);
-
+Vue.component('lat-lng', latLng);
+Vue.component('l-map', LMap);
+Vue.component('l-tile-layer', LTileLayer);
+Vue.component('l-marker', LMarker);
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;

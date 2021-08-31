@@ -10,6 +10,7 @@
         justify-content: flex-start;
         align-items: top;
         font-weight: 800;
+        margin-left: 9%;
         font-size: calc((25 * 1px) + (100 - 25) * ((100vw - 420px) / (1200 - 420)));">
         WORKS</div>
         <div style=

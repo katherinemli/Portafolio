@@ -27,7 +27,7 @@ export default {
       marginLeftTxt: '50.6vw',
       title: 'KATHERINE',
       toptext: 'katherine.lib.ira@gmail.com',
-      subtitle: ' I\'m a FrontEnd Developer and Software Engineer',
+      subtitle: ' I\'m a FullStack Developer and Software Engineer',
       subtext: 'I\'m passionate about building engaging experiences that contribute to the overall growth of a company. I possess a Bachelor’s Degree in Computer Science and I have industry experience building websites and web applications using Vue, Angular, Twig, PHP 5.3 and Go. With an eye for intuitive, well designed and user-friendly websites, I love to build websites that not only look great, but also feel great to use, regardless of how the final user access the web.',
       tecnologias: ['Vue', 'Angular', 'Twig', 'Python'],
     };
