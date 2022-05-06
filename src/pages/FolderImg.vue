@@ -129,8 +129,8 @@ export default {
     },
     scrollToWorkSelelected(url) {
       console.log('que se esta mandando?', url);
-      const urlComplete = url.trim('/');
-      this.$router.push({ path: url, params: { id: urlComplete } });
+      // const urlComplete = url.trim('/');
+      // this.$router.push({ path: url, params: { id: urlComplete } });
     },
   },
 };
