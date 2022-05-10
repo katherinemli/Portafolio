@@ -69,7 +69,7 @@ export default {
       subtitleRight: 'The Solution',
       subtext: 'Web platform for quotes and tenders that aims to transform the acquisition processes of big companies. Allow Suppliers to have new business opportunities through access to more buyers; and to the Buyers to ensure a higher level of competence, efficiency and control in their procurement processes, generating significant benefits.',
       textParrafo: 'Allow Suppliers to have new business opportunities through access to more buyers; and to the Buyers to ensure a higher level of competence, efficiency and control in their procurement processes, generating significant benefits.',
-      tecnologias: ['Angular', 'twig', 'php'],
+      tecnologias: ['Angular', 'twig', 'php', 'golang'],
     };
   },
   methods: {

@@ -158,7 +158,7 @@ export default {
     return {
       plataformaMobile: this.$q.platform.is.mobile,
       plataformaEscritorio: this.$q.platform.is.desktop,
-      tecnologias: ['Vue', 'Angular', 'Twig', 'Python'],
+      tecnologias: ['Vue', 'Angular', 'Twig', 'Python', 'golang'],
     };
   },
   methods: {

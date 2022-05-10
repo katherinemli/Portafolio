@@ -183,7 +183,7 @@ export default {
   },
   data() {
     return {
-      tecnologias: ['Vue', 'Angular', 'Twig', 'Python'],
+      tecnologias: ['Vue', 'Angular', 'Twig', 'Python', 'golang'],
     };
   },
   methods: {

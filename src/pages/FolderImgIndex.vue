@@ -40,6 +40,22 @@
       color="rgb(61, 255, 190)"
       icon="code"
       />
+      <q-btn
+      flat
+      @click="openURL(urlEvic)"
+      @mouseover="showCodeInfoEvic = !showCodeInfoEvic"
+      @mouseout="showCodeInfoEvic = !showCodeInfoEvic"
+      color="rgb(61, 255, 190)"
+      icon="code"
+      />
+      <q-btn
+      flat
+      @click="openURL(urlRouter)"
+      @mouseover="showCodeInfoRouter = !showCodeInfoRouter"
+      @mouseout="showCodeInfoRouter = !showCodeInfoRouter"
+      color="rgb(61, 255, 190)"
+      icon="code"
+      />
     </div>
     <div class="item-3">
     </div>
@@ -52,7 +68,7 @@
     style="grid-row: row 3 / span 2;"
     class="item-2">
       <img
-      v-show="!show && !showCodeInfo"
+      v-show="!show && !showCodeInfo && !showCodeInfoEvic &&!showCodeInfoRouter"
         src="~assets/yo.jpg"
         id="companyLogo"
         style=
@@ -131,6 +147,7 @@
       <div class="mail-title">Python</div>
     </div>
     </div>
+
       <div
   class="item-6"
   style=
@@ -163,6 +180,48 @@
     <div class="mail-info">
       <div>Teacher</div>
     </div>
+    </div>
+              <div
+  class="item-6"
+  style=
+  "display:flex;
+  flex-direction:column;
+  width: 79%;
+  height: 72.3%;
+  grid-row: row 4 / span 2;
+  grid-column: 4;
+  align-items: flex-start;
+  justify-content: space-between;"
+  v-show="showCodeInfoRouter">
+    <div
+    style="font-size: calc((25 * 1px) + (50 - 25) * ((40vw - 420px) / (1200 - 420)));
+    text-align: justify;
+    line-height: 5vh;
+    color: rgb(39, 52, 96);
+    font-weight: 100;
+    "
+    >Router</div>
+    </div>
+          <div
+  class="item-6"
+  style=
+  "display:flex;
+  flex-direction:column;
+  width: 79%;
+  height: 72.3%;
+  grid-row: row 4 / span 2;
+  grid-column: 4;
+  align-items: flex-start;
+  justify-content: space-between;"
+  v-show="showCodeInfoEvic">
+    <div
+    style="font-size: calc((25 * 1px) + (50 - 25) * ((40vw - 420px) / (1200 - 420)));
+    text-align: justify;
+    line-height: 5vh;
+    color: rgb(39, 52, 96);
+    font-weight: 100;
+    "
+    >Evic</div>
     </div>
   </div>
   <div v-if="plataformaMobile">
@@ -278,13 +337,17 @@ export default {
   },
   data() {
     return {
-      tecnologias: ['Vue', 'Angular', 'Twig', 'Python'],
+      tecnologias: ['Vue', 'Angular', 'Twig', 'Python', 'golang'],
       plataformaMobile: this.$q.platform.is.mobile,
       plataformaEscritorio: this.$q.platform.is.desktop,
       show: false,
       showCodeInfo: false,
+      showCodeInfoEvic: false,
+      showCodeInfoRouter: false,
       urlGmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=katherine.lib.ira@gmail.com&su=I%20have%20a%20project%20in%20mind&body=I%20hope%20hear%20from%20you%20soon!',
       urlGithubProject: 'https://github.com/katherinemli',
+      urlEvic: 'https://evic.netlify.app',
+      urlRouter: 'https://katherineliberonarouter.netlify.app',
     };
   },
   methods: {
