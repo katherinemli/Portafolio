@@ -34,6 +34,7 @@
       />
       <q-btn
       flat
+      @click="openURL(urlGithubProject)"
       @mouseover="showCodeInfo = !showCodeInfo"
       @mouseout="showCodeInfo = !showCodeInfo"
       color="rgb(61, 255, 190)"
@@ -283,6 +284,7 @@ export default {
       show: false,
       showCodeInfo: false,
       urlGmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=katherine.lib.ira@gmail.com&su=I%20have%20a%20project%20in%20mind&body=I%20hope%20hear%20from%20you%20soon!',
+      urlGithubProject: 'https://github.com/katherinemli',
     };
   },
   methods: {
