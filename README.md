@@ -1,9 +1,15 @@
-# portafolio (miportafolio)
+# Katherine Liberona
 
-mi portafolio
+I am a Bachelor of Computer Science & Engineering at the University of Santiago de Chile (2018) and I have been working for around 3 years on web-based applications both on the front-end and back-end.
+
+[Watch the code working here](https://Katherineliberonaportafolio.netlify.app).
+
+Have something cool to share? Pop me a message! katherine.lib.ira@gmail.com
 
 ## Install the dependencies
 ```bash
+yarn
+# or
 npm install
 ```
 
@@ -12,8 +18,11 @@ npm install
 quasar dev
 ```
 
+
 ### Lint the files
 ```bash
+yarn lint
+# or
 npm run lint
 ```
 
@@ -21,6 +30,3 @@ npm run lint
 ```bash
 quasar build
 ```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
