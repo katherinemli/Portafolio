@@ -1,13 +1,23 @@
-# Katherine Liberona Irarrázabal
+# Portfolio (2021 version)
 
-[katherine.lib.ira@gmail.com](mailto:katherine.lib.ira@gmail.com) | (438) 526-1448 | Ontario, Canada | Open Work Permit
+My previous personal portfolio: an animated single-page site presenting my work history and selected projects (Wherex, Falabella, CitiApps, teaching, maps).
 
-Full Stack Developer with 6 years of experience building scalable web applications and microservices. Specialized in performance optimization and large-scale data processing. Successfully delivered critical applications, including e-commerce logistics systems, emergency response platforms, and network management solutions for satellite communications.
+## Highlights
+- Built with **Quasar** (Vue 2), routed project pages loaded from a JSON data file
+- Scroll-driven animations with **GSAP** + **ScrollMagic**
+- vue-i18n setup for translations
+- Embedded Leaflet map
 
-## Technical Skills
+## Stack
+Vue 2 · Quasar · GSAP · ScrollMagic · vue-i18n · Leaflet
 
-Frontend: React, Vue.js, Angular, CSS, Webpack, D3.js  
-Backend: Go, PHP, C, Django, Python  
-Core: Embedded Systems, Memory Management, Threading, Network Protocols  
-Data: MySQL, MongoDB, Real-time Processing, AI/ML Integration, GIS (Google Maps, Leaflet)  
-DevOps: Docker, AWS, Nginx, Git
+## Run locally
+```bash
+npm install
+npx quasar dev
+```
+
+> Archived. A new portfolio is in progress.
+
+---
+Katherine Liberona Irarrázabal · [github.com/katherinemli](https://github.com/katherinemli)
