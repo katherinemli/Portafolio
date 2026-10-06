@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "sam": "node sam_katherine.mjs"
+    "katherine": "node katherine.mjs"
   },
   "dependencies": {
     "playwright": "^1.62.1"

@@ -1,4 +1,4 @@
-// Sam Katherine — une visiteuse qui ouvre le portfolio et fait ce qu'une vraie
+// Katherine — une visiteuse qui ouvre le portfolio et fait ce qu'une vraie
 // personne fait : elle attend l'intro, elle descend la page, elle change de
 // langue, elle copie le courriel, sur ordi et sur téléphone.
 //
@@ -7,8 +7,8 @@
 // si elle ne sait pas voir un projet caché exprès, elle ne prouve rien.
 //
 //   npm install
-//   node sam_katherine.mjs                       # le fichier local ../index.html
-//   node sam_katherine.mjs https://katherinemli.github.io/Portafolio/
+//   node katherine.mjs                       # le fichier local ../index.html
+//   node katherine.mjs https://katherinemli.github.io/Portafolio/
 //
 // Verdicts : PASS · DEFECT · INCONCLUSIVE. Code de sortie 1 s'il y a un DEFECT.
 
@@ -43,7 +43,7 @@ const open = async (opts = {}) => {
   return page;
 };
 
-console.log(`Sam Katherine → ${TARGET}\n`);
+console.log(`Katherine → ${TARGET}\n`);
 
 // K0 — contrôle négatif : un projet caché exprès DOIT être vu.
 {
