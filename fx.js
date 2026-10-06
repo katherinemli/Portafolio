@@ -489,4 +489,130 @@ footer { position: relative; padding-top: 48px !important; }
 
     return () => cleanups.forEach(f => f());
   });
+
+  // ------------------------------------------------------------------
+  // Round 4: a toy for every GSAP plugin we hadn't touched yet.
+  // ------------------------------------------------------------------
+  const have = n => typeof window[n] !== 'undefined';
+  ['Draggable', 'InertiaPlugin', 'MorphSVGPlugin', 'Physics2DPlugin', 'PhysicsPropsPlugin', 'ScrambleTextPlugin',
+   'CustomEase', 'CustomWiggle', 'CustomBounce', 'EasePack', 'Observer', 'RoughEase'].forEach(n => { if (have(n)) gsap.registerPlugin(window[n]); });
+  const css4 = document.createElement('style');
+  css4.textContent = `
+#about .skills li { cursor: grab; touch-action: none; position: relative; z-index: 1; }
+#about .skills li:active { cursor: grabbing; }
+#about { position: relative; }
+.avatar { touch-action: none; }
+.bubble { pointer-events: auto; cursor: pointer; }
+.fx-conf { position: fixed; z-index: 70; width: 9px; height: 14px; border-radius: 2px; pointer-events: none; }
+.now-pill { cursor: pointer; }
+.kpi b { cursor: pointer; }
+`;
+  document.head.appendChild(css4);
+  if (have('CustomBounce')) CustomBounce.create('fruitBounce', { strength: .6, squash: 3, squashID: 'fruitBounce-squash' });
+  if (have('CustomWiggle')) CustomWiggle.create('quake', { wiggles: 14, type: 'uniform' });
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    const cleanups = [];
+    const on = (el, ev, fn, opt) => { el.addEventListener(ev, fn, opt); cleanups.push(() => el.removeEventListener(ev, fn, opt)); };
+
+    // 22. Draggable + Inertia: skill chips are fridge magnets — drag, throw, bounce off the edges.
+    if (have('Draggable')) {
+      const chips = gsap.utils.toArray('#about .skills li');
+      const ds = Draggable.create(chips, { type: 'x,y', bounds: '#about', inertia: have('InertiaPlugin'), edgeResistance: .6,
+        onPress() { gsap.to(this.target, { scale: 1.15, rotate: rnd(-8, 8), duration: .2 }); },
+        onRelease() { gsap.to(this.target, { scale: 1, duration: .3 }); } });
+      cleanups.push(() => ds.forEach(d => d.kill()));
+
+      // 23. Throw the cat avatar across the screen; it walks back home after a moment.
+      const home = document.querySelector('#avatar');
+      if (home) {
+        let back;
+        const [dc] = Draggable.create(home, { type: 'x,y', trigger: '#avatar .avatar', dragClickables: true, minimumMovement: 8,
+          inertia: have('InertiaPlugin'), bounds: window,
+          onPress() { back?.kill(); },
+          onDragStart() { gsap.to(home, { rotate: rnd(-25, 25), duration: .3 }); },
+          onThrowComplete() { back = gsap.to(home, { x: 0, y: 0, rotate: 0, duration: 1.2, delay: 1.2, ease: 'elastic.out(1, .5)' }); },
+          onRelease() { if (!this.tween) back = gsap.to(home, { x: 0, y: 0, rotate: 0, duration: 1.2, delay: 1.2, ease: 'elastic.out(1, .5)' }); } });
+        cleanups.push(() => dc.kill());
+      }
+    }
+
+    // 24. MorphSVG: section squiggles turn into a heart on hover.
+    if (have('MorphSVGPlugin')) {
+      const heart = 'M100 11 C 92 3 80 1 76 5 C 70 11 82 17 100 11 C 118 17 130 11 124 5 C 120 1 108 3 100 11 Z';
+      document.querySelectorAll('section h2').forEach(h => {
+        const path = h.querySelector('.fx-squiggle path'); if (!path) return;
+        const orig = path.getAttribute('d');
+        on(h, 'pointerenter', () => gsap.to(path, { morphSVG: heart, fill: 'var(--accent)', duration: .5, ease: 'back.out(2)' }));
+        on(h, 'pointerleave', () => gsap.to(path, { morphSVG: orig, fill: 'none', duration: .5 }));
+      });
+    }
+
+    // 25. Physics2D: the "Currently" pill shoots a confetti fountain with real gravity.
+    const pill = document.querySelector('.now-pill');
+    if (pill && have('Physics2DPlugin')) on(pill, 'click', () => {
+      const r = pill.getBoundingClientRect();
+      for (let i = 0; i < 70; i++) {
+        const c = document.createElement('i'); c.className = 'fx-conf'; c.setAttribute('aria-hidden', 'true');
+        c.style.left = r.left + r.width / 2 + 'px'; c.style.top = r.top + 'px';
+        c.style.background = ['#f7941d', '#ed1c5b', '#7900a6', '#28b095', '#aad500', '#e8505b'][i % 6];
+        document.body.appendChild(c);
+        gsap.to(c, { physics2D: { velocity: rnd(380, 720), angle: rnd(235, 305), gravity: 900 }, rotation: rnd(-720, 720), duration: 2.4, ease: 'none', onComplete: () => c.remove() });
+      }
+    });
+
+    // 26. PhysicsProps: click a bubble and it flies off with friction, then floats back.
+    if (have('PhysicsPropsPlugin')) document.querySelectorAll('.bubble').forEach(b => on(b, 'click', e => {
+      e.stopPropagation();
+      gsap.timeline()
+        .to(b, { physicsProps: { x: { velocity: rnd(-700, 700), friction: .08 }, y: { velocity: rnd(-600, -200), acceleration: 600, friction: .04 } }, rotation: rnd(-360, 360), duration: 1.6 })
+        .to(b, { x: 0, y: 0, rotation: 0, duration: 1.4, ease: 'elastic.out(1, .4)' });
+    }));
+
+    // 27. ScrambleText: job dates decode in binary on hover (monospace, so nothing moves).
+    if (have('ScrambleTextPlugin')) document.querySelectorAll('.jobs-past .label, .sec-head .label').forEach(l => on(l, 'pointerenter', () => {
+      if (gsap.isTweening(l)) return;
+      gsap.to(l, { duration: .9, scrambleText: { text: l.textContent, chars: '01', revealDelay: .3, speed: .6 } });
+    }));
+
+    // 28. CustomWiggle: click the −80 % for an earthquake.
+    const kb = document.querySelector('.kpi b');
+    if (kb && have('CustomWiggle')) on(kb, 'click', () => {
+      gsap.fromTo(kb, { x: 0 }, { x: 14, rotate: 6, duration: 1, ease: 'quake', clearProps: 'x,rotate' });
+      gsap.fromTo(document.querySelector('#job-falabella'), { y: 0 }, { y: 6, duration: 1, ease: 'quake', clearProps: 'y' });
+    });
+
+    // 29. CustomBounce: fruit that falls on empty clicks now squashes when it lands (overrides 11's motion).
+    if (have('CustomBounce')) on(document, 'click', e => {
+      if (e.target.closest('a, button, input, .avatar, .job, .stats, h1, .tags, .plist, .lang, .fx-peek-box, .bubble, .now-pill')) return;
+      requestAnimationFrame(() => {
+        const s = [...document.querySelectorAll('.fx-fall')].pop(); if (!s) return;
+        gsap.killTweensOf(s);
+        const floor = innerHeight - 30 - e.clientY;
+        gsap.timeline({ onComplete: () => s.remove() })
+          .fromTo(s, { y: 0, scale: 1 }, { y: floor, duration: 1.4, ease: 'fruitBounce' })
+          .to(s, { scaleX: 1.6, scaleY: .5, duration: 1.4, ease: 'fruitBounce-squash', transformOrigin: '50% 100%' }, 0)
+          .to(s, { autoAlpha: 0, duration: .4 }, '+=.3');
+      });
+    });
+
+    // 30. RoughEase: the Comtech "LIVE" label flickers like a broken neon sign.
+    const live = document.querySelector('.ill-sat .label-t');
+    if (live && have('RoughEase')) gsap.to(live, { opacity: .15, duration: 2.5, repeat: -1, yoyo: true,
+      ease: RoughEase.ease.config({ template: 'none', strength: 2, points: 30, taper: 'none', randomize: true, clamp: true }) });
+
+    // 31. Observer: spin the wheel fast and my name stretches with the speed.
+    if (have('Observer')) {
+      const name = document.querySelector('h1 .name');
+      const sk = gsap.quickTo(name, 'skewX', { duration: .4, ease: 'power3' });
+      const sy = gsap.quickTo(name, 'scaleY', { duration: .4, ease: 'power3' });
+      const obs = Observer.create({ target: window, type: 'wheel,touch', onChange: self => {
+        const v = gsap.utils.clamp(-1, 1, self.velocityY / 4000);
+        sk(v * -14); sy(1 + Math.abs(v) * .25);
+      }, onStop: () => { sk(0); sy(1); }, onStopDelay: .15 });
+      cleanups.push(() => obs.kill());
+    }
+
+    return () => cleanups.forEach(f => f());
+  });
 })();
