@@ -63,7 +63,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 }
 .hero {
   display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 32px; align-items: center;
-  padding-block: 48px 40px; border-bottom: 1px solid var(--rule);
+  padding-block: 34px 30px; border-bottom: 1px solid var(--rule);
   position: relative; isolation: isolate;
 }
 .glow {
@@ -71,14 +71,18 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   border-radius: 50%; background: radial-gradient(circle, var(--glow) 0%, transparent 68%);
 }
 h1 {
-  font: 600 clamp(42px, 7vw, 80px)/1 var(--display);
+  font: 600 clamp(38px, 5.6vw, 66px)/1 var(--display);
   font-optical-sizing: auto; letter-spacing: -.02em; margin: 0 0 22px; text-wrap: balance;
 }
 h1 .role { display: block; color: var(--accent); font-style: italic; font-weight: 500; margin-top: .08em; }
 .lede { max-width: 56ch; margin: 0; font-size: 19px; }
+.lede b { font-weight: 700; color: var(--accent); }
+.companies { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: 16px; font: 600 20px/1.2 var(--display); }
+.companies span:first-child { color: var(--accent); }
+.companies i { font-style: normal; color: var(--rule); }
 .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 20px; color: var(--muted); font-size: 15px; }
 
-.scope { width: 100%; max-width: 260px; justify-self: end; }
+.scope { width: 100%; max-width: 220px; justify-self: end; }
 .scope .ring { fill: none; stroke: var(--rule); stroke-width: 1; }
 .scope .ax { fill: var(--muted); font: 500 9px var(--mono); text-anchor: middle; }
 .scope .path { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 3; opacity: .55; }
@@ -156,7 +160,7 @@ footer { padding-top: 24px; color: var(--muted); font-size: 14px; }
 body { margin: 0; }
 
 /* Motion (GSAP). Hidden only while the intro is pending. */
-.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .facts, .anim .scope, .anim .badge, .anim .bubbles, .anim .marquee { visibility: hidden; }
+.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .links, .anim .companies, .anim .facts, .anim .scope, .anim .badge, .anim .bubbles { visibility: hidden; }
 .name .word { white-space: nowrap; }
 
 /* Curtain (Maison Auge): a rose sheet with the KL monogram, lifted with a curved edge. */
@@ -209,6 +213,72 @@ body { margin: 0; }
 .ill .bubble-t { fill: var(--ink); font: italic 500 11px var(--display); }
 .ill .emoji { font: 22px/1 var(--body); }
 
+/* Experience: the current job is the big card, Chile is the compact row below. */
+.job-now {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 20px 40px; align-items: center;
+  padding: 34px 36px; border-radius: 24px; margin-bottom: 28px;
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--paper));
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+}
+.now-pill {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+  background: var(--accent); color: var(--on-accent); font: 600 12px/1 var(--body); letter-spacing: .02em;
+}
+.now-pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.job-now h3 { font: 600 clamp(32px, 4.4vw, 46px)/1.02 var(--display); letter-spacing: -.02em; margin: 16px 0 8px; }
+.job-meta { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
+.job-meta b { color: var(--ink); font-weight: 600; }
+.job-list { margin: 0 0 16px; padding: 0; list-style: none; display: grid; gap: 9px; }
+.job-list li { padding-left: 18px; position: relative; }
+.job-list li::before { content: ''; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.job-now .job-list { font-size: 16.5px; }
+.ill.big { width: 100%; height: auto; margin: 0; }
+
+.jobs-past { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.jobs-past .job { padding: 22px 22px 18px; border-radius: 18px; border: 1px solid var(--rule); background: var(--paper); }
+.jobs-past h3 { font: 600 22px/1.15 var(--display); margin: 8px 0 2px; }
+.jobs-past .kind { font: 12px/1.4 var(--mono); color: var(--muted); }
+.jobs-past .ill { width: 100%; height: auto; margin: 10px 0 12px; }
+.jobs-past .job-list { font-size: 14px; gap: 7px; color: color-mix(in srgb, var(--ink) 82%, var(--paper)); }
+.jobs-past .job-list li::before { width: 5px; height: 5px; }
+@media (max-width: 860px) {
+  .job-now { grid-template-columns: 1fr; padding: 24px 20px; }
+  .jobs-past { grid-template-columns: 1fr; }
+}
+
+/* "What I learned there, in code": one repo per job. */
+.proof {
+  display: grid; gap: 3px; margin-top: 16px; padding: 12px 14px; border-radius: 14px; text-decoration: none; color: var(--ink);
+  background: var(--paper); border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  transition: border-color .2s, transform .2s;
+}
+.proof:hover { border-style: solid; border-color: var(--accent); transform: translateY(-2px); }
+.proof b { font: 600 17px/1.2 var(--display); color: var(--accent); }
+.proof span:last-child { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+.jobs-past .job { display: flex; flex-direction: column; }
+.jobs-past .proof { margin-top: auto; }
+.jobs-past .tags { margin-bottom: 14px; }
+
+/* All projects, small, at the end. */
+.plist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+.plist li { display: grid; gap: 2px; padding: 10px 0; border-top: 1px solid var(--rule); font-size: 14px; }
+.plist a { font: 600 16px/1.25 var(--display); }
+.plist .pd { color: var(--muted); }
+.plist .st { font: 11.5px/1.4 var(--mono); color: var(--muted); }
+@media (max-width: 720px) { .plist { grid-template-columns: 1fr; } }
+
+/* Shortcuts: LinkedIn first, then email and GitHub. */
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.lk {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px;
+  font: 600 14px/1 var(--body); text-decoration: none; color: var(--ink);
+  border: 1px solid var(--rule); background: var(--paper); transition: border-color .2s, background .2s, transform .2s;
+}
+.lk svg { width: 17px; height: 17px; flex: none; }
+.lk:hover { border-color: var(--accent); transform: translateY(-1px); }
+.lk-main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.lk-main:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
 /* Ring cursor (Deepa). Decoration only: the system cursor stays. */
 .ring-cursor {
   position: fixed; left: 0; top: 0; z-index: 40; width: 30px; height: 30px; margin: -15px 0 0 -15px;
@@ -230,7 +300,6 @@ body { margin: 0; }
 </head>
 <body>
 
-<div class="curtain" aria-hidden="true"><span>K<em>L</em></span></div>
 <div class="ring-cursor" aria-hidden="true"></div>
 
 <div class="sheet">
@@ -252,6 +321,12 @@ body { margin: 0; }
       <p class="hello" aria-hidden="true"><span class="hello-word">Bonjour</span><span class="caret"></span></p>
       <h1><span class="name">Katherine Liberona Irarrázabal</span> <span class="role" data-t="role"></span></h1>
       <p class="lede" data-t="lede"></p>
+      <nav class="links" data-t-aria="linksAria">
+        <a class="lk lk-main" href="https://www.linkedin.com/in/katherine-liberona-irarrazabal-76a843150/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg><span>LinkedIn</span></a>
+        <a class="lk" href="mailto:katherine.lib.ira@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 6h17v12h-17z M3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span data-t="lkMail"></span></a>
+        <a class="lk" href="https://github.com/katherinemli" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a>
+      </nav>
+      <p class="companies"><span>Comtech</span><i>·</i><span>wherEX</span><i>·</i><span>Falabella</span><i>·</i><span>CITIAPS</span></p>
       <div class="facts"><span data-t="f1"></span><span data-t="f2"></span><span data-t="f3"></span></div>
     </div>
     <figure class="scope" data-t-aria="scopeAria">
@@ -280,9 +355,98 @@ body { margin: 0; }
     </div>
   </header>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="track"><span>C <i>✿</i></span><span>Python <i>✿</i></span><span>Vue <i>✿</i></span><span>Go <i>✿</i></span><span>Linux embarqué <i>✿</i></span><span>systemd <i>✿</i></span><span>Leaflet <i>✿</i></span><span>Raspberry Pi <i>✿</i></span><span>Django <i>✿</i></span></div>
-  </div>
+
+  <section id="experience">
+    <div class="sec-head"><h2 data-t="xpH"></h2><span class="label">2017 – 2026</span></div>
+    <article class="job job-now">
+      <div>
+        <span class="now-pill" data-t="xNow"></span>
+        <h3>Comtech Telecommunications</h3>
+        <div class="job-meta"><b data-t="xFS"></b> · <span data-t="x1d"></span> · Montréal, QC</div>
+        <ul class="job-list"><li data-t="x1a"></li><li data-t="x1b"></li><li data-t="x1c"></li><li data-t="x1e"></li></ul>
+        <ul class="tags"><li data-t="tSat"></li><li data-t="tNet"></li><li>Vue.js</li><li>Linux</li><li>Docker</li><li>Jenkins</li><li>Git</li></ul>
+        <a class="proof" href="https://github.com/katherinemli/orbit-tracker"><span class="label" data-t="proofL"></span><b>Orbit Tracker <span aria-hidden="true">→</span></b><span data-t="pr1"></span></a>
+      </div>
+      <svg class="ill big ill-sat" viewBox="0 0 320 160" aria-hidden="true">
+        <path id="x-link" class="faint" d="M40 126 L160 34 L280 126" stroke-dasharray="3 4"/>
+        <circle class="ln ping" cx="160" cy="28" r="12" opacity=".5"/><circle class="ln ping" cx="160" cy="28" r="12" opacity=".5"/>
+        <g transform="translate(160 28)"><rect class="sig" x="-27" y="-3.5" width="18" height="7"/><rect class="sig" x="9" y="-3.5" width="18" height="7"/><rect class="acc" x="-7" y="-7" width="14" height="14" rx="2"/></g>
+        <path class="ln" d="M26 146 h28 M40 146 v-12 M24 126 q7 16 30 5"/>
+        <path class="ln" d="M266 146 h28 M280 146 v-12 M296 126 q-7 16 -30 5"/>
+        <g class="pkt" transform="translate(100 80)"><circle class="acc" r="3.5"/></g>
+        <g class="pkt" transform="translate(160 34)"><circle class="acc" r="3.5"/></g>
+        <g class="pkt" transform="translate(220 80)"><circle class="acc" r="3.5"/></g>
+        <rect class="soft" x="112" y="98" width="96" height="50" rx="8"/>
+        <text class="label-t" x="122" y="112">LIVE</text><circle class="acc live" cx="198" cy="109" r="3"/>
+        <g class="dash"><rect class="acc" x="122" y="128" width="8" height="14" rx="2"/><rect class="acc" x="135" y="120" width="8" height="22" rx="2"/><rect class="acc" x="148" y="132" width="8" height="10" rx="2"/><rect class="acc" x="161" y="116" width="8" height="26" rx="2"/><rect class="acc" x="174" y="124" width="8" height="18" rx="2"/><rect class="acc" x="187" y="118" width="8" height="24" rx="2"/><rect class="acc" x="200" y="130" width="8" height="12" rx="2"/></g>
+      </svg>
+    </article>
+    <div class="jobs-past">
+      <article class="job">
+        <span class="label" data-t="x2d"></span>
+        <h3>wherEX</h3><div class="kind" data-t="x2k"></div>
+        <svg class="ill ill-micro" viewBox="0 0 160 80" aria-hidden="true">
+            <g class="mono"><rect class="soft" x="8" y="18" width="46" height="44" rx="5"/><rect class="ln" x="8" y="18" width="46" height="44" rx="5"/><text class="acc" x="31" y="43" text-anchor="middle">PHP</text></g>
+            <path class="ln arrow" d="M62 40 h20 m-5 -4 l5 4 l-5 4"/>
+            <g class="svc" transform="translate(106 22)"><rect class="soft" x="-15" y="-10" width="30" height="20" rx="5"/><rect class="ln" x="-15" y="-10" width="30" height="20" rx="5"/><text class="acc" x="0" y="3.5" text-anchor="middle">Go</text></g>
+            <g class="svc" transform="translate(142 22)"><rect class="soft" x="-15" y="-10" width="30" height="20" rx="5"/><rect class="ln" x="-15" y="-10" width="30" height="20" rx="5"/><text class="acc" x="0" y="3.5" text-anchor="middle">Go</text></g>
+            <g class="svc" transform="translate(106 58)"><rect class="soft" x="-15" y="-10" width="30" height="20" rx="5"/><rect class="ln" x="-15" y="-10" width="30" height="20" rx="5"/><text class="acc" x="0" y="3.5" text-anchor="middle">Go</text></g>
+            <g class="svc" transform="translate(142 58)"><rect class="soft" x="-15" y="-10" width="30" height="20" rx="5"/><rect class="ln" x="-15" y="-10" width="30" height="20" rx="5"/><text class="acc" x="0" y="3.5" text-anchor="middle">React</text></g>
+          </svg>
+        <ul class="job-list"><li data-t="x2a"></li><li data-t="x2b"></li><li data-t="x2c"></li><li data-t="x2e"></li></ul>
+        <ul class="tags"><li>Go</li><li>React</li><li>PHP</li><li>Angular</li></ul>
+        <a class="proof" href="https://github.com/katherinemli/backendecommerce"><span class="label" data-t="proofL"></span><b>E-commerce API <span aria-hidden="true">→</span></b><span data-t="pr2"></span></a>
+      </article>
+      <article class="job">
+        <span class="label" data-t="x3d"></span>
+        <h3>Falabella</h3><div class="kind" data-t="x3k"></div>
+        <svg class="ill ill-truck" viewBox="0 0 160 80" aria-hidden="true">
+            <path id="x-route" class="ln" d="M14 64 C 42 64, 44 30, 76 30 S 112 62, 148 46" opacity=".4" stroke-dasharray="2 3"/>
+            <rect class="ink" x="4" y="56" width="16" height="12" rx="1"/>
+            <g transform="translate(76 22)"><path class="soft" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><path class="ln" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><text class="acc chk" x="10" y="-6">✓</text></g>
+            <g transform="translate(116 46)"><path class="soft" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><path class="ln" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><text class="acc chk" x="10" y="-6">✓</text></g>
+            <g transform="translate(148 38)"><path class="soft" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><path class="ln" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><text class="acc chk" x="-4" y="-17">✓</text></g>
+            <g class="truck" transform="translate(96 44)"><text class="emoji" x="0" y="6" text-anchor="middle" style="font-size:18px">🚚</text></g>
+          </svg>
+        <ul class="job-list"><li data-t="x3a"></li><li data-t="x3b"></li><li data-t="x3c"></li><li data-t="x3e"></li><li data-t="x3f"></li></ul>
+        <ul class="tags"><li>Go</li><li>React</li></ul>
+        <a class="proof" href="https://github.com/katherinemli/backend"><span class="label" data-t="proofL"></span><b>Route Optimizer <span aria-hidden="true">→</span></b><span data-t="pr3"></span></a>
+      </article>
+      <article class="job">
+        <span class="label" data-t="x4d"></span>
+        <h3>CITIAPS</h3><div class="kind" data-t="x4k"></div>
+        <svg class="ill ill-sos" viewBox="0 0 160 80" aria-hidden="true">
+            <rect class="soft" x="4" y="6" width="152" height="68" rx="10"/>
+            <path class="faint" d="M4 30 h152 M4 52 h152 M50 6 v68 M108 6 v68"/>
+            <circle class="ln ping" cx="80" cy="40" r="6"/><circle class="ln ping" cx="80" cy="40" r="6"/>
+            <circle class="acc" cx="80" cy="40" r="4.5"/>
+            <g class="vol"><circle class="sig" cx="24" cy="20" r="3"/><circle class="sig" cx="136" cy="18" r="3"/><circle class="sig" cx="30" cy="64" r="3"/><circle class="sig" cx="128" cy="62" r="3"/><circle class="sig" cx="62" cy="14" r="3"/></g>
+            <g class="notif" transform="translate(124 30)"><rect class="acc" x="-20" y="-9" width="40" height="18" rx="9"/><text x="0" y="3.5" text-anchor="middle" fill="#fff">🔔 SOS</text></g>
+          </svg>
+        <ul class="job-list"><li data-t="x4a"></li><li data-t="x4b"></li><li data-t="x4c"></li><li data-t="x4e"></li></ul>
+        <ul class="tags"><li>Vue.js</li><li>D3.js</li><li>Java</li><li>Google Maps</li></ul>
+        <a class="proof" href="https://github.com/katherinemli/hantavirustracker"><span class="label" data-t="proofL"></span><b>Hantavirus Tracker <span aria-hidden="true">→</span></b><span data-t="pr4"></span></a>
+      </article>
+    </div>
+  </section>
+
+
+
+
+
+  <section id="about">
+    <div class="sec-head"><h2 data-t="bgH"></h2></div>
+    <div class="two">
+      <div><p data-t="bg1"></p><p data-t="bg2"></p></div>
+      <dl class="spec">
+        <dt>Backend</dt><dd>Go, Python, C, PHP, Django</dd>
+        <dt>Frontend</dt><dd>React, Vue.js, Angular, D3.js</dd>
+        <dt data-t="dSys"></dt><dd data-t="dSysV"></dd>
+        <dt data-t="dData"></dt><dd data-t="dDataV"></dd>
+        <dt>DevOps</dt><dd>Docker, AWS, Nginx, Git, Jenkins</dd>
+      </dl>
+    </div>
+  </section>
 
   <section id="features">
     <div class="sec-head"><h2 data-t="featH"></h2><span class="label" data-t="featL"></span></div>
@@ -291,122 +455,25 @@ body { margin: 0; }
     </ul>
   </section>
 
-  <section id="work">
-    <div class="sec-head"><h2 data-t="workH"></h2><span class="label">2025 – 2026</span></div>
-    <div class="work">
-      <article class="row lead">
-        <div><h3>Orbit Tracker</h3><div class="kind" data-t="otK"></div>
-          <svg class="ill ill-orbit" viewBox="0 0 160 80" aria-hidden="true">
-            <path id="ill-orbit-path" class="faint" d="M18 36 a62 20 0 1 0 124 0 a62 20 0 1 0 -124 0"/>
-            <circle class="soft" cx="80" cy="36" r="10"/><circle class="ln" cx="80" cy="36" r="10"/>
-            <line class="ln beam" x1="80" y1="74" x2="18" y2="36" stroke-dasharray="2 3" opacity=".7"/>
-            <path class="ln" d="M72 74 h16 M80 74 v-6 M74 66 a8 8 0 0 0 12 0"/>
-            <g class="sat" transform="translate(18 36)"><rect class="acc" x="-3" y="-3" width="6" height="6" rx="1"/><rect class="sig" x="-11" y="-2" width="6" height="4"/><rect class="sig" x="5" y="-2" width="6" height="4"/></g>
-          </svg></div>
-        <div>
-          <p data-t="otP"></p>
-          <div class="meta">
-            <ul class="tags"><li>Python</li><li>Vue 3</li><li data-t="tagSM"></li><li>SVG</li></ul>
-            <a href="https://github.com/katherinemli/orbit-tracker" data-t="code"></a>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <div><h3 data-t="hvH"></h3><div class="kind" data-t="hvK"></div>
-          <svg class="ill ill-map" viewBox="0 0 160 80" aria-hidden="true">
-            <path class="soft" d="M30 30 q14 -6 22 4 q6 10 -2 22 q-6 10 -12 22 q-6 -8 -8 -20 q-6 -14 0 -28z"/>
-            <path class="soft" d="M112 6 q18 -4 30 4 q4 10 -6 14 q-12 4 -22 0 q-8 -8 -2 -18z"/>
-            <path id="ill-route" class="ln route" d="M42 76 C 30 60, 62 52, 58 40 S 92 18, 128 14"/>
-            <g class="pin" transform="translate(42 76)"><path class="acc" d="M0 0 l-4 -7 a4.6 4.6 0 1 1 8 0z"/></g>
-            <g class="pin" transform="translate(58 40)"><path class="acc" d="M0 0 l-4 -7 a4.6 4.6 0 1 1 8 0z"/></g>
-            <g class="pin" transform="translate(128 14)"><path class="acc" d="M0 0 l-4 -7 a4.6 4.6 0 1 1 8 0z"/></g>
-            <g class="ship" transform="translate(90 24)"><path class="ink" d="M-5 -1 h10 l-2 4 h-6z M0 -1 v-5 l4 4z"/></g>
-          </svg></div>
-        <div>
-          <p data-t="hvP"></p>
-          <div class="meta">
-            <ul class="tags"><li>Vue 3</li><li>Leaflet</li><li>Vite</li><li>Netlify Functions</li><li>Python</li></ul>
-            <a href="https://github.com/katherinemli/hantavirustracker" data-t="code"></a>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <div><h3 data-t="tcfH"></h3><div class="kind" data-t="tcfK"></div>
-          <svg class="ill ill-tcf" viewBox="0 0 160 80" aria-hidden="true">
-            <g class="bars"><rect class="acc" x="6" y="35" width="4" height="10" rx="2"/><rect class="acc" x="13" y="29" width="4" height="22" rx="2"/><rect class="acc" x="20" y="23" width="4" height="34" rx="2"/><rect class="acc" x="27" y="31" width="4" height="18" rx="2"/><rect class="acc" x="34" y="20" width="4" height="40" rx="2"/><rect class="acc" x="41" y="27" width="4" height="26" rx="2"/><rect class="acc" x="48" y="34" width="4" height="12" rx="2"/><rect class="acc" x="55" y="25" width="4" height="30" rx="2"/><rect class="acc" x="62" y="21" width="4" height="38" rx="2"/><rect class="acc" x="69" y="32" width="4" height="16" rx="2"/><rect class="acc" x="76" y="28" width="4" height="24" rx="2"/><rect class="acc" x="83" y="22" width="4" height="36" rx="2"/><rect class="acc" x="90" y="33" width="4" height="14" rx="2"/><rect class="acc" x="97" y="30" width="4" height="20" rx="2"/></g>
-            <circle class="faint" cx="132" cy="40" r="16" stroke-width="3"/>
-            <circle class="ln timer" cx="132" cy="40" r="16" stroke-width="3" transform="rotate(-90 132 40)"/>
-            <circle class="rec acc" cx="132" cy="40" r="4"/>
-            <text class="label-t" x="118" y="72">REC</text>
-          </svg></div>
-        <div>
-          <p data-t="tcfP"></p>
-          <div class="meta">
-            <ul class="tags"><li>Java / Android</li><li>Python</li><li>Vue</li><li>Bash</li></ul>
-            <a href="https://github.com/katherinemli/tcf-canada" data-t="code"></a>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <div><h3>Minou</h3><div class="kind" data-t="miK"></div>
-          <svg class="ill ill-minou" viewBox="0 0 160 80" aria-hidden="true">
-            <line class="faint" x1="0" y1="64" x2="160" y2="64"/>
-            <g class="say" opacity="0"><rect class="soft" x="58" y="12" width="52" height="22" rx="11"/><path class="soft" d="M74 33 l-4 8 l10 -8z"/><text class="bubble-t" x="84" y="27" text-anchor="middle">Salut !</text></g>
-            <g class="cat" transform="translate(40 0)"><text class="emoji" x="0" y="62" text-anchor="middle">🐈</text></g>
-          </svg></div>
-        <div>
-          <p data-t="miP"></p>
-          <div class="meta">
-            <ul class="tags"><li>Python</li><li>PyQt5</li><li>Ollama</li></ul>
-            <a href="https://github.com/katherinemli/French-cat-writing-motivator-" data-t="code"></a>
-          </div>
-        </div>
-      </article>
-      <article class="row">
-        <div><h3>Hazel Outdoor</h3><div class="kind" data-t="hzK"></div>
-          <svg class="ill ill-shop" viewBox="0 0 160 80" aria-hidden="true">
-            <g class="tag" transform="translate(40 40)"><rect class="soft" x="-15" y="-9" width="30" height="18" rx="4"/><rect class="ln" x="-15" y="-9" width="30" height="18" rx="4"/><text class="acc" x="0" y="3.5" text-anchor="middle">$29</text></g>
-            <g class="cart"><path class="ln" d="M100 30 h8 l8 28 h26 l6 -20 h-36"/><circle class="ln" cx="120" cy="66" r="4"/><circle class="ln" cx="138" cy="66" r="4"/>
-              <circle class="acc" cx="146" cy="28" r="8"/><text class="count" x="146" y="31.5" text-anchor="middle" fill="#fff">0</text></g>
-          </svg></div>
-        <div>
-          <p data-t="hzP"></p>
-          <div class="meta">
-            <ul class="tags"><li>React</li><li>Vite</li></ul>
-            <a href="https://github.com/hazeloutdoorclothing-max/tactical-store" data-t="code"></a>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
+  <div class="marquee" aria-hidden="true">
+    <div class="track"><span>C <i>✿</i></span><span>Python <i>✿</i></span><span>Vue <i>✿</i></span><span>Go <i>✿</i></span><span>Linux embarqué <i>✿</i></span><span>systemd <i>✿</i></span><span>Leaflet <i>✿</i></span><span>Raspberry Pi <i>✿</i></span><span>Django <i>✿</i></span></div>
+  </div>
 
-  <section id="earlier">
-    <div class="sec-head"><h2 data-t="earlyH"></h2><span class="label">2018 – 2022</span></div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th class="label" data-t="thP"></th><th class="label" data-t="thW"></th><th class="label" data-t="thS"></th></tr></thead>
-        <tbody>
-          <tr><td><a href="https://github.com/katherinemli/backend" data-t="e1n"></a></td><td data-t="e1"></td><td class="stack">Go · MySQL</td></tr>
-          <tr><td><a href="https://github.com/katherinemli/backendecommerce" data-t="e2n"></a></td><td data-t="e2"></td><td class="stack">Django REST · PostgreSQL</td></tr>
-          <tr><td><a href="https://github.com/katherinemli/Evic2018Usach">EVIC 2018</a></td><td data-t="e3"></td><td class="stack">Vue 2 · Firebase</td></tr>
-          <tr><td><a href="https://github.com/katherinemli/mapLeafletExample" data-t="e4n"></a></td><td data-t="e4"></td><td class="stack">Vue 2 · Leaflet</td></tr>
-          <tr><td><a href="https://github.com/katherinemli/nginx-httpsScript">Nginx HTTPS</a></td><td data-t="e5"></td><td class="stack">Shell · Nginx</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section id="about">
-    <div class="sec-head"><h2 data-t="bgH"></h2></div>
-    <div class="two">
-      <div><p data-t="bg1"></p><p data-t="bg2"></p></div>
-      <dl class="spec">
-        <dt data-t="dLang"></dt><dd>C, Python, JavaScript, Go</dd>
-        <dt>Frontend</dt><dd>Vue 2/3, React, Leaflet, D3, CSS</dd>
-        <dt>Backend</dt><dd>Flask, Django REST, Go, SQLite, PostgreSQL</dd>
-        <dt data-t="dSys"></dt><dd data-t="dSysV"></dd>
-      </dl>
-    </div>
+  <section id="projects">
+    <div class="sec-head"><h2 data-t="plH"></h2><span class="label" data-t="plL"></span></div>
+    <ul class="plist">
+        <li><a href="https://github.com/katherinemli/orbit-tracker">Orbit Tracker</a><span class="pd" data-t="pl1"></span><span class="st">Python · Vue 3</span></li>
+        <li><a href="https://github.com/katherinemli/hantavirustracker" data-t="pl2n"></a><span class="pd" data-t="pl2"></span><span class="st">Vue 3 · Leaflet · Python</span></li>
+        <li><a href="https://github.com/katherinemli/backend" data-t="pl3n"></a><span class="pd" data-t="pl3"></span><span class="st">Go · MySQL</span></li>
+        <li><a href="https://github.com/katherinemli/backendecommerce" data-t="pl4n"></a><span class="pd" data-t="pl4"></span><span class="st">Django REST · PostgreSQL · Quasar</span></li>
+        <li><a href="https://github.com/katherinemli/carwatch">CarWatch</a><span class="pd" data-t="pl5"></span><span class="st">Python · Flask · Vue</span></li>
+        <li><a href="https://github.com/katherinemli/tcf-canada" data-t="pl6n"></a><span class="pd" data-t="pl6"></span><span class="st">Android · Python · Vue</span></li>
+        <li><a href="https://github.com/katherinemli/mapLeafletExample" data-t="pl7n"></a><span class="pd" data-t="pl7"></span><span class="st">Vue 2 · Leaflet</span></li>
+        <li><a href="https://github.com/katherinemli/Evic2018Usach">EVIC 2018</a><span class="pd" data-t="pl8"></span><span class="st">Vue 2 · Firebase</span></li>
+        <li><a href="https://github.com/hazeloutdoorclothing-max/tactical-store">Hazel Outdoor</a><span class="pd" data-t="pl9"></span><span class="st">React · Vite</span></li>
+        <li><a href="https://github.com/katherinemli/nginx-httpsScript">Nginx HTTPS</a><span class="pd" data-t="pl10"></span><span class="st">Shell · Nginx</span></li>
+        <li><a href="https://github.com/katherinemli/French-cat-writing-motivator-">Minou</a><span class="pd" data-t="pl11"></span><span class="st">Python · PyQt5</span></li>
+    </ul>
   </section>
 
   <section id="contact" style="border-bottom:0">
@@ -414,7 +481,8 @@ body { margin: 0; }
     <div class="contact">
       <span class="email" id="email">katherine.lib.ira@gmail.com</span>
       <button type="button" id="copy" data-t="copy"></button>
-      <a href="https://github.com/katherinemli">github.com/katherinemli</a>
+      <a class="lk" href="https://www.linkedin.com/in/katherine-liberona-irarrazabal-76a843150/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg><span>LinkedIn</span></a>
+      <a class="lk" href="https://github.com/katherinemli" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a>
     </div>
   </section>
 
@@ -431,9 +499,49 @@ body { margin: 0; }
 const T = {
   fr: {
     strip: 'Fiche technique · Rév. 2026-10',
-    role: 'Firmware et full-stack',
-    lede: 'Je conçois des appareils Linux embarqués et les tableaux de bord web qui servent à les piloter&nbsp;: le C et le Python près du matériel, l’API au milieu, l’interface par-dessus.',
-    f1: 'Originaire de Santiago, Chili', f2: 'À Montréal depuis 2022', f3: 'Espagnol · anglais · français',
+    role: 'Développeuse full stack',
+    lede: '7&nbsp;ans d’expérience en logiciels, applications web et systèmes distribués. Actuellement chez <b>Comtech</b>&nbsp;: communications satellitaires et gestion de réseaux.',
+    proofL: 'Ce que j’en ai appris, en code',
+    pr1: 'Démon superviseur, API et tableau de bord en temps réel pour une monture qui suit un satellite.',
+    pr2: 'API REST de catalogue&nbsp;: produits, inventaire, coupons et paniers, avec sa vitrine séparée.',
+    pr3: 'API en Go qui trouve le trajet le plus court entre des arrêts, en explorant les permutations en parallèle.',
+    pr4: 'Carte en direct de cas géolocalisés, avec filtres et recherche partagés entre la carte et la liste.',
+    plH: 'Tous mes projets', plL: 'GitHub',
+    pl1: 'Démon, API et tableau de bord pour une monture de poursuite simulée',
+    pl2n: 'Suivi hantavirus', pl2: 'Carte en direct d’une éclosion liée à un navire de croisière',
+    pl3n: 'Optimiseur d’itinéraire', pl3: 'Trajet le plus court entre plusieurs arrêts, avec des goroutines',
+    pl4n: 'API commerce en ligne', pl4: 'Produits, inventaire, coupons et paniers, avec une vitrine Quasar',
+    pl5: 'Suivi d’inventaire de voitures d’occasion, qui respecte robots.txt',
+    pl6n: 'Entraîneur TCF Canada', pl6: 'Tableau de bord et appli Android pour préparer l’examen de français',
+    pl7n: 'Carte Leaflet', pl7: 'Points d’intérêt d’une API en marqueurs personnalisés',
+    pl8: 'Site d’un congrès scientifique à l’USACH',
+    pl9: 'Catalogue de boutique avec commande par WhatsApp',
+    pl10: 'Configuration HTTPS en une commande',
+    pl11: 'Un chat de bureau qui jase en français',
+    lkMail: 'Courriel', linksAria: 'Liens de contact',
+    xpH: 'Expérience', xNow: 'Actuellement', xFS: 'Développeuse full stack',
+    x1d: 'juin 2022 – aujourd’hui', tSat: 'communications satellitaires', tNet: 'gestion de réseaux',
+    x1a: 'Développé des solutions logicielles pour des systèmes de communications satellitaires et de gestion de réseaux, intégrant des systèmes embarqués, des protocoles réseau et des interfaces web modernes.',
+    x1b: 'Développé des outils de gestion et de surveillance réseau avec Vue.js, permettant l’interaction avec les équipements et la visualisation des données en temps réel.',
+    x1c: 'Développé des interfaces de visualisation de données et des cartes vectorielles optimisées pour les environnements à faible bande passante.',
+    x1e: 'Automatisé les tests et le déploiement logiciel dans des environnements Linux avec Git, Jenkins et Docker.',
+    x2d: 'sept. 2020 – févr. 2022', x2k: 'développeuse full stack · Chili',
+    x2a: 'Mené la migration complète d’une plateforme PHP/Angular vers une architecture de microservices avec Go et React.',
+    x2b: 'Conçu et développé des services backend et des interfaces web pour traiter et visualiser des données à grande échelle.',
+    x2c: 'Mis en place un algorithme de classement utilisant les profils utilisateurs et les données du marché afin d’améliorer les recommandations.',
+    x2e: 'Développé des solutions évolutives en collaboration avec différentes équipes techniques et produit.',
+    x3d: 'févr. 2018 – juin 2018', x3k: 'développeuse full stack · Chili',
+    x3a: 'Conçu et développé de bout en bout un système de logistique du dernier kilomètre pour un grand détaillant, avec Go et React.',
+    x3b: 'Automatisé des processus logistiques clés, réduisant les coûts opérationnels et optimisant de plus de 80&nbsp;% la taille de l’équipe de livraison.',
+    x3c: 'Conçu et déployé un système de géocodage automatisé traitant des milliers d’adresses par jour.',
+    x3e: 'Optimisé les itinéraires de livraison en collaboration avec différentes équipes afin de mieux répondre aux besoins opérationnels.',
+    x3f: 'Développé un système prédictif permettant d’estimer avec précision les plages horaires de livraison.',
+    x4d: 'mars 2017 – janv. 2018', x4k: 'développeuse front-end · Santiago, Chili',
+    x4a: 'Développé une plateforme d’intervention d’urgence soutenue par le gouvernement avec Vue.js, permettant le suivi des bénévoles en temps réel et l’envoi de notifications mobiles.',
+    x4b: 'Développé un système d’analyse des émotions basé sur Java et l’IA pour traiter les données provenant de plusieurs caméras.',
+    x4c: 'Créé des visualisations de données interactives avec Vue.js et D3.js pour l’analyse de données géolocalisées.',
+    x4e: 'Développé un système interactif de suivi d’itinéraires pour une visite papale avec Vue.js et l’API Google Maps.',
+    f1: 'Montréal, QC', f2: 'Originaire de Santiago, Chili', f3: 'Espagnol · anglais · français',
     scopeAria: 'Tracé du ciel animé, tiré du projet Orbit Tracker', west: 'O',
     scopeCap: 'monture ● qui suit la cible ✕',
     featH: 'Caractéristiques', featL: 'ce que j’apporte',
@@ -459,16 +567,57 @@ const T = {
     e4n: 'Carte Leaflet', e4: 'Points d’intérêt d’une API affichés en marqueurs personnalisés avec infobulles',
     e5: 'Configuration HTTPS en une commande avec un certificat autosigné',
     bgH: 'Parcours',
-    bg1: 'J’ai commencé en développement web au Chili, sur des plateformes de logistique, des logiciels d’approvisionnement et du commerce en ligne, et j’ai enseigné la programmation pendant six ans.',
+    bg1: 'J’ai contribué au développement et à la mise en production de solutions dans différents domaines, notamment les communications satellitaires, la gestion de réseaux, la logistique et les plateformes d’intervention d’urgence.',
     bg2: 'Depuis mon arrivée à Montréal, je travaille plus près du matériel&nbsp;: firmware, démons, gestion réseau et étalonnage de capteurs, tout en gardant la main sur les tableaux de bord.',
-    dLang: 'Langages', dSys: 'Systèmes', dSysV: 'Linux embarqué, Raspberry Pi, systemd, paquets Debian, SNMP, Nginx',
+    dSys: 'Systèmes', dSysV: 'Linux, systèmes embarqués, programmation multithread, gestion de la mémoire, protocoles réseau',
+    dData: 'Données', dDataV: 'MySQL, MongoDB, traitement en temps réel',
     ctH: 'Me joindre', copy: 'Copier le courriel', copied: 'Copié', selected: 'Sélectionné',
   },
   en: {
     strip: 'Developer datasheet · Rev. 2026-10',
-    role: 'Firmware &amp; full-stack',
-    lede: 'I build embedded Linux devices and the web dashboards people use to run them: the C and Python close to the hardware, the API in the middle, and the interface on top.',
-    f1: 'From Santiago, Chile', f2: 'In Montréal since 2022', f3: 'Spanish · English · French',
+    role: 'Full stack developer',
+    lede: '7 years of experience in software, web applications and distributed systems. Currently at <b>Comtech</b>: satellite communications and network management.',
+    proofL: 'What I learned there, in code',
+    pr1: 'Supervisor daemon, API and real-time dashboard for a mount that tracks a satellite.',
+    pr2: 'Catalog REST API: products, inventory, coupons and carts, with its own storefront.',
+    pr3: 'Go API that finds the shortest route through a set of stops, exploring permutations in parallel.',
+    pr4: 'Live map of geolocated cases, with filters and search shared between the map and the list.',
+    plH: 'All my projects', plL: 'GitHub',
+    pl1: 'Daemon, API and dashboard for a simulated tracking mount',
+    pl2n: 'Hantavirus Tracker', pl2: 'Live map of an outbreak linked to a cruise ship',
+    pl3n: 'Route Optimizer', pl3: 'Shortest route through several stops, with goroutines',
+    pl4n: 'E-commerce API', pl4: 'Products, inventory, coupons and carts, with a Quasar storefront',
+    pl5: 'Used-car inventory tracker that respects robots.txt',
+    pl6n: 'TCF Canada Trainer', pl6: 'Dashboard and Android app to prepare for the French exam',
+    pl7n: 'Leaflet Map', pl7: 'Points of interest from an API as custom markers',
+    pl8: 'Website for a scientific conference at USACH',
+    pl9: 'Shop catalog with ordering through WhatsApp',
+    pl10: 'One-command HTTPS setup',
+    pl11: 'A desktop cat that chats in French',
+    lkMail: 'Email', linksAria: 'Contact links',
+    xpH: 'Experience', xNow: 'Currently', xFS: 'Full stack developer',
+    x1d: 'Jun 2022 – present', tSat: 'satellite communications', tNet: 'network management',
+    x1a: 'Built software for satellite communication and network management systems, integrating embedded systems, network protocols and modern web interfaces.',
+    x1b: 'Built network management and monitoring tools in Vue.js to interact with equipment and visualize data in real time.',
+    x1c: 'Built data visualization interfaces and vector maps optimized for low-bandwidth environments.',
+    x1e: 'Automated software testing and deployment on Linux with Git, Jenkins and Docker.',
+    x2d: 'Sep 2020 – Feb 2022', x2k: 'full stack developer · Chile',
+    x2a: 'Led the full migration of a PHP/Angular platform to a microservices architecture with Go and React.',
+    x2b: 'Designed and built backend services and web interfaces to process and visualize data at scale.',
+    x2c: 'Implemented a ranking algorithm using user profiles and market data to improve recommendations.',
+    x2e: 'Built scalable solutions together with engineering and product teams.',
+    x3d: 'Feb 2018 – Jun 2018', x3k: 'full stack developer · Chile',
+    x3a: 'Designed and built, end to end, a last-mile logistics system for a major retailer, with Go and React.',
+    x3b: 'Automated key logistics processes, cutting operating costs and optimizing delivery team size by more than 80%.',
+    x3c: 'Designed and deployed an automated geocoding system processing thousands of addresses a day.',
+    x3e: 'Optimized delivery routes together with several teams to better meet operational needs.',
+    x3f: 'Built a predictive system that accurately estimates delivery time windows.',
+    x4d: 'Mar 2017 – Jan 2018', x4k: 'front-end developer · Santiago, Chile',
+    x4a: 'Built a government-backed emergency response platform in Vue.js, with real-time volunteer tracking and mobile notifications.',
+    x4b: 'Built a Java and AI-based emotion analysis system processing data from multiple cameras.',
+    x4c: 'Created interactive data visualizations with Vue.js and D3.js for geolocated data analysis.',
+    x4e: 'Built an interactive route-tracking system for a papal visit with Vue.js and the Google Maps API.',
+    f1: 'Montréal, QC', f2: 'From Santiago, Chile', f3: 'Spanish · English · French',
     scopeAria: 'Animated sky plot from the Orbit Tracker project', west: 'W',
     scopeCap: 'mount ● following target ✕',
     featH: 'Features', featL: 'what I bring',
@@ -494,9 +643,10 @@ const T = {
     e4n: 'Leaflet Map', e4: 'Points of interest from an API as custom markers with tooltips and popups',
     e5: 'One-command HTTPS setup with a self-signed certificate',
     bgH: 'Background',
-    bg1: 'I started in web development in Chile, working on logistics platforms, procurement software and e-commerce, and spent six years teaching programming.',
+    bg1: 'I have helped build and ship solutions across several fields, including satellite communications, network management, logistics and emergency response platforms.',
     bg2: 'Since moving to Montréal I have worked closer to the hardware: firmware, device daemons, network management and sensor calibration, while keeping ownership of the dashboards on top.',
-    dLang: 'Languages', dSys: 'Systems', dSysV: 'Embedded Linux, Raspberry Pi, systemd, Debian packages, SNMP, Nginx',
+    dSys: 'Systems', dSysV: 'Linux, embedded systems, multithreaded programming, memory management, network protocols',
+    dData: 'Data', dDataV: 'MySQL, MongoDB, real-time processing',
     ctH: 'Contact', copy: 'Copy email', copied: 'Copied', selected: 'Selected',
   },
 };
@@ -560,28 +710,22 @@ if (window.gsap) {
   const mm = gsap.matchMedia();
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     document.fonts.ready.then(() => {
-      gsap.set('.curtain', { display: 'grid' });
       document.documentElement.classList.remove('anim');
       const name = SplitText.create('.name', { type: 'words,chars', wordsClass: 'word', mask: 'words' });
 
-      gsap.set('.strip, .hero h1, .hello, .lede, .facts, .scope, .badge, .bubbles, .marquee', { visibility: 'visible' });
+      gsap.set('.strip, .hero h1, .hello, .lede, .links, .companies, .facts, .scope, .badge, .bubbles', { visibility: 'visible' });
       gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .from('.curtain span', { yPercent: 40, autoAlpha: 0, duration: .5 })
-        .to('.curtain span', { yPercent: -60, autoAlpha: 0, duration: .4, ease: 'power2.in' }, '+=.25')
-        .to('.curtain', { yPercent: -100, borderBottomLeftRadius: '50% 22vh', borderBottomRightRadius: '50% 22vh', duration: .9, ease: 'power4.inOut' }, '-=.15')
-        .set('.curtain', { display: 'none' })
-        .from('.strip', { autoAlpha: 0, y: -12, duration: .6 }, '-=.35')
-        .from('.hello', { autoAlpha: 0, x: -16, duration: .5 }, '<')
-        .from(name.chars, { yPercent: 110, rotate: 6, duration: .8, stagger: .022, ease: 'back.out(1.7)' }, '-=.3')
-        .from('.role', { autoAlpha: 0, x: -24, skewX: -14, duration: .9 }, '-=.45')
-        .from('.lede, .facts', { autoAlpha: 0, y: 18, duration: .7, stagger: .12 }, '-=.6')
+        .from('.strip', { autoAlpha: 0, y: -8, duration: .4 })
+        .from('.hello', { autoAlpha: 0, x: -12, duration: .4 }, '<')
+        .from(name.chars, { yPercent: 110, duration: .5, stagger: .01, ease: 'back.out(1.5)' }, '<')
+        .from('.role', { autoAlpha: 0, x: -16, duration: .5 }, '-=.3')
+        .from('.lede, .links, .companies, .facts', { autoAlpha: 0, y: 12, duration: .45, stagger: .07 }, '-=.35')
         .from('.scope', { autoAlpha: 0, scale: .92, duration: .8 }, '-=.9')
         .from('.scope .ring', { drawSVG: 0, duration: 1.2, stagger: .08, ease: 'power2.inOut' }, '<')
         .from('.scope .ax', { autoAlpha: 0, duration: .4, stagger: .05 }, '-=.4')
         .from('.glow', { autoAlpha: 0, scale: .6, duration: 1.6, ease: 'sine.out' }, '<')
         .from('.bubble', { scale: 0, duration: 1, stagger: .12, ease: 'elastic.out(1, .5)' }, '-=1.2')
         .from('.badge', { autoAlpha: 0, scale: .4, rotate: -90, duration: .9, ease: 'back.out(1.8)' }, '-=.8')
-        .from('.marquee', { autoAlpha: 0, y: 20, duration: .7 }, '-=.6')
         .add(typeGreetings);
 
       gsap.to('.glow', { x: -24, y: 18, scale: 1.08, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
@@ -590,7 +734,7 @@ if (window.gsap) {
         const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 82%', once: true }, defaults: { ease: 'power3.out' } });
         tl.from(sec.querySelector('h2'), { autoAlpha: 0, y: 26, duration: .7 })
           .from(sec.querySelectorAll('.sec-head .label'), { autoAlpha: 0, x: -10, duration: .5 }, '-=.4');
-        const items = sec.querySelectorAll('.features li, .row, tbody tr, .two > *, .contact > *');
+        const items = sec.querySelectorAll('.job-now, .jobs-past .job, .features li, .plist li, .two > *, .contact > *');
         if (items.length) tl.from(items, { autoAlpha: 0, y: 30, duration: .7, stagger: .09 }, '-=.35');
         const tags = sec.querySelectorAll('.tags li');
         if (tags.length) tl.from(tags, { scale: 0, autoAlpha: 0, duration: .45, stagger: .03, ease: 'back.out(2.2)' }, '-=.5');
@@ -644,72 +788,55 @@ if (window.gsap) {
         },
       });
 
-      // Each project's illustration plays only while it is on screen.
+      // Each illustration plays only while it is on screen.
       const playWhileVisible = (svg, tl) => ScrollTrigger.create({ trigger: svg, start: 'top 95%', end: 'bottom 5%', onToggle: self => self.isActive ? tl.play() : tl.pause() });
       const ill = sel => document.querySelector(sel);
 
-      // Satellites: the dish beam follows the satellite around its orbit.
+      // Comtech: packets hop dish → satellite → dish, the satellite pings, the live dashboard moves.
       {
-        const svg = ill('.ill-orbit'), sat = svg.querySelector('.sat'), beam = svg.querySelector('.beam');
-        const tl = gsap.timeline({ paused: true, repeat: -1 }).to(sat, {
-          motionPath: { path: '#ill-orbit-path' }, duration: 6, ease: 'none',
-          onUpdate: () => { beam.setAttribute('x2', gsap.getProperty(sat, 'x')); beam.setAttribute('y2', gsap.getProperty(sat, 'y')); },
-        });
-        playWhileVisible(svg, tl);
-      }
-
-      // Maps: the ship's route is drawn, pins drop on each stop, then the ship sails it.
-      {
-        const svg = ill('.ill-map');
-        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .6 })
-          .fromTo(svg.querySelector('.route'), { drawSVG: 0 }, { drawSVG: '100%', duration: 1.6, ease: 'power1.inOut' })
-          .from(svg.querySelectorAll('.pin'), { y: -16, autoAlpha: 0, duration: .5, stagger: .45, ease: 'bounce.out' }, 0.1)
-          .fromTo(svg.querySelector('.ship'), { autoAlpha: 0 }, { autoAlpha: 1, duration: .2 })
-          .to(svg.querySelector('.ship'), { motionPath: { path: '#ill-route', autoRotate: false }, duration: 3.2, ease: 'sine.inOut' }, '<')
-          .to(svg.querySelector('.ship'), { autoAlpha: 0, duration: .3 });
-        playWhileVisible(svg, tl);
-      }
-
-      // TCF: my voice as a waveform, the REC dot, and the exam timer ring filling up.
-      {
-        const svg = ill('.ill-tcf');
+        const svg = ill('.ill-sat');
         const tl = gsap.timeline({ paused: true, repeat: -1 })
-          .fromTo(svg.querySelector('.timer'), { drawSVG: 0 }, { drawSVG: '100%', duration: 5, ease: 'none' }, 0)
-          .to(svg.querySelector('.rec'), { autoAlpha: .2, duration: .5, repeat: 9, yoyo: true, ease: 'steps(1)' }, 0)
-          .to(svg.querySelectorAll('.bars rect'), {
-            attr: { height: () => gsap.utils.random(4, 40) }, duration: .18, ease: 'sine.inOut',
-            stagger: { each: .02, repeat: 25, yoyo: true },
-            onUpdate() { this.targets().forEach(b => b.setAttribute('y', 40 - b.getAttribute('height') / 2)); },
+          .to(svg.querySelectorAll('.pkt'), { motionPath: { path: '#x-link' }, duration: 3, ease: 'none', stagger: { each: 1, repeat: -1 } }, 0)
+          .fromTo(svg.querySelectorAll('.ping'), { attr: { r: 10 }, opacity: .6 }, { attr: { r: 34 }, opacity: 0, duration: 2, stagger: { each: 1, repeat: -1 }, ease: 'power1.out' }, 0)
+          .to(svg.querySelector('.live'), { opacity: .2, duration: .6, yoyo: true, repeat: -1, ease: 'steps(1)' }, 0)
+          .to(svg.querySelectorAll('.dash rect'), {
+            attr: { height: () => gsap.utils.random(6, 30) }, duration: .5, ease: 'power2.inOut', stagger: { each: .05, repeat: -1, yoyo: true },
+            onUpdate() { this.targets().forEach(b => b.setAttribute('y', 142 - b.getAttribute('height'))); },
           }, 0);
         playWhileVisible(svg, tl);
       }
 
-      // Minou: the cat walks in, says hi, and walks back.
+      // wherEX: the PHP monolith breaks into Go/React microservices.
       {
-        const svg = ill('.ill-minou'), cat = svg.querySelector('.cat');
-        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .4 })
-          .fromTo(cat, { x: -10, scaleX: -1, transformOrigin: '50% 50%' }, { x: 70, duration: 2.2, ease: 'none' })
-          .to(cat, { y: -6, duration: .15, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 0)
-          .to(cat, { y: -6, duration: .15, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 1.1)
-          .to(svg.querySelector('.say'), { opacity: 1, scale: 1, duration: .35, ease: 'back.out(2.5)', transformOrigin: '30% 100%' })
-          .to(svg.querySelector('.say'), { opacity: 0, duration: .3 }, '+=1.1')
-          .set(cat, { scaleX: 1 })
-          .to(cat, { x: -10, duration: 2.2, ease: 'none' });
-        gsap.set(svg.querySelector('.say'), { scale: .4, transformOrigin: '30% 100%' });
+        const svg = ill('.ill-micro'), mono = svg.querySelector('.mono');
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: 1.4, yoyo: true })
+          .to(mono, { rotate: 3, duration: .08, yoyo: true, repeat: 5, transformOrigin: '50% 50%' })
+          .fromTo(svg.querySelector('.arrow'), { drawSVG: 0 }, { drawSVG: '100%', duration: .4 })
+          .from(svg.querySelectorAll('.svc'), { x: 31, y: 40, scale: .3, autoAlpha: 0, duration: .7, stagger: .12, ease: 'back.out(1.6)' }, '-=.1')
+          .to(mono, { opacity: .25, duration: .5 }, '<');
         playWhileVisible(svg, tl);
       }
 
-      // E-commerce: a price tag jumps into the cart, the cart bumps, the counter goes up.
+      // Falabella: the truck drives the last mile and each house gets its check.
       {
-        const svg = ill('.ill-shop'), count = svg.querySelector('.count');
-        let n = 0;
-        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .5 })
-          .fromTo(svg.querySelector('.tag'), { x: 22, y: 50, autoAlpha: 1, scale: 1, rotate: 0 },
-            { motionPath: { path: [{ x: 22, y: 50 }, { x: 70, y: 2 }, { x: 124, y: 42 }], curviness: 1.4 }, rotate: 200, scale: .4, duration: 1.1, ease: 'power1.in' })
-          .set(svg.querySelector('.tag'), { autoAlpha: 0 })
-          .to(svg.querySelector('.cart'), { y: 4, duration: .12, yoyo: true, repeat: 1, ease: 'power2.out' })
-          .add(() => { n = n % 9 + 1; count.textContent = n; })
-          .fromTo(count, { scale: 1.8, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+        const svg = ill('.ill-truck'), checks = svg.querySelectorAll('.chk');
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .6 })
+          .set(checks, { autoAlpha: 0 })
+          .fromTo(svg.querySelector('.truck'), { scaleX: -1, transformOrigin: '50% 50%' }, { motionPath: { path: '#x-route' }, duration: 3.6, ease: 'sine.inOut' })
+          .fromTo(checks, { scale: 0, autoAlpha: 0, transformOrigin: '50% 50%' }, { scale: 1, autoAlpha: 1, duration: .35, stagger: 1.05, ease: 'back.out(3)' }, 1.3)
+          .to({}, { duration: .8 });
+        playWhileVisible(svg, tl);
+      }
+
+      // CITIAPS: the alert pings and volunteers converge on it, then a mobile notification pops.
+      {
+        const svg = ill('.ill-sos'), vols = svg.querySelectorAll('.vol circle');
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .4 })
+          .fromTo(svg.querySelectorAll('.ping'), { attr: { r: 5 }, opacity: .8 }, { attr: { r: 26 }, opacity: 0, duration: 1.4, stagger: .7, repeat: 1, ease: 'power1.out' }, 0)
+          .to(vols, { x: (i, el) => (80 - el.getAttribute('cx')) * .62, y: (i, el) => (40 - el.getAttribute('cy')) * .62, duration: 2, ease: 'power2.inOut', stagger: .08 }, 0)
+          .from(svg.querySelector('.notif'), { scale: 0, autoAlpha: 0, duration: .45, ease: 'back.out(2.5)', transformOrigin: '50% 50%' }, 1.2)
+          .to(svg.querySelector('.notif'), { autoAlpha: 0, duration: .3 }, '+=1')
+          .to(vols, { x: 0, y: 0, duration: 1.2, ease: 'power2.inOut' }, '<');
         playWhileVisible(svg, tl);
       }
 

@@ -50,10 +50,10 @@ console.log(`Katherine → ${TARGET}\n`);
   const page = await open();
   await page.goto(TARGET); await page.waitForTimeout(5500);
   await scrollLikeAPerson(page);
-  await page.addStyleTag({ content: '.row:nth-child(2) { opacity: 0 !important; }' });
+  await page.addStyleTag({ content: '.jobs-past .job:nth-child(2) { opacity: 0 !important; }' });
   const hidden = await findHidden(page);
-  if (hidden.some(h => h.startsWith('article.row'))) verdict('K0', 'PASS', 'le contrôle voit un projet caché exprès');
-  else verdict('K0', 'INCONCLUSIVE', 'le contrôle n’a PAS vu le projet caché : les jugements suivants ne prouvent rien');
+  if (hidden.some(h => h.startsWith('article.job'))) verdict('K0', 'PASS', 'le contrôle voit un emploi caché exprès');
+  else verdict('K0', 'INCONCLUSIVE', 'le contrôle n’a PAS vu l’emploi caché : les jugements suivants ne prouvent rien');
   await page.close();
 }
 
@@ -87,7 +87,7 @@ console.log(`Katherine → ${TARGET}\n`);
   await page.click('.lang button[data-lang="en"]'); await page.waitForTimeout(900);
   const en = await page.evaluate(() => ({ lang: document.documentElement.lang, role: document.querySelector('.role').textContent }));
   const hiddenAfter = await findHidden(page);
-  if (en.lang === 'en-CA' && en.role === 'Firmware & full-stack' && !hiddenAfter.length) verdict('K3', 'PASS', 'EN : texte changé et entièrement visible');
+  if (en.lang === 'en-CA' && en.role === 'Full stack developer' && !hiddenAfter.length) verdict('K3', 'PASS', 'EN : texte changé et entièrement visible');
   else verdict('K3', 'DEFECT', `EN : ${JSON.stringify(en)} caché=${hiddenAfter.slice(0, 3)}`);
 
   // K4 — elle copie le courriel : le bouton répond, les cœurs partent et ne restent pas dans la page.
@@ -98,6 +98,26 @@ console.log(`Katherine → ${TARGET}\n`);
   const left = await page.$$eval('.spark', s => s.length);
   if (['Copied', 'Selected'].includes(label) && sparks > 0 && left === 0) verdict('K4', 'PASS', `« ${label} », ${sparks} cœurs, tous nettoyés`);
   else verdict('K4', 'DEFECT', `bouton="${label}" cœurs=${sparks} restants=${left}`);
+  await page.close();
+}
+
+// K10 — la recruteuse : 3 secondes, sans défiler. Au bout de 1,5 s, ce qui compte doit
+// déjà être lisible dans le premier écran : le nom, le métier, et Comtech.
+for (const [label, viewport] of [['ordi', { width: 1440, height: 900 }], ['téléphone', { width: 390, height: 844 }]]) {
+  const page = await open({ viewport });
+  await page.goto(TARGET); await page.waitForTimeout(1500);
+  const seen = await page.evaluate(() => {
+    const ok = el => {
+      if (!el) return false;
+      const r = el.getBoundingClientRect(), c = getComputedStyle(el);
+      return r.top >= 0 && r.bottom <= innerHeight && c.visibility === 'visible' && +c.opacity > .95;
+    };
+    const comtech = [...document.querySelectorAll('.hero b, .companies span')].find(e => e.textContent.trim() === 'Comtech');
+    return { nom: ok(document.querySelector('h1')), metier: ok(document.querySelector('.role')), comtech: ok(comtech), linkedin: ok(document.querySelector('.hero a[href*="linkedin.com/in/"]')) };
+  });
+  const missing = Object.entries(seen).filter(([, v]) => !v).map(([k]) => k);
+  if (!missing.length) verdict('K10', 'PASS', `${label} : à 1,5 s, nom + métier + Comtech + LinkedIn visibles sans défiler`);
+  else verdict('K10', 'DEFECT', `${label} : à 1,5 s, pas encore lisible : ${missing.join(', ')}`);
   await page.close();
 }
 
