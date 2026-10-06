@@ -8,6 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Onest:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  document.documentElement.classList.add('anim');
+  setTimeout(() => { if (!window.gsap) document.documentElement.classList.remove('anim'); }, 2500);
+}
+</script>
 <style>
 /* Layout: a component datasheet, set in an editorial rose palette. */
 :root {
@@ -59,15 +65,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   padding-block: 48px 40px; border-bottom: 1px solid var(--rule);
   position: relative; isolation: isolate;
 }
-.hero::after {
-  content: ''; position: absolute; z-index: -1; right: 0; top: 20px; width: min(340px, 100%); aspect-ratio: 1;
+.glow {
+  position: absolute; pointer-events: none; z-index: -1; right: 0; top: 20px; width: min(340px, 100%); aspect-ratio: 1;
   border-radius: 50%; background: radial-gradient(circle, var(--glow) 0%, transparent 68%);
 }
 h1 {
   font: 600 clamp(42px, 7vw, 80px)/1 var(--display);
   font-optical-sizing: auto; letter-spacing: -.02em; margin: 0 0 22px; text-wrap: balance;
 }
-h1 span { display: block; color: var(--accent); font-style: italic; font-weight: 500; margin-top: .08em; }
+h1 .role { display: block; color: var(--accent); font-style: italic; font-weight: 500; margin-top: .08em; }
 .lede { max-width: 56ch; margin: 0; font-size: 19px; }
 .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 20px; color: var(--muted); font-size: 15px; }
 
@@ -147,9 +153,84 @@ footer { padding-top: 24px; color: var(--muted); font-size: 14px; }
 .lang button:hover { background: var(--accent); color: var(--paper); }
 
 body { margin: 0; }
+
+/* Motion (GSAP). Hidden only while the intro is pending. */
+.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .facts, .anim .scope, .anim .badge, .anim .bubbles, .anim .marquee { visibility: hidden; }
+.name .word { white-space: nowrap; }
+
+/* Curtain (Maison Auge): a rose sheet with the KL monogram, lifted with a curved edge. */
+.curtain { display: none; }
+.anim .curtain { display: grid; }
+.curtain {
+  place-items: center; position: fixed; inset: 0; z-index: 50;
+  background: var(--accent); color: var(--on-accent);
+}
+.curtain span { font: 600 clamp(56px, 10vw, 120px)/1 var(--display); letter-spacing: -.03em; }
+.curtain em { font-weight: 500; }
+
+/* Greeting that types itself (RNDM). */
+.hello { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font: italic 500 22px/1 var(--display); color: var(--accent); min-height: 1em; }
+.hello::before { content: ''; width: 36px; height: 1px; background: currentColor; }
+.caret { width: 2px; height: 1em; background: currentColor; margin-left: -8px; }
+
+/* Rotating circular badge (Mild Sugar). */
+.badge { position: absolute; right: 8px; bottom: 6px; width: 104px; height: 104px; z-index: 1; pointer-events: none; }
+.badge svg { width: 100%; height: 100%; overflow: visible; }
+.badge text { font: 500 10.5px var(--mono); letter-spacing: .2em; fill: var(--ink); }
+.badge .heart { font: 22px var(--body); fill: var(--accent); letter-spacing: 0; }
+
+/* Pastel bubbles (Deepa). */
+.bubbles { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.bubble { position: absolute; border-radius: 50%; }
+.bubble.b1 { width: 92px; height: 92px; right: 4%; top: 6%; background: radial-gradient(circle at 32% 30%, #fff 0 8%, #f7b6c8 22%, #e58aa6 72%); }
+.bubble.b2 { width: 54px; height: 54px; right: 34%; top: 2%; background: radial-gradient(circle at 32% 30%, #fff 0 8%, #d9c8f7 24%, #b39ae8 72%); }
+.bubble.b3 { width: 40px; height: 40px; right: 0; top: 58%; background: radial-gradient(circle at 32% 30%, #fff 0 8%, #fbd9c2 24%, #f2ad87 72%); }
+.bubble.b4 { width: 26px; height: 26px; right: 27%; bottom: 3%; background: radial-gradient(circle at 32% 30%, #fff 0 10%, #c8eedd 26%, #93d2b6 74%); }
+:root[data-theme="dark"] .bubble { opacity: .55; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bubble { opacity: .55; } }
+
+/* Tech ribbon that slides with the scroll (Noomo). */
+.marquee { overflow: hidden; border-bottom: 1px solid var(--rule); padding-block: 16px; }
+.track { display: flex; width: max-content; gap: 0; font: italic 500 26px/1 var(--display); color: var(--accent); white-space: nowrap; }
+.track span { padding-inline: 18px; }
+.track i { font-style: normal; color: var(--ink); opacity: .35; }
+
+/* Project illustrations: each one tells what the project does. Static when motion is off. */
+.ill { display: block; width: 160px; height: 80px; margin-top: 14px; overflow: visible; }
+.ill .ln { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.ill .faint { fill: none; stroke: var(--rule); stroke-width: 1; }
+.ill .soft { fill: var(--accent-soft); }
+.ill .ink { fill: var(--ink); }
+.ill .acc { fill: var(--accent); }
+.ill .sig { fill: var(--signal); }
+.ill text { font: 600 9px var(--mono); }
+.ill .label-t { fill: var(--muted); font-weight: 500; letter-spacing: .08em; }
+.ill .bubble-t { fill: var(--ink); font: italic 500 11px var(--display); }
+.ill .emoji { font: 22px/1 var(--body); }
+
+/* Ring cursor (Deepa). Decoration only: the system cursor stays. */
+.ring-cursor {
+  position: fixed; left: 0; top: 0; z-index: 40; width: 30px; height: 30px; margin: -15px 0 0 -15px;
+  border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; opacity: 0;
+  transition: background-color .3s;
+}
+.ring-cursor.hot { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+
+@media (max-width: 720px) {
+  .badge { width: 84px; height: 84px; right: 0; bottom: auto; top: 8px; }
+  .bubble.b1, .bubble.b2, .bubble.b4 { display: none; }
+  .track { font-size: 21px; }
+}
+.spark {
+  position: fixed; z-index: 10; pointer-events: none; font-size: 16px; line-height: 1;
+  color: var(--accent); translate: -50% -50%;
+}
 </style>
 </head>
 <body>
+
+<div class="curtain" aria-hidden="true"><span>K<em>L</em></span></div>
+<div class="ring-cursor" aria-hidden="true"></div>
 
 <div class="sheet">
   <div class="strip">
@@ -164,8 +245,11 @@ body { margin: 0; }
   </div>
 
   <header class="hero">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="bubbles" aria-hidden="true"><i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i><i class="bubble b4"></i></div>
     <div>
-      <h1>Katherine Liberona Irarrázabal <span data-t="role"></span></h1>
+      <p class="hello" aria-hidden="true"><span class="hello-word">Bonjour</span><span class="caret"></span></p>
+      <h1><span class="name">Katherine Liberona Irarrázabal</span> <span class="role" data-t="role"></span></h1>
       <p class="lede" data-t="lede"></p>
       <div class="facts"><span data-t="f1"></span><span data-t="f2"></span><span data-t="f3"></span></div>
     </div>
@@ -186,7 +270,18 @@ body { margin: 0; }
       </svg>
       <figcaption data-t="scopeCap"></figcaption>
     </figure>
+    <div class="badge" aria-hidden="true">
+      <svg viewBox="-60 -60 120 120">
+        <defs><path id="badgeCircle" d="M 0 -44 A 44 44 0 1 1 -0.01 -44"/></defs>
+        <g class="badge-spin"><text><textPath href="#badgeCircle">FIRMWARE · FULL-STACK · MONTRÉAL · </textPath></text></g>
+        <text class="heart" x="0" y="8" text-anchor="middle">♥</text>
+      </svg>
+    </div>
   </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track"><span>C <i>✿</i></span><span>Python <i>✿</i></span><span>Vue <i>✿</i></span><span>Go <i>✿</i></span><span>Linux embarqué <i>✿</i></span><span>systemd <i>✿</i></span><span>Leaflet <i>✿</i></span><span>Raspberry Pi <i>✿</i></span><span>Django <i>✿</i></span></div>
+  </div>
 
   <section id="features">
     <div class="sec-head"><h2 data-t="featH"></h2><span class="label" data-t="featL"></span></div>
@@ -199,7 +294,14 @@ body { margin: 0; }
     <div class="sec-head"><h2 data-t="workH"></h2><span class="label">2025 – 2026</span></div>
     <div class="work">
       <article class="row lead">
-        <div><h3>Orbit Tracker</h3><div class="kind" data-t="otK"></div></div>
+        <div><h3>Orbit Tracker</h3><div class="kind" data-t="otK"></div>
+          <svg class="ill ill-orbit" viewBox="0 0 160 80" aria-hidden="true">
+            <path id="ill-orbit-path" class="faint" d="M18 36 a62 20 0 1 0 124 0 a62 20 0 1 0 -124 0"/>
+            <circle class="soft" cx="80" cy="36" r="10"/><circle class="ln" cx="80" cy="36" r="10"/>
+            <line class="ln beam" x1="80" y1="74" x2="18" y2="36" stroke-dasharray="2 3" opacity=".7"/>
+            <path class="ln" d="M72 74 h16 M80 74 v-6 M74 66 a8 8 0 0 0 12 0"/>
+            <g class="sat" transform="translate(18 36)"><rect class="acc" x="-3" y="-3" width="6" height="6" rx="1"/><rect class="sig" x="-11" y="-2" width="6" height="4"/><rect class="sig" x="5" y="-2" width="6" height="4"/></g>
+          </svg></div>
         <div>
           <p data-t="otP"></p>
           <div class="meta">
@@ -209,7 +311,16 @@ body { margin: 0; }
         </div>
       </article>
       <article class="row">
-        <div><h3 data-t="hvH"></h3><div class="kind" data-t="hvK"></div></div>
+        <div><h3 data-t="hvH"></h3><div class="kind" data-t="hvK"></div>
+          <svg class="ill ill-map" viewBox="0 0 160 80" aria-hidden="true">
+            <path class="soft" d="M30 30 q14 -6 22 4 q6 10 -2 22 q-6 10 -12 22 q-6 -8 -8 -20 q-6 -14 0 -28z"/>
+            <path class="soft" d="M112 6 q18 -4 30 4 q4 10 -6 14 q-12 4 -22 0 q-8 -8 -2 -18z"/>
+            <path id="ill-route" class="ln route" d="M42 76 C 30 60, 62 52, 58 40 S 92 18, 128 14"/>
+            <g class="pin" transform="translate(42 76)"><path class="acc" d="M0 0 l-4 -7 a4.6 4.6 0 1 1 8 0z"/></g>
+            <g class="pin" transform="translate(58 40)"><path class="acc" d="M0 0 l-4 -7 a4.6 4.6 0 1 1 8 0z"/></g>
+            <g class="pin" transform="translate(128 14)"><path class="acc" d="M0 0 l-4 -7 a4.6 4.6 0 1 1 8 0z"/></g>
+            <g class="ship" transform="translate(90 24)"><path class="ink" d="M-5 -1 h10 l-2 4 h-6z M0 -1 v-5 l4 4z"/></g>
+          </svg></div>
         <div>
           <p data-t="hvP"></p>
           <div class="meta">
@@ -219,7 +330,14 @@ body { margin: 0; }
         </div>
       </article>
       <article class="row">
-        <div><h3 data-t="tcfH"></h3><div class="kind" data-t="tcfK"></div></div>
+        <div><h3 data-t="tcfH"></h3><div class="kind" data-t="tcfK"></div>
+          <svg class="ill ill-tcf" viewBox="0 0 160 80" aria-hidden="true">
+            <g class="bars"><rect class="acc" x="6" y="35" width="4" height="10" rx="2"/><rect class="acc" x="13" y="29" width="4" height="22" rx="2"/><rect class="acc" x="20" y="23" width="4" height="34" rx="2"/><rect class="acc" x="27" y="31" width="4" height="18" rx="2"/><rect class="acc" x="34" y="20" width="4" height="40" rx="2"/><rect class="acc" x="41" y="27" width="4" height="26" rx="2"/><rect class="acc" x="48" y="34" width="4" height="12" rx="2"/><rect class="acc" x="55" y="25" width="4" height="30" rx="2"/><rect class="acc" x="62" y="21" width="4" height="38" rx="2"/><rect class="acc" x="69" y="32" width="4" height="16" rx="2"/><rect class="acc" x="76" y="28" width="4" height="24" rx="2"/><rect class="acc" x="83" y="22" width="4" height="36" rx="2"/><rect class="acc" x="90" y="33" width="4" height="14" rx="2"/><rect class="acc" x="97" y="30" width="4" height="20" rx="2"/></g>
+            <circle class="faint" cx="132" cy="40" r="16" stroke-width="3"/>
+            <circle class="ln timer" cx="132" cy="40" r="16" stroke-width="3" transform="rotate(-90 132 40)"/>
+            <circle class="rec acc" cx="132" cy="40" r="4"/>
+            <text class="label-t" x="118" y="72">REC</text>
+          </svg></div>
         <div>
           <p data-t="tcfP"></p>
           <div class="meta">
@@ -229,7 +347,12 @@ body { margin: 0; }
         </div>
       </article>
       <article class="row">
-        <div><h3>Minou</h3><div class="kind" data-t="miK"></div></div>
+        <div><h3>Minou</h3><div class="kind" data-t="miK"></div>
+          <svg class="ill ill-minou" viewBox="0 0 160 80" aria-hidden="true">
+            <line class="faint" x1="0" y1="64" x2="160" y2="64"/>
+            <g class="say" opacity="0"><rect class="soft" x="58" y="12" width="52" height="22" rx="11"/><path class="soft" d="M74 33 l-4 8 l10 -8z"/><text class="bubble-t" x="84" y="27" text-anchor="middle">Salut !</text></g>
+            <g class="cat" transform="translate(40 0)"><text class="emoji" x="0" y="62" text-anchor="middle">🐈</text></g>
+          </svg></div>
         <div>
           <p data-t="miP"></p>
           <div class="meta">
@@ -239,7 +362,12 @@ body { margin: 0; }
         </div>
       </article>
       <article class="row">
-        <div><h3>Hazel Outdoor</h3><div class="kind" data-t="hzK"></div></div>
+        <div><h3>Hazel Outdoor</h3><div class="kind" data-t="hzK"></div>
+          <svg class="ill ill-shop" viewBox="0 0 160 80" aria-hidden="true">
+            <g class="tag" transform="translate(40 40)"><rect class="soft" x="-15" y="-9" width="30" height="18" rx="4"/><rect class="ln" x="-15" y="-9" width="30" height="18" rx="4"/><text class="acc" x="0" y="3.5" text-anchor="middle">$29</text></g>
+            <g class="cart"><path class="ln" d="M100 30 h8 l8 28 h26 l6 -20 h-36"/><circle class="ln" cx="120" cy="66" r="4"/><circle class="ln" cx="138" cy="66" r="4"/>
+              <circle class="acc" cx="146" cy="28" r="8"/><text class="count" x="146" y="31.5" text-anchor="middle" fill="#fff">0</text></g>
+          </svg></div>
         <div>
           <p data-t="hzP"></p>
           <div class="meta">
@@ -292,6 +420,12 @@ body { margin: 0; }
   <footer>Katherine Liberona Irarrázabal · Montréal</footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/SplitText.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/DrawSVGPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/TextPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/MotionPathPlugin.min.js"></script>
 <script>
 const T = {
   fr: {
@@ -383,7 +517,13 @@ if (location.hash === '#en' || location.hash === '#fr') start = location.hash.sl
 else { try { start = localStorage.getItem('lang') || 'fr'; } catch {} }
 apply(start);
 
-document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
+  if (b.dataset.lang === lang) return;
+  apply(b.dataset.lang);
+  if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.fromTo('[data-t]', { autoAlpha: 0, y: 6 }, { autoAlpha: 1, y: 0, duration: .45, stagger: .006, ease: 'power2.out', overwrite: true });
+  }
+}));
 
 document.getElementById('copy').addEventListener('click', async (e) => {
   const btn = e.currentTarget, text = document.getElementById('email').textContent;
@@ -393,7 +533,213 @@ document.getElementById('copy').addEventListener('click', async (e) => {
     const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = T[lang].selected;
   }
   setTimeout(() => { btn.textContent = T[lang].copy; }, 1800);
+  burst(btn);
 });
+
+/* Little hearts and sparkles out of the copy button. */
+function burst(el) {
+  if (!window.gsap || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement('span');
+    s.className = 'spark'; s.textContent = ['♥', '✦', '✿'][i % 3];
+    s.style.left = cx + 'px'; s.style.top = cy + 'px';
+    document.body.appendChild(s);
+    const a = Math.random() * Math.PI * 2, d = 50 + Math.random() * 70;
+    gsap.fromTo(s, { scale: 0, rotate: 0 }, {
+      x: Math.cos(a) * d, y: Math.sin(a) * d - 30, scale: .7 + Math.random() * .8,
+      rotate: gsap.utils.random(-90, 90), autoAlpha: 0, duration: 1 + Math.random() * .5,
+      ease: 'power3.out', onComplete: () => s.remove(),
+    });
+  }
+}
+
+if (window.gsap) {
+  gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, TextPlugin, MotionPathPlugin);
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    document.fonts.ready.then(() => {
+      gsap.set('.curtain', { display: 'grid' });
+      document.documentElement.classList.remove('anim');
+      const name = SplitText.create('.name', { type: 'words,chars', wordsClass: 'word', mask: 'words' });
+
+      gsap.set('.strip, .hero h1, .hello, .lede, .facts, .scope, .badge, .bubbles, .marquee', { visibility: 'visible' });
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from('.curtain span', { yPercent: 40, autoAlpha: 0, duration: .5 })
+        .to('.curtain span', { yPercent: -60, autoAlpha: 0, duration: .4, ease: 'power2.in' }, '+=.25')
+        .to('.curtain', { yPercent: -100, borderBottomLeftRadius: '50% 22vh', borderBottomRightRadius: '50% 22vh', duration: .9, ease: 'power4.inOut' }, '-=.15')
+        .set('.curtain', { display: 'none' })
+        .from('.strip', { autoAlpha: 0, y: -12, duration: .6 }, '-=.35')
+        .from('.hello', { autoAlpha: 0, x: -16, duration: .5 }, '<')
+        .from(name.chars, { yPercent: 110, rotate: 6, duration: .8, stagger: .022, ease: 'back.out(1.7)' }, '-=.3')
+        .from('.role', { autoAlpha: 0, x: -24, skewX: -14, duration: .9 }, '-=.45')
+        .from('.lede, .facts', { autoAlpha: 0, y: 18, duration: .7, stagger: .12 }, '-=.6')
+        .from('.scope', { autoAlpha: 0, scale: .92, duration: .8 }, '-=.9')
+        .from('.scope .ring', { drawSVG: 0, duration: 1.2, stagger: .08, ease: 'power2.inOut' }, '<')
+        .from('.scope .ax', { autoAlpha: 0, duration: .4, stagger: .05 }, '-=.4')
+        .from('.glow', { autoAlpha: 0, scale: .6, duration: 1.6, ease: 'sine.out' }, '<')
+        .from('.bubble', { scale: 0, duration: 1, stagger: .12, ease: 'elastic.out(1, .5)' }, '-=1.2')
+        .from('.badge', { autoAlpha: 0, scale: .4, rotate: -90, duration: .9, ease: 'back.out(1.8)' }, '-=.8')
+        .from('.marquee', { autoAlpha: 0, y: 20, duration: .7 }, '-=.6')
+        .add(typeGreetings);
+
+      gsap.to('.glow', { x: -24, y: 18, scale: 1.08, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+
+      gsap.utils.toArray('section').forEach(sec => {
+        const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 82%', once: true }, defaults: { ease: 'power3.out' } });
+        tl.from(sec.querySelector('h2'), { autoAlpha: 0, y: 26, duration: .7 })
+          .from(sec.querySelectorAll('.sec-head .label'), { autoAlpha: 0, x: -10, duration: .5 }, '-=.4');
+        const items = sec.querySelectorAll('.features li, .row, tbody tr, .two > *, .contact > *');
+        if (items.length) tl.from(items, { autoAlpha: 0, y: 30, duration: .7, stagger: .09 }, '-=.35');
+        const tags = sec.querySelectorAll('.tags li');
+        if (tags.length) tl.from(tags, { scale: 0, autoAlpha: 0, duration: .45, stagger: .03, ease: 'back.out(2.2)' }, '-=.5');
+      });
+
+      // Magnetic copy button.
+      const btn = document.getElementById('copy');
+      const xTo = gsap.quickTo(btn, 'x', { duration: .4, ease: 'power3' });
+      const yTo = gsap.quickTo(btn, 'y', { duration: .4, ease: 'power3' });
+      btn.addEventListener('pointermove', e => {
+        const r = btn.getBoundingClientRect();
+        xTo((e.clientX - r.left - r.width / 2) * .35); yTo((e.clientY - r.top - r.height / 2) * .35);
+      });
+      btn.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
+
+      // Project titles lean into italic on hover.
+      document.querySelectorAll('.row h3').forEach(h => {
+        h.addEventListener('pointerenter', () => gsap.to(h, { x: 6, skewX: -6, color: 'var(--accent)', duration: .3 }));
+        h.addEventListener('pointerleave', () => gsap.to(h, { x: 0, skewX: 0, clearProps: 'color', duration: .3 }));
+      });
+
+      // Greeting that types itself, in my three languages (RNDM).
+      function typeGreetings() {
+        const words = ['Bonjour', 'Hola', 'Hello', 'Allô'];
+        const el = document.querySelector('.hello-word');
+        const tl = gsap.timeline({ repeat: -1 });
+        words.forEach((w, i) => {
+          const next = words[(i + 1) % words.length];
+          tl.to(el, { duration: 1.6 })
+            .to(el, { text: '', duration: w.length * .05, ease: 'none' })
+            .to(el, { text: next, duration: next.length * .08, ease: 'none' });
+        });
+        gsap.to('.caret', { autoAlpha: 0, duration: .5, repeat: -1, yoyo: true, ease: 'steps(1)' });
+      }
+
+      // Circular badge spins forever and speeds up with the scroll (Mild Sugar).
+      const spin = gsap.to('.badge-spin', { rotate: 360, transformOrigin: '50% 50%', duration: 16, ease: 'none', repeat: -1 });
+
+      // Tech ribbon loops sideways; scrolling pushes it and flips its direction (Noomo).
+      const track = document.querySelector('.track');
+      track.innerHTML += track.innerHTML;
+      const ribbon = gsap.to(track, { xPercent: -50, duration: 28, ease: 'none', repeat: -1 });
+      let dir = 1;
+      ScrollTrigger.create({
+        onUpdate: self => {
+          dir = self.direction;
+          const boost = 1 + Math.min(Math.abs(self.getVelocity()) / 400, 5);
+          gsap.to(ribbon, { timeScale: dir * boost, duration: .2, overwrite: true });
+          gsap.to(spin, { timeScale: boost, duration: .2, overwrite: true });
+          gsap.to([ribbon, spin], { timeScale: i => i === 0 ? dir : 1, duration: 1.2, delay: .25, ease: 'power2.out' });
+        },
+      });
+
+      // Each project's illustration plays only while it is on screen.
+      const playWhileVisible = (svg, tl) => ScrollTrigger.create({ trigger: svg, start: 'top 95%', end: 'bottom 5%', onToggle: self => self.isActive ? tl.play() : tl.pause() });
+      const ill = sel => document.querySelector(sel);
+
+      // Satellites: the dish beam follows the satellite around its orbit.
+      {
+        const svg = ill('.ill-orbit'), sat = svg.querySelector('.sat'), beam = svg.querySelector('.beam');
+        const tl = gsap.timeline({ paused: true, repeat: -1 }).to(sat, {
+          motionPath: { path: '#ill-orbit-path' }, duration: 6, ease: 'none',
+          onUpdate: () => { beam.setAttribute('x2', gsap.getProperty(sat, 'x')); beam.setAttribute('y2', gsap.getProperty(sat, 'y')); },
+        });
+        playWhileVisible(svg, tl);
+      }
+
+      // Maps: the ship's route is drawn, pins drop on each stop, then the ship sails it.
+      {
+        const svg = ill('.ill-map');
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .6 })
+          .fromTo(svg.querySelector('.route'), { drawSVG: 0 }, { drawSVG: '100%', duration: 1.6, ease: 'power1.inOut' })
+          .from(svg.querySelectorAll('.pin'), { y: -16, autoAlpha: 0, duration: .5, stagger: .45, ease: 'bounce.out' }, 0.1)
+          .fromTo(svg.querySelector('.ship'), { autoAlpha: 0 }, { autoAlpha: 1, duration: .2 })
+          .to(svg.querySelector('.ship'), { motionPath: { path: '#ill-route', autoRotate: false }, duration: 3.2, ease: 'sine.inOut' }, '<')
+          .to(svg.querySelector('.ship'), { autoAlpha: 0, duration: .3 });
+        playWhileVisible(svg, tl);
+      }
+
+      // TCF: my voice as a waveform, the REC dot, and the exam timer ring filling up.
+      {
+        const svg = ill('.ill-tcf');
+        const tl = gsap.timeline({ paused: true, repeat: -1 })
+          .fromTo(svg.querySelector('.timer'), { drawSVG: 0 }, { drawSVG: '100%', duration: 5, ease: 'none' }, 0)
+          .to(svg.querySelector('.rec'), { autoAlpha: .2, duration: .5, repeat: 9, yoyo: true, ease: 'steps(1)' }, 0)
+          .to(svg.querySelectorAll('.bars rect'), {
+            attr: { height: () => gsap.utils.random(4, 40) }, duration: .18, ease: 'sine.inOut',
+            stagger: { each: .02, repeat: 25, yoyo: true },
+            onUpdate() { this.targets().forEach(b => b.setAttribute('y', 40 - b.getAttribute('height') / 2)); },
+          }, 0);
+        playWhileVisible(svg, tl);
+      }
+
+      // Minou: the cat walks in, says hi, and walks back.
+      {
+        const svg = ill('.ill-minou'), cat = svg.querySelector('.cat');
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .4 })
+          .fromTo(cat, { x: -10, scaleX: -1, transformOrigin: '50% 50%' }, { x: 70, duration: 2.2, ease: 'none' })
+          .to(cat, { y: -6, duration: .15, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 0)
+          .to(cat, { y: -6, duration: .15, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 1.1)
+          .to(svg.querySelector('.say'), { opacity: 1, scale: 1, duration: .35, ease: 'back.out(2.5)', transformOrigin: '30% 100%' })
+          .to(svg.querySelector('.say'), { opacity: 0, duration: .3 }, '+=1.1')
+          .set(cat, { scaleX: 1 })
+          .to(cat, { x: -10, duration: 2.2, ease: 'none' });
+        gsap.set(svg.querySelector('.say'), { scale: .4, transformOrigin: '30% 100%' });
+        playWhileVisible(svg, tl);
+      }
+
+      // E-commerce: a price tag jumps into the cart, the cart bumps, the counter goes up.
+      {
+        const svg = ill('.ill-shop'), count = svg.querySelector('.count');
+        let n = 0;
+        const tl = gsap.timeline({ paused: true, repeat: -1, repeatDelay: .5 })
+          .fromTo(svg.querySelector('.tag'), { x: 22, y: 50, autoAlpha: 1, scale: 1, rotate: 0 },
+            { motionPath: { path: [{ x: 22, y: 50 }, { x: 70, y: 2 }, { x: 124, y: 42 }], curviness: 1.4 }, rotate: 200, scale: .4, duration: 1.1, ease: 'power1.in' })
+          .set(svg.querySelector('.tag'), { autoAlpha: 0 })
+          .to(svg.querySelector('.cart'), { y: 4, duration: .12, yoyo: true, repeat: 1, ease: 'power2.out' })
+          .add(() => { n = n % 9 + 1; count.textContent = n; })
+          .fromTo(count, { scale: 1.8, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+        playWhileVisible(svg, tl);
+      }
+
+      // Bubbles float, and drift away from the mouse (Deepa).
+      gsap.utils.toArray('.bubble').forEach((b, i) => {
+        gsap.to(b, { y: i % 2 ? 14 : -14, x: i % 2 ? -8 : 8, duration: 2.6 + i * .4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      });
+      const bubbles = document.querySelector('.bubbles');
+      const bx = gsap.quickTo(bubbles, 'x', { duration: 1.2, ease: 'power3' });
+      const by = gsap.quickTo(bubbles, 'y', { duration: 1.2, ease: 'power3' });
+      const hero = document.querySelector('.hero');
+      hero.addEventListener('pointermove', e => { bx((innerWidth / 2 - e.clientX) * .03); by((innerHeight / 2 - e.clientY) * .03); });
+      hero.addEventListener('pointerleave', () => { bx(0); by(0); });
+
+      return () => name.revert();
+    });
+  });
+  mm.add('(prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
+    const ring = document.querySelector('.ring-cursor');
+    const rx = gsap.quickTo(ring, 'x', { duration: .45, ease: 'power3' });
+    const ry = gsap.quickTo(ring, 'y', { duration: .45, ease: 'power3' });
+    const move = e => { rx(e.clientX); ry(e.clientY); gsap.to(ring, { opacity: 1, duration: .3, overwrite: 'auto' }); };
+    const over = e => {
+      const hot = !!e.target.closest('a, button');
+      ring.classList.toggle('hot', hot);
+      gsap.to(ring, { scale: hot ? 1.8 : 1, duration: .3 });
+    };
+    addEventListener('pointermove', move); addEventListener('pointerover', over);
+    return () => { removeEventListener('pointermove', move); removeEventListener('pointerover', over); };
+  });
+}
 </script>
 </body>
 </html>

@@ -1,0 +1,11 @@
+{
+  "name": "portafolio-qa",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sam": "node sam_katherine.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.62.1"
+  }
+}
