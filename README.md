@@ -10,13 +10,15 @@
 
 Portfolio personnel de Katherine Liberona Irarrázabal, développeuse firmware et full-stack à Montréal. En français par défaut, en anglais avec le bouton FR/EN (ou `#en`).
 
-Un seul fichier statique `index.html` : aucune étape de compilation; seule dépendance, GSAP chargé depuis cdnjs.
+Un seul fichier statique `index.html` : aucune étape de compilation; GSAP et Vue 3 chargés depuis cdnjs.
 
 **Publication :** GitHub Pages, à partir de la branche `main`, dossier `/ (root)`.
 
 Animations : GSAP (SplitText, ScrollTrigger, DrawSVG, MotionPath, Text), désactivées si le système demande de réduire les animations.
 
 **Katherine** (`qa/`) : un test Playwright qui visite la page comme une vraie personne — intro, défilement, FR/EN, copie du courriel, téléphone, mouvement réduit, CDN coupé — avec un contrôle négatif. `cd qa && npm install && node katherine.mjs`
+
+CV : `cv/cv.html` → `cv-fr.pdf` / `cv-en.pdf` (`node cv/build.mjs`). Avatar vocal : composant Vue 3 avec `media/presentation.m4a`.
 
 La version précédente en Quasar (2021) se trouve dans l'historique git.
 
@@ -26,13 +28,15 @@ La version précédente en Quasar (2021) se trouve dans l'historique git.
 
 Personal portfolio of Katherine Liberona Irarrázabal, firmware and full-stack developer in Montréal. French by default, English with the FR/EN toggle (or `#en`).
 
-A single static `index.html`: no build step; the only dependency is GSAP, loaded from cdnjs.
+A single static `index.html`: no build step; GSAP and Vue 3, loaded from cdnjs.
 
 **Published with:** GitHub Pages, from branch `main`, folder `/ (root)`.
 
 Animations: GSAP (SplitText, ScrollTrigger, DrawSVG, MotionPath, Text), turned off when the system asks for reduced motion.
 
 **Katherine** (`qa/`): a Playwright test that visits the page like a real person — intro, scrolling, FR/EN, copying the email, phone, reduced motion, CDN down — with a negative control. `cd qa && npm install && node katherine.mjs`
+
+Resume: `cv/cv.html` → `cv-fr.pdf` / `cv-en.pdf` (`node cv/build.mjs`). Voice avatar: Vue 3 component playing `media/presentation.m4a`.
 
 The previous Quasar version (2021) is in the git history.
 

@@ -7,14 +7,32 @@
 // si elle ne sait pas voir un projet caché exprès, elle ne prouve rien.
 //
 //   npm install
-//   node katherine.mjs                       # le fichier local ../index.html
+//   node katherine.mjs                       # le dépôt local, servi en HTTP sur 127.0.0.1
 //   node katherine.mjs https://katherinemli.github.io/Portafolio/
 //
 // Verdicts : PASS · DEFECT · INCONCLUSIVE. Code de sortie 1 s'il y a un DEFECT.
 
 import { chromium } from 'playwright';
 
-const TARGET = process.argv[2] || new URL('../index.html', import.meta.url).href;
+import http from 'node:http';
+import { readFile } from 'node:fs/promises';
+import { extname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// Without a URL, serve the repo over HTTP on localhost: a real visitor never sees file://.
+let server, TARGET = process.argv[2];
+if (!TARGET) {
+  const root = fileURLToPath(new URL('..', import.meta.url));
+  const types = { '.html': 'text/html; charset=utf-8', '.pdf': 'application/pdf', '.m4a': 'audio/mp4', '.js': 'text/javascript', '.json': 'application/json' };
+  server = http.createServer(async (req, res) => {
+    const path = normalize(decodeURIComponent(new URL(req.url, 'http://x').pathname)).replace(/^([/\\])+/, '');
+    const file = path || 'index.html';
+    try { const body = await readFile(join(root, file)); res.writeHead(200, { 'content-type': types[extname(file)] || 'application/octet-stream' }); res.end(body); }
+    catch { res.writeHead(404); res.end(); }
+  });
+  await new Promise(ok => server.listen(0, '127.0.0.1', ok));
+  TARGET = `http://127.0.0.1:${server.address().port}/`;
+}
 const results = [];
 const verdict = (id, status, what) => { results.push({ id, status, what }); console.log(`${status.padEnd(12)} ${id}  ${what}`); };
 
@@ -61,7 +79,7 @@ console.log(`Katherine → ${TARGET}\n`);
 {
   const page = await open();
   await page.goto(TARGET); await page.waitForTimeout(6000);
-  const hero = await page.evaluate(() => ['h1', '.role', '.lede', '.facts', '.scope'].map(s => {
+  const hero = await page.evaluate(() => ['h1', '.role', '.lede', '.facts', '.avatar-wrap'].map(s => {
     const c = getComputedStyle(document.querySelector(s)); return c.visibility === 'visible' && +c.opacity > 0.99;
   }));
   const name = await page.$eval('.name', e => e.getAttribute('aria-label') || e.textContent.trim());
@@ -112,12 +130,78 @@ for (const [label, viewport] of [['ordi', { width: 1440, height: 900 }], ['tél�
       const r = el.getBoundingClientRect(), c = getComputedStyle(el);
       return r.top >= 0 && r.bottom <= innerHeight && c.visibility === 'visible' && +c.opacity > .95;
     };
-    const comtech = [...document.querySelectorAll('.hero b, .companies span')].find(e => e.textContent.trim() === 'Comtech');
+    const comtech = [...document.querySelectorAll('.hero b, .companies a')].find(e => e.textContent.trim() === 'Comtech');
     return { nom: ok(document.querySelector('h1')), metier: ok(document.querySelector('.role')), comtech: ok(comtech), linkedin: ok(document.querySelector('.hero a[href*="linkedin.com/in/"]')) };
   });
   const missing = Object.entries(seen).filter(([, v]) => !v).map(([k]) => k);
   if (!missing.length) verdict('K10', 'PASS', `${label} : à 1,5 s, nom + métier + Comtech + LinkedIn visibles sans défiler`);
   else verdict('K10', 'DEFECT', `${label} : à 1,5 s, pas encore lisible : ${missing.join(', ')}`);
+  await page.close();
+}
+
+// K11 — elle passe la souris sur Falabella : la carte doit réagir (bordure, ombre).
+{
+  const page = await open();
+  await page.goto(TARGET); await page.waitForTimeout(2500);
+  const card = page.locator('#job-falabella');
+  await card.scrollIntoViewIfNeeded(); await page.waitForTimeout(1500);
+  const look = () => card.evaluate(e => { const c = getComputedStyle(e); return c.borderTopColor + ' | ' + c.boxShadow; });
+  await page.mouse.move(5, 5); await page.waitForTimeout(500);
+  const before = await look();
+  await card.hover(); await page.waitForTimeout(600);
+  const after = await look();
+  if (before !== after) verdict('K11', 'PASS', 'survol de Falabella : la carte réagit');
+  else verdict('K11', 'DEFECT', `survol de Falabella : rien ne change (${before})`);
+  await page.close();
+}
+
+// K12 — elle veut le CV : le bouton mène au PDF de la langue affichée, et ce PDF existe.
+{
+  const page = await open();
+  await page.goto(TARGET); await page.waitForTimeout(2000);
+  const res = [];
+  for (const lang of ['fr', 'en']) {
+    await page.click(`.lang button[data-lang="${lang}"]`); await page.waitForTimeout(300);
+    const href = await page.$eval('.hero .cvlink', a => a.href);
+    const status = await page.evaluate(async u => { try { const r = await fetch(u); const b = await r.arrayBuffer(); return r.ok && new TextDecoder().decode(b.slice(0, 5)) === '%PDF-' ? 'pdf' : `http ${r.status}`; } catch (e) { return 'fetch impossible'; } }, href);
+    res.push([lang, href.split('/').pop(), status]);
+  }
+  const bad = res.filter(([l, f, st]) => f !== `cv-${l}.pdf` || (st !== 'pdf' && st !== 'fetch impossible'));
+  const unsure = res.filter(([, , st]) => st === 'fetch impossible');
+  if (bad.length) verdict('K12', 'DEFECT', `CV : ${JSON.stringify(bad)}`);
+  else if (unsure.length) verdict('K12', 'INCONCLUSIVE', 'CV : le bon fichier est visé, mais je ne peux pas le télécharger depuis file:// — relancer avec l’URL publiée');
+  else verdict('K12', 'PASS', 'CV : FR → cv-fr.pdf, EN → cv-en.pdf, deux vrais PDF');
+  await page.close();
+}
+
+// K13 — l'œuf de Pâques : taper « minou » fait traverser le chat, puis il s'en va.
+{
+  const page = await open();
+  await page.goto(TARGET); await page.waitForTimeout(2500);
+  await page.keyboard.type('minou'); await page.waitForTimeout(400);
+  const during = await page.$$eval('.runcat', c => c.length);
+  await page.waitForTimeout(3800);
+  const after = await page.$$eval('.runcat', c => c.length);
+  if (during === 1 && after === 0) verdict('K13', 'PASS', '« minou » : le chat traverse et repart');
+  else verdict('K13', 'DEFECT', `« minou » : pendant=${during} après=${after}`);
+  await page.close();
+}
+
+// K14 — elle clique sur l'avatar : ma voix joue, la bouche bouge, les sous-titres défilent ; re-clic = pause.
+{
+  const page = await open();
+  await page.goto(TARGET); await page.waitForTimeout(2500);
+  await page.click('.avatar'); await page.waitForTimeout(3500);
+  const playing = await page.evaluate(() => {
+    const a = document.querySelector('#avatar audio');
+    const ry = +document.querySelector('.avatar .mouth').getAttribute('ry');
+    return { t: a.currentTime, paused: a.paused, caption: document.querySelector('.caption').textContent.trim(), ry };
+  });
+  await page.click('.avatar'); await page.waitForTimeout(400);
+  const paused = await page.evaluate(() => document.querySelector('#avatar audio').paused);
+  const ok = playing.t > 1.5 && !playing.paused && /Katherine/.test(playing.caption) && paused;
+  if (ok) verdict('K14', 'PASS', `avatar : ${playing.t.toFixed(1)} s joués, sous-titre « ${playing.caption.slice(0, 40)}… », pause OK`);
+  else verdict('K14', 'DEFECT', `avatar : ${JSON.stringify({ ...playing, pausedAfter: paused })}`);
   await page.close();
 }
 
@@ -158,6 +242,7 @@ if (!errors.length) verdict('K8', 'PASS', 'aucune erreur dans la console');
 else verdict('K8', 'DEFECT', `erreurs : ${errors.slice(0, 3).join(' | ')}`);
 
 await browser.close();
+server?.close();
 
 const count = s => results.filter(r => r.status === s).length;
 console.log(`\n${count('PASS')} PASS · ${count('DEFECT')} DEFECT · ${count('INCONCLUSIVE')} INCONCLUSIVE`);

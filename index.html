@@ -78,7 +78,9 @@ h1 .role { display: block; color: var(--accent); font-style: italic; font-weight
 .lede { max-width: 56ch; margin: 0; font-size: 19px; }
 .lede b { font-weight: 700; color: var(--accent); }
 .companies { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin-top: 16px; font: 600 20px/1.2 var(--display); }
-.companies span:first-child { color: var(--accent); }
+.companies a { color: var(--ink); text-decoration: none; background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 2px no-repeat; transition: background-size .3s, color .2s; }
+.companies a:first-child { color: var(--accent); }
+.companies a:hover { color: var(--accent); background-size: 100% 2px; }
 .companies i { font-style: normal; color: var(--rule); }
 .facts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 20px; color: var(--muted); font-size: 15px; }
 
@@ -160,7 +162,7 @@ footer { padding-top: 24px; color: var(--muted); font-size: 14px; }
 body { margin: 0; }
 
 /* Motion (GSAP). Hidden only while the intro is pending. */
-.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .links, .anim .companies, .anim .facts, .anim .scope, .anim .badge, .anim .bubbles { visibility: hidden; }
+.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .links, .anim .companies, .anim .facts, .anim .avatar-wrap, .anim .badge, .anim .bubbles { visibility: hidden; }
 .name .word { white-space: nowrap; }
 
 /* Curtain (Maison Auge): a rose sheet with the KL monogram, lifted with a curved edge. */
@@ -279,6 +281,71 @@ body { margin: 0; }
 .lk-main { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .lk-main:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
+/* Hover: cards lift and blush, their illustration wakes up (JS), small things pop. */
+.job, .proof, .tags li, .plist li, .features li, .plist a { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .25s, background-color .25s, color .2s, padding .25s; }
+.job:hover { border-color: var(--accent); box-shadow: 0 22px 44px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
+.jobs-past .job:hover { background: color-mix(in srgb, var(--accent-soft) 45%, var(--paper)); }
+.job-now:hover { background: color-mix(in srgb, var(--accent-soft) 85%, var(--paper)); }
+.job h3 { transition: color .25s; }
+.jobs-past .job:hover h3 { color: var(--accent); }
+.ill .acc, .ill .sig, .ill .soft { transition: fill .3s; }
+.job:hover .ill .sig { fill: var(--accent); }
+.tags li:hover { background: var(--accent); color: var(--on-accent); }
+.proof b span { display: inline-block; transition: transform .25s; }
+.proof:hover b span { transform: translateX(5px); }
+.plist li { position: relative; }
+.plist li::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 3px; background: var(--accent); transform: scaleY(0); transition: transform .25s; }
+.plist li:hover { padding-left: 14px; background: color-mix(in srgb, var(--accent-soft) 40%, transparent); }
+.plist li:hover::before { transform: scaleY(1); }
+.features li:hover::before { transform: scale(1.8); }
+.features li::before { transition: transform .25s; }
+dl.spec dd { transition: color .2s; }
+dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .job:hover { transform: translateY(-5px); }
+  .tags li:hover { transform: translateY(-2px) scale(1.06); }
+}
+
+/* Stats strip. */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--rule); }
+.stats div { display: grid; gap: 2px; padding: 16px 0 18px; }
+.stats div + div { padding-left: 22px; border-left: 1px solid var(--rule); }
+.stats b { font: 600 38px/1 var(--display); color: var(--accent); font-variant-numeric: tabular-nums; }
+.stats span { color: var(--muted); font-size: 14px; }
+@media (max-width: 560px) {
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .stats div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+}
+
+/* Scroll progress. */
+.progress { position: fixed; left: 0; top: 0; z-index: 45; height: 3px; width: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+
+/* 3D tilt of the Comtech card. */
+.job-now { position: relative; }
+.job-now .glare { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,.55), transparent 45%); mix-blend-mode: soft-light; }
+
+/* Easter egg: type "minou". */
+.runcat { position: fixed; z-index: 60; bottom: 18px; left: 0; font-size: 46px; line-height: 1; pointer-events: none; }
+.runcat i { position: absolute; bottom: 100%; left: 50%; translate: -50% -4px; font: italic 500 16px var(--display); color: var(--ink); background: var(--accent-soft); padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+
+/* Voice avatar (Vue component): a rose orb whose mouth follows my real voice. */
+.avatar-wrap { justify-self: end; width: 100%; max-width: 250px; }
+.avatar-box { display: grid; justify-items: center; gap: 10px; }
+.avatar, .avatar:hover { position: relative; width: 190px; height: 190px; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 50%; box-shadow: none; }
+.avatar svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.avatar .ring { fill: none; stroke: var(--accent); }
+.avatar .face { fill: var(--accent); }
+.avatar .cheek { fill: #f6a5bf; opacity: .75; }
+.avatar .eye { fill: var(--on-accent); }
+.avatar .mouth { fill: var(--ink); }
+.avatar .hair { fill: var(--ink); }
+.avatar-cta { display: inline-flex; align-items: center; gap: 8px; font: 600 13px/1 var(--body); color: var(--accent); }
+.avatar-cta .bar { width: 60px; height: 4px; border-radius: 4px; background: var(--rule); overflow: hidden; }
+.avatar-cta .bar i { display: block; height: 100%; background: var(--accent); }
+.caption { min-height: 3.6em; font: italic 500 14px/1.35 var(--display); text-align: center; color: var(--ink); max-width: 250px; }
+@media (max-width: 720px) { .avatar-wrap { justify-self: center; } }
+
 /* Ring cursor (Deepa). Decoration only: the system cursor stays. */
 .ring-cursor {
   position: fixed; left: 0; top: 0; z-index: 40; width: 30px; height: 30px; margin: -15px 0 0 -15px;
@@ -301,6 +368,7 @@ body { margin: 0; }
 <body>
 
 <div class="ring-cursor" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
 
 <div class="sheet">
   <div class="strip">
@@ -323,29 +391,17 @@ body { margin: 0; }
       <p class="lede" data-t="lede"></p>
       <nav class="links" data-t-aria="linksAria">
         <a class="lk lk-main" href="https://www.linkedin.com/in/katherine-liberona-irarrazabal-76a843150/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg><span>LinkedIn</span></a>
+        <a class="lk cvlink" href="cv-fr.pdf" download><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg><span>CV (PDF)</span></a>
         <a class="lk" href="mailto:katherine.lib.ira@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3.5 6h17v12h-17z M3.5 6.5l8.5 6.5 8.5-6.5"/></svg><span data-t="lkMail"></span></a>
         <a class="lk" href="https://github.com/katherinemli" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a>
       </nav>
-      <p class="companies"><span>Comtech</span><i>·</i><span>wherEX</span><i>·</i><span>Falabella</span><i>·</i><span>CITIAPS</span></p>
+      <p class="companies"><a href="#job-comtech">Comtech</a><i>·</i><a href="#job-wherex">wherEX</a><i>·</i><a href="#job-falabella">Falabella</a><i>·</i><a href="#job-citiaps">CITIAPS</a></p>
       <div class="facts"><span data-t="f1"></span><span data-t="f2"></span><span data-t="f3"></span></div>
     </div>
-    <figure class="scope" data-t-aria="scopeAria">
-      <svg viewBox="-110 -110 220 220" role="img">
-        <circle class="ring" r="96"/><circle class="ring" r="64"/><circle class="ring" r="32"/>
-        <line class="ring" x1="-96" y1="0" x2="96" y2="0"/><line class="ring" x1="0" y1="-96" x2="0" y2="96"/>
-        <text class="ax" x="0" y="-100">N</text><text class="ax" x="103" y="3">E</text>
-        <text class="ax" x="0" y="107">S</text><text class="ax" x="-103" y="3" data-t="west">W</text>
-        <path id="orbit" class="path" d="M -40 52 C -10 20, 20 10, 34 -12 C 46 -32, 22 -48, 0 -30 C -22 -12, -60 30, -40 52 Z"/>
-        <g class="tgt">
-          <line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/>
-          <animateMotion dur="14s" repeatCount="indefinite"><mpath href="#orbit"/></animateMotion>
-        </g>
-        <circle class="mnt" r="3.6">
-          <animateMotion dur="14s" begin="-.35s" repeatCount="indefinite"><mpath href="#orbit"/></animateMotion>
-        </circle>
-      </svg>
-      <figcaption data-t="scopeCap"></figcaption>
-    </figure>
+    <div id="avatar" class="avatar-wrap">
+      <!-- Vue mounts the voice avatar here. Without JS, the plain audio player still works. -->
+      <audio controls preload="none" src="media/presentation.m4a"></audio>
+    </div>
     <div class="badge" aria-hidden="true">
       <svg viewBox="-60 -60 120 120">
         <defs><path id="badgeCircle" d="M 0 -44 A 44 44 0 1 1 -0.01 -44"/></defs>
@@ -356,9 +412,17 @@ body { margin: 0; }
   </header>
 
 
+  <div class="stats">
+    <div><b class="num" data-to="7">7</b><span data-t="st1"></span></div>
+    <div><b class="num" data-to="4">4</b><span data-t="st2"></span></div>
+    <div><b class="num" data-to="3">3</b><span data-t="st3"></span></div>
+    <div><b class="num" data-to="11">11</b><span data-t="st4"></span></div>
+  </div>
+
   <section id="experience">
     <div class="sec-head"><h2 data-t="xpH"></h2><span class="label">2017 – 2026</span></div>
-    <article class="job job-now">
+    <article class="job job-now" id="job-comtech">
+      <div class="glare" aria-hidden="true"></div>
       <div>
         <span class="now-pill" data-t="xNow"></span>
         <h3>Comtech Telecommunications</h3>
@@ -382,7 +446,7 @@ body { margin: 0; }
       </svg>
     </article>
     <div class="jobs-past">
-      <article class="job">
+      <article class="job" id="job-wherex">
         <span class="label" data-t="x2d"></span>
         <h3>wherEX</h3><div class="kind" data-t="x2k"></div>
         <svg class="ill ill-micro" viewBox="0 0 160 80" aria-hidden="true">
@@ -397,7 +461,7 @@ body { margin: 0; }
         <ul class="tags"><li>Go</li><li>React</li><li>PHP</li><li>Angular</li></ul>
         <a class="proof" href="https://github.com/katherinemli/backendecommerce"><span class="label" data-t="proofL"></span><b>E-commerce API <span aria-hidden="true">→</span></b><span data-t="pr2"></span></a>
       </article>
-      <article class="job">
+      <article class="job" id="job-falabella">
         <span class="label" data-t="x3d"></span>
         <h3>Falabella</h3><div class="kind" data-t="x3k"></div>
         <svg class="ill ill-truck" viewBox="0 0 160 80" aria-hidden="true">
@@ -412,7 +476,7 @@ body { margin: 0; }
         <ul class="tags"><li>Go</li><li>React</li></ul>
         <a class="proof" href="https://github.com/katherinemli/backend"><span class="label" data-t="proofL"></span><b>Route Optimizer <span aria-hidden="true">→</span></b><span data-t="pr3"></span></a>
       </article>
-      <article class="job">
+      <article class="job" id="job-citiaps">
         <span class="label" data-t="x4d"></span>
         <h3>CITIAPS</h3><div class="kind" data-t="x4k"></div>
         <svg class="ill ill-sos" viewBox="0 0 160 80" aria-hidden="true">
@@ -481,6 +545,7 @@ body { margin: 0; }
     <div class="contact">
       <span class="email" id="email">katherine.lib.ira@gmail.com</span>
       <button type="button" id="copy" data-t="copy"></button>
+      <a class="lk cvlink" href="cv-fr.pdf" download><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg><span>CV (PDF)</span></a>
       <a class="lk" href="https://www.linkedin.com/in/katherine-liberona-irarrazabal-76a843150/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg><span>LinkedIn</span></a>
       <a class="lk" href="https://github.com/katherinemli" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg><span>GitHub</span></a>
     </div>
@@ -489,6 +554,93 @@ body { margin: 0; }
   <footer>Katherine Liberona Irarrázabal · Montréal</footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.13/vue.global.prod.min.js"></script>
+<script>
+/* Voice avatar: Vue 3 component. The mouth opens with the real loudness of the audio
+   (Web Audio analyser); if the browser can't analyse it, it flaps while I'm speaking. */
+const CAPTIONS = [[1.52, 10.52, "Bonjour, je m'appelle Katherine, je suis chilienne, j'ai 33 ans et j'habite à Montréal depuis 5 ans.", "Hello, my name is Katherine, I'm Chilean, I'm 33 and I've lived in Montréal for 5 years."], [10.52, 16.71, "J'ai étudié l'ingénie informatique et j'adore la programmation.", "I studied computer engineering and I love programming."], [16.71, 22.9, "J'ai choisi Montréal parce que c'est un pôle de technologie au Canada.", "I chose Montréal because it's a technology hub in Canada."], [22.9, 29.97, "J'ai 6 ans d'expérience, 3 ans au Chili et 3 ans à Montréal.", "I have 6 years of experience, 3 in Chile and 3 in Montréal."], [29.97, 34.35, "Et j'ai trouvé un travail il y a 3 mois.", "And I found a job 3 months ago."], [34.35, 39.35, "J'ai aussi été professeur à l'université au Chili.", "I was also a university professor in Chile."], [39.35, 46.22, "J'aime beaucoup faire du vélo, j'aime faire depuis que je suis enfant.", "I really like cycling, I've done it since I was a child."], [46.22, 51.22, "Mais ici, grâce à la neige, j'ai commencé de nouveau hobby.", "But here, thanks to the snow, I started a new hobby."], [51.22, 54.31, "La planche à neige est le ski de fond.", "Snowboarding and cross-country skiing."], [54.31, 61.31, "Pour la planche à neige, je vais à un montant près de Montréal qui s'appelle Saint-Bruno.", "For snowboarding, I go to a mountain near Montréal called Saint-Bruno."], [61.31, 66.54, "Et pour le ski de fond, j'ai pris un course au Mont Royal.", "And for cross-country skiing, I took a course on Mount Royal."], [66.54, 71.14, "Le Canada n'est pas le premier pays où j'habite.", "Canada isn't the first country I've lived in."], [71.14, 79.14, "J'ai aussi habité en Allemagne pendant un an et au Danemark pendant un an.", "I also lived in Germany for a year and in Denmark for a year."], [79.14, 83.14, "Je travaillais avec une femme de ménage.", "I worked as a cleaner."], [83.14, 88.23, "Je suis une personne avec une personnalité ouverte.", "I'm a person with an open personality."], [88.23, 93.26, "Je n'ai pas pour parler avec la jeune.", "I like talking with people."], [93.26, 100.26, "Mais je préférerais aussi rester seule et passer du thème avec moi-même.", "But I also like being alone and spending time with myself."], [100.26, 105.3, "Ici, j'habite seule, sans ma famille. Merci.", "Here, I live alone, without my family. Thank you."]];
+const VoiceAvatar = {
+  props: { src: String, lang: String },
+  data: () => ({ playing: false, level: 0, t: 0, dur: 1, blink: false, ripples: [] }),
+  computed: {
+    caption() {
+      const c = CAPTIONS.find(([a, b]) => this.t >= a && this.t <= b);
+      if (!c) return this.playing ? '' : (this.lang === 'en' ? 'Click me: I introduce myself (in French) ♥' : 'Clique-moi : je me présente ♥');
+      return this.lang === 'en' ? c[3] : c[2];
+    },
+    mouthH() { return 4 + this.level * 30; },
+    speaking() { return CAPTIONS.some(([a, b]) => this.t >= a && this.t <= b); },
+  },
+  mounted() {
+    const loop = () => {
+      const a = this.$refs.audio;
+      if (a) { this.t = a.currentTime; this.dur = a.duration || 1; }
+      let v = 0;
+      if (this.analyser && this.playing) {
+        this.analyser.getByteTimeDomainData(this.buf);
+        let peak = 0; for (const x of this.buf) peak = Math.max(peak, Math.abs(x - 128));
+        v = Math.min(1, peak / 26);
+      }
+      if (this.playing && v < .1 && this.speaking) v = .3 + .5 * Math.abs(Math.sin(performance.now() / 85));
+      this.level += (v - this.level) * .35;
+      if (this.playing && this.level > .45 && Math.random() < .08) this.ripples.push({ id: performance.now(), born: performance.now() });
+      this.ripples = this.ripples.filter(r => performance.now() - r.born < 1400);
+      this.raf = requestAnimationFrame(loop);
+    };
+    loop();
+    this.blinker = setInterval(() => { this.blink = true; setTimeout(() => this.blink = false, 140); }, 3200);
+  },
+  unmounted() { cancelAnimationFrame(this.raf); clearInterval(this.blinker); },
+  methods: {
+    toggle() {
+      const a = this.$refs.audio;
+      if (!this.ctx) {
+        try {
+          this.ctx = new AudioContext();
+          const src = this.ctx.createMediaElementSource(a);
+          this.analyser = this.ctx.createAnalyser(); this.analyser.fftSize = 512;
+          this.buf = new Uint8Array(this.analyser.fftSize);
+          src.connect(this.analyser); this.analyser.connect(this.ctx.destination);
+        } catch { this.analyser = null; }
+      }
+      this.ctx?.resume?.();
+      if (a.paused) a.play(); else a.pause();
+    },
+    rippleStyle(r) {
+      const k = (performance.now() - r.born) / 1400;
+      return { r: 70 + k * 40, opacity: (1 - k) * .5 };
+    },
+  },
+  template: `
+    <div class="avatar-box">
+      <button class="avatar" type="button" @click="toggle" :aria-label="lang === 'en' ? (playing ? 'Pause my introduction' : 'Play my introduction') : (playing ? 'Mettre en pause ma présentation' : 'Écouter ma présentation')" :aria-pressed="playing">
+        <svg viewBox="-100 -100 200 200" aria-hidden="true">
+          <circle v-for="r in ripples" :key="r.id" class="ring" :r="rippleStyle(r).r" :opacity="rippleStyle(r).opacity" stroke-width="2"/>
+          <circle class="ring" r="86" stroke-width="1.5" opacity=".35" :transform="'scale(' + (1 + level * .08) + ')'"/>
+          <g :transform="'translate(0 ' + (-level * 4) + ') scale(' + (1 + level * .05) + ')'">
+            <circle class="face" r="70"/>
+            <path class="hair" d="M-66 -18 C -64 -70, 64 -76, 68 -14 C 50 -46, 10 -40, -8 -54 C -24 -36, -50 -40, -66 -18 Z"/>
+            <ellipse class="cheek" cx="-38" cy="16" rx="11" ry="7"/><ellipse class="cheek" cx="38" cy="16" rx="11" ry="7"/>
+            <ellipse class="eye" cx="-24" cy="-4" rx="7" :ry="blink ? 1 : 9"/><ellipse class="eye" cx="24" cy="-4" rx="7" :ry="blink ? 1 : 9"/>
+            <ellipse class="mouth" cx="0" cy="26" :rx="9 + level * 6" :ry="mouthH / 2"/>
+          </g>
+          <g v-if="!playing" transform="translate(52 52)"><circle r="17" class="face" stroke="var(--paper)" stroke-width="3"/><path d="M-5 -8 L9 0 L-5 8 Z" fill="var(--on-accent)"/></g>
+        </svg>
+      </button>
+      <div class="avatar-cta" aria-hidden="true"><span>{{ playing ? '♪' : '▶' }} {{ Math.floor(t / 60) }}:{{ String(Math.floor(t % 60)).padStart(2, '0') }}</span><span class="bar"><i :style="{ width: (t / dur * 100) + '%' }"></i></span></div>
+      <p class="caption" aria-live="polite">{{ caption }}</p>
+      <audio ref="audio" :src="src" preload="metadata" @play="playing = true" @pause="playing = false" @ended="playing = false; t = 0"></audio>
+    </div>`,
+};
+const avatarApp = Vue.createApp({
+  components: { VoiceAvatar },
+  data: () => ({ lang: document.documentElement.lang.startsWith('en') ? 'en' : 'fr' }),
+  template: '<voice-avatar src="media/presentation.m4a" :lang="lang"/>',
+});
+window.avatarVm = avatarApp.mount('#avatar');
+new MutationObserver(() => { window.avatarVm.lang = document.documentElement.lang.startsWith('en') ? 'en' : 'fr'; })
+  .observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/SplitText.min.js"></script>
@@ -519,6 +671,7 @@ const T = {
     pl10: 'Configuration HTTPS en une commande',
     pl11: 'Un chat de bureau qui jase en français',
     lkMail: 'Courriel', linksAria: 'Liens de contact',
+    st1: 'ans d’expérience', st2: 'entreprises', st3: 'langues', st4: 'projets sur GitHub',
     xpH: 'Expérience', xNow: 'Actuellement', xFS: 'Développeuse full stack',
     x1d: 'juin 2022 – aujourd’hui', tSat: 'communications satellitaires', tNet: 'gestion de réseaux',
     x1a: 'Développé des solutions logicielles pour des systèmes de communications satellitaires et de gestion de réseaux, intégrant des systèmes embarqués, des protocoles réseau et des interfaces web modernes.',
@@ -595,6 +748,7 @@ const T = {
     pl10: 'One-command HTTPS setup',
     pl11: 'A desktop cat that chats in French',
     lkMail: 'Email', linksAria: 'Contact links',
+    st1: 'years of experience', st2: 'companies', st3: 'languages', st4: 'projects on GitHub',
     xpH: 'Experience', xNow: 'Currently', xFS: 'Full stack developer',
     x1d: 'Jun 2022 – present', tSat: 'satellite communications', tNet: 'network management',
     x1a: 'Built software for satellite communication and network management systems, integrating embedded systems, network protocols and modern web interfaces.',
@@ -660,6 +814,7 @@ function apply(next) {
   document.querySelectorAll('[data-t]').forEach(el => { el.innerHTML = d[el.dataset.t]; });
   document.querySelectorAll('[data-t-aria]').forEach(el => el.setAttribute('aria-label', d[el.dataset.tAria]));
   document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  document.querySelectorAll('.cvlink').forEach(a => a.setAttribute('href', `cv-${lang}.pdf`));
   try { localStorage.setItem('lang', lang); } catch {}
 }
 
@@ -713,16 +868,14 @@ if (window.gsap) {
       document.documentElement.classList.remove('anim');
       const name = SplitText.create('.name', { type: 'words,chars', wordsClass: 'word', mask: 'words' });
 
-      gsap.set('.strip, .hero h1, .hello, .lede, .links, .companies, .facts, .scope, .badge, .bubbles', { visibility: 'visible' });
+      gsap.set('.strip, .hero h1, .hello, .lede, .links, .companies, .facts, .avatar-wrap, .badge, .bubbles', { visibility: 'visible' });
       gsap.timeline({ defaults: { ease: 'power3.out' } })
         .from('.strip', { autoAlpha: 0, y: -8, duration: .4 })
         .from('.hello', { autoAlpha: 0, x: -12, duration: .4 }, '<')
         .from(name.chars, { yPercent: 110, duration: .5, stagger: .01, ease: 'back.out(1.5)' }, '<')
         .from('.role', { autoAlpha: 0, x: -16, duration: .5 }, '-=.3')
         .from('.lede, .links, .companies, .facts', { autoAlpha: 0, y: 12, duration: .45, stagger: .07 }, '-=.35')
-        .from('.scope', { autoAlpha: 0, scale: .92, duration: .8 }, '-=.9')
-        .from('.scope .ring', { drawSVG: 0, duration: 1.2, stagger: .08, ease: 'power2.inOut' }, '<')
-        .from('.scope .ax', { autoAlpha: 0, duration: .4, stagger: .05 }, '-=.4')
+        .from('.avatar-wrap', { autoAlpha: 0, scale: .6, rotate: -8, duration: .8, ease: 'back.out(1.8)' }, '-=.6')
         .from('.glow', { autoAlpha: 0, scale: .6, duration: 1.6, ease: 'sine.out' }, '<')
         .from('.bubble', { scale: 0, duration: 1, stagger: .12, ease: 'elastic.out(1, .5)' }, '-=1.2')
         .from('.badge', { autoAlpha: 0, scale: .4, rotate: -90, duration: .9, ease: 'back.out(1.8)' }, '-=.8')
@@ -789,7 +942,16 @@ if (window.gsap) {
       });
 
       // Each illustration plays only while it is on screen.
-      const playWhileVisible = (svg, tl) => ScrollTrigger.create({ trigger: svg, start: 'top 95%', end: 'bottom 5%', onToggle: self => self.isActive ? tl.play() : tl.pause() });
+      const playWhileVisible = (svg, tl) => {
+        // Chile cards idle slowly and wake up on hover; Comtech runs normally and speeds up.
+        const card = svg.closest('.job'), idle = card && !card.classList.contains('job-now') ? .3 : 1;
+        tl.timeScale(idle);
+        if (card) {
+          card.addEventListener('pointerenter', () => gsap.to(tl, { timeScale: idle === 1 ? 1.8 : 1.4, duration: .4 }));
+          card.addEventListener('pointerleave', () => gsap.to(tl, { timeScale: idle, duration: .8 }));
+        }
+        ScrollTrigger.create({ trigger: svg, start: 'top 95%', end: 'bottom 5%', onToggle: self => self.isActive ? tl.play() : tl.pause() });
+      };
       const ill = sel => document.querySelector(sel);
 
       // Comtech: packets hop dish → satellite → dish, the satellite pings, the live dashboard moves.
@@ -838,6 +1000,78 @@ if (window.gsap) {
           .to(svg.querySelector('.notif'), { autoAlpha: 0, duration: .3 }, '+=1')
           .to(vols, { x: 0, y: 0, duration: 1.2, ease: 'power2.inOut' }, '<');
         playWhileVisible(svg, tl);
+      }
+
+      // Stats count up when they come into view.
+      gsap.utils.toArray('.stats .num').forEach(el => {
+        const o = { v: 0 };
+        gsap.to(o, { v: +el.dataset.to, duration: 1.6, ease: 'power2.out', delay: .6, onUpdate: () => { el.textContent = Math.round(o.v); },
+          scrollTrigger: { trigger: el, start: 'top 95%', once: true } });
+      });
+
+      // Scroll progress bar.
+      gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+
+      // Section titles come in letter by letter, like a wave.
+      gsap.utils.toArray('section h2').forEach(h => {
+        const st = SplitText.create(h, { type: 'chars' });
+        gsap.from(st.chars, { yPercent: 80, rotate: 12, autoAlpha: 0, duration: .5, stagger: .025, ease: 'back.out(2)',
+          scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+      });
+
+      // Letters of my name jump when the mouse touches them.
+      name.chars.forEach(c => c.addEventListener('pointerenter', () => {
+        if (gsap.isTweening(c)) return;
+        gsap.timeline().to(c, { y: -14, color: 'var(--accent)', duration: .18, ease: 'power2.out' })
+          .to(c, { y: 0, duration: .5, ease: 'bounce.out' }).to(c, { clearProps: 'color', duration: .6 }, '-=.2');
+      }));
+
+      // Comtech card tilts in 3D toward the mouse, with a glare.
+      {
+        const card = document.querySelector('.job-now'), glare = card.querySelector('.glare');
+        gsap.set(card, { transformPerspective: 1100 });
+        const rx = gsap.quickTo(card, 'rotationX', { duration: .5, ease: 'power3' });
+        const ry = gsap.quickTo(card, 'rotationY', { duration: .5, ease: 'power3' });
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+          rx((.5 - py) * 7); ry((px - .5) * 9);
+          glare.style.setProperty('--gx', px * 100 + '%'); glare.style.setProperty('--gy', py * 100 + '%');
+          gsap.to(glare, { opacity: 1, duration: .3, overwrite: 'auto' });
+        });
+        card.addEventListener('pointerleave', () => { rx(0); ry(0); gsap.to(glare, { opacity: 0, duration: .4 }); });
+      }
+
+      // All shortcut buttons are magnetic.
+      document.querySelectorAll('.lk').forEach(b => {
+        const bx = gsap.quickTo(b, 'x', { duration: .4, ease: 'power3' }), by = gsap.quickTo(b, 'y', { duration: .4, ease: 'power3' });
+        b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); bx((e.clientX - r.left - r.width / 2) * .3); by((e.clientY - r.top - r.height / 2) * .4); });
+        b.addEventListener('pointerleave', () => { bx(0); by(0); });
+      });
+
+      // Cards lean with the scroll speed.
+      {
+        const lean = gsap.quickTo('.jobs-past .job, .plist', 'skewY', { duration: .5, ease: 'power3' });
+        ScrollTrigger.create({ onUpdate: self => lean(gsap.utils.clamp(-3, 3, self.getVelocity() / -500)) });
+        ScrollTrigger.addEventListener('scrollEnd', () => lean(0));
+      }
+
+      // Easter egg: type "minou" and the cat runs across the screen.
+      {
+        let typed = '';
+        addEventListener('keydown', e => {
+          if (e.target.closest('input, textarea')) return;
+          typed = (typed + e.key.toLowerCase()).slice(-5);
+          if (typed !== 'minou') return;
+          typed = '';
+          const cat = document.createElement('div');
+          cat.className = 'runcat'; cat.innerHTML = '<span style="display:inline-block;transform:scaleX(-1)">🐈</span><i>miaou !</i>';
+          document.body.appendChild(cat);
+          gsap.timeline({ onComplete: () => cat.remove() })
+            .fromTo(cat, { x: -80 }, { x: innerWidth + 80, duration: 3.2, ease: 'none' })
+            .to(cat, { y: -18, duration: .16, yoyo: true, repeat: 19, ease: 'sine.inOut' }, 0)
+            .from(cat.querySelector('i'), { scale: 0, duration: .3, ease: 'back.out(3)' }, .3);
+          burst(document.querySelector('h1'));
+        });
       }
 
       // Bubbles float, and drift away from the mouse (Deepa).

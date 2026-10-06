@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<title>Katherine Liberona Irarrázabal — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..700;1,9..144,500&family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* One CV, two languages: build.mjs renders ?lang=fr and ?lang=en to PDF (Letter). */
+@page { size: Letter; margin: 0; }
+:root { --ink: #2b1b2e; --muted: #6f5a68; --rule: #ead8dc; --accent: #b2466e; --soft: #f7dfe6; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { font: 8.85pt/1.33 'Onest', system-ui, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { padding: 0.4in 0.5in 0.3in; }
+header { display: grid; grid-template-columns: 1fr auto; gap: 6px 24px; align-items: end; padding-bottom: 9px; border-bottom: 2px solid var(--accent); }
+h1 { font: 600 23pt/1 'Fraunces', Georgia, serif; letter-spacing: -.02em; margin: 0; }
+.role { font: italic 500 13.5pt/1.2 'Fraunces', Georgia, serif; color: var(--accent); margin-top: 4px; }
+.contact { text-align: right; font-size: 8.8pt; line-height: 1.55; }
+.contact a { color: var(--ink); text-decoration: none; }
+.contact b { color: var(--accent); font-weight: 600; }
+h2 {
+  font: 600 11.5pt/1 'Fraunces', Georgia, serif; color: var(--accent); margin: 11px 0 5px;
+  display: flex; align-items: center; gap: 10px;
+}
+h2::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+.summary { margin: 0; }
+.job { margin-bottom: 6px; break-inside: avoid; }
+.job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.job-head h3 { font: 600 10.6pt/1.2 'Fraunces', Georgia, serif; margin: 0; }
+.job-head h3 span { font: 500 9.4pt 'Onest', sans-serif; color: var(--muted); }
+.dates { font-size: 8.6pt; color: var(--muted); white-space: nowrap; }
+.job.now .job-head h3 { color: var(--accent); }
+ul { margin: 2px 0 0; padding-left: 14px; }
+li { margin: 1px 0; }
+li::marker { color: var(--accent); }
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 22px; }
+.projects div { break-inside: avoid; }
+.projects b { font-weight: 600; }
+.projects a { color: var(--accent); text-decoration: none; font-size: 8.4pt; }
+.skills { display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; margin: 0; }
+.skills dt { font-weight: 600; color: var(--accent); }
+.skills dd { margin: 0; }
+.two { display: grid; grid-template-columns: 1.5fr 1fr; gap: 0 26px; }
+[data-l] { display: none; }
+html[lang="fr-CA"] [data-l="fr"], html[lang="en-CA"] [data-l="en"] { display: revert; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div>
+      <h1>Katherine Liberona Irarrázabal</h1>
+      <div class="role"><span data-l="fr">Développeuse full stack</span><span data-l="en">Full stack developer</span></div>
+    </div>
+    <div class="contact">
+      <b>Montréal, QC</b><br>
+      <a href="mailto:katherine.lib.ira@gmail.com">katherine.lib.ira@gmail.com</a><br>
+      <a href="https://www.linkedin.com/in/katherine-liberona-irarrazabal-76a843150/">linkedin.com/in/katherine-liberona-irarrazabal-76a843150</a><br>
+      <a href="https://github.com/katherinemli">github.com/katherinemli</a> · <a href="https://katherinemli.github.io/Portafolio/">katherinemli.github.io/Portafolio</a>
+    </div>
+  </header>
+
+  <h2><span data-l="fr">À propos</span><span data-l="en">About</span></h2>
+  <p class="summary" data-l="fr">Développeuse full stack avec 7&nbsp;ans d’expérience dans le développement de logiciels, d’applications web et de systèmes distribués. Je travaille sur des solutions combinant développement backend et frontend, systèmes embarqués, protocoles réseau et traitement de données. J’ai contribué au développement et à la mise en production de solutions dans différents domaines, notamment les communications satellitaires, la gestion de réseaux, la logistique et les plateformes d’intervention d’urgence.</p>
+  <p class="summary" data-l="en">Full stack developer with 7 years of experience in software, web applications and distributed systems. I work on solutions that combine backend and frontend development, embedded systems, network protocols and data processing. I have helped build and ship solutions across several fields, including satellite communications, network management, logistics and emergency response platforms.</p>
+
+  <h2><span data-l="fr">Expérience</span><span data-l="en">Experience</span></h2>
+
+  <div class="job now">
+    <div class="job-head"><h3>Comtech Telecommunications <span>· <span data-l="fr">Développeuse full stack · Montréal, QC</span><span data-l="en">Full stack developer · Montréal, QC</span></span></h3><span class="dates"><span data-l="fr">juin 2022 – aujourd’hui</span><span data-l="en">Jun 2022 – present</span></span></div>
+    <ul data-l="fr">
+      <li>Développé des solutions logicielles pour des systèmes de communications satellitaires et de gestion de réseaux, intégrant des systèmes embarqués, des protocoles réseau et des interfaces web modernes.</li>
+      <li>Développé des outils de gestion et de surveillance réseau avec Vue.js, permettant l’interaction avec les équipements et la visualisation des données en temps réel.</li>
+      <li>Développé des interfaces de visualisation de données et des cartes vectorielles optimisées pour les environnements à faible bande passante.</li>
+      <li>Automatisé les tests et le déploiement logiciel dans des environnements Linux avec Git, Jenkins et Docker.</li>
+    </ul>
+    <ul data-l="en">
+      <li>Built software for satellite communication and network management systems, integrating embedded systems, network protocols and modern web interfaces.</li>
+      <li>Built network management and monitoring tools in Vue.js to interact with equipment and visualize data in real time.</li>
+      <li>Built data visualization interfaces and vector maps optimized for low-bandwidth environments.</li>
+      <li>Automated software testing and deployment on Linux with Git, Jenkins and Docker.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><h3>wherEX <span>· <span data-l="fr">Développeuse full stack · Chili</span><span data-l="en">Full stack developer · Chile</span></span></h3><span class="dates"><span data-l="fr">sept. 2020 – févr. 2022</span><span data-l="en">Sep 2020 – Feb 2022</span></span></div>
+    <ul data-l="fr">
+      <li>Mené la migration complète d’une plateforme PHP/Angular vers une architecture de microservices avec Go et React.</li>
+      <li>Conçu et développé des services backend et des interfaces web pour traiter et visualiser des données à grande échelle.</li>
+      <li>Mis en place un algorithme de classement utilisant les profils utilisateurs et les données du marché afin d’améliorer les recommandations.</li>
+      <li>Développé des solutions évolutives en collaboration avec différentes équipes techniques et produit.</li>
+    </ul>
+    <ul data-l="en">
+      <li>Led the full migration of a PHP/Angular platform to a microservices architecture with Go and React.</li>
+      <li>Designed and built backend services and web interfaces to process and visualize data at scale.</li>
+      <li>Implemented a ranking algorithm using user profiles and market data to improve recommendations.</li>
+      <li>Built scalable solutions together with engineering and product teams.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><h3>Falabella Retail <span>· <span data-l="fr">Développeuse full stack · Chili</span><span data-l="en">Full stack developer · Chile</span></span></h3><span class="dates"><span data-l="fr">févr. 2018 – juin 2018</span><span data-l="en">Feb 2018 – Jun 2018</span></span></div>
+    <ul data-l="fr">
+      <li>Conçu et développé de bout en bout un système de logistique du dernier kilomètre pour un grand détaillant, avec Go et React.</li>
+      <li>Automatisé des processus logistiques clés, réduisant les coûts opérationnels et optimisant de plus de 80&nbsp;% la taille de l’équipe de livraison.</li>
+      <li>Conçu et déployé un système de géocodage automatisé traitant des milliers d’adresses par jour.</li>
+      <li>Optimisé les itinéraires de livraison en collaboration avec différentes équipes afin de mieux répondre aux besoins opérationnels.</li>
+      <li>Développé un système prédictif permettant d’estimer avec précision les plages horaires de livraison.</li>
+    </ul>
+    <ul data-l="en">
+      <li>Designed and built, end to end, a last-mile logistics system for a major retailer, with Go and React.</li>
+      <li>Automated key logistics processes, cutting operating costs and optimizing delivery team size by more than 80%.</li>
+      <li>Designed and deployed an automated geocoding system processing thousands of addresses a day.</li>
+      <li>Optimized delivery routes together with several teams to better meet operational needs.</li>
+      <li>Built a predictive system that accurately estimates delivery time windows.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><h3>CITIAPS <span>· <span data-l="fr">Développeuse front-end · Santiago, Chili</span><span data-l="en">Front-end developer · Santiago, Chile</span></span></h3><span class="dates"><span data-l="fr">mars 2017 – janv. 2018</span><span data-l="en">Mar 2017 – Jan 2018</span></span></div>
+    <ul data-l="fr">
+      <li>Développé une plateforme d’intervention d’urgence soutenue par le gouvernement avec Vue.js, permettant le suivi des bénévoles en temps réel et l’envoi de notifications mobiles.</li>
+      <li>Développé un système d’analyse des émotions basé sur Java et l’IA pour traiter les données provenant de plusieurs caméras.</li>
+      <li>Créé des visualisations de données interactives avec Vue.js et D3.js pour l’analyse de données géolocalisées.</li>
+      <li>Développé un système interactif de suivi d’itinéraires pour une visite papale avec Vue.js et l’API Google Maps.</li>
+    </ul>
+    <ul data-l="en">
+      <li>Built a government-backed emergency response platform in Vue.js, with real-time volunteer tracking and mobile notifications.</li>
+      <li>Built a Java and AI-based emotion analysis system processing data from multiple cameras.</li>
+      <li>Created interactive data visualizations with Vue.js and D3.js for geolocated data analysis.</li>
+      <li>Built an interactive route-tracking system for a papal visit with Vue.js and the Google Maps API.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-head"><h3>Universidad de Santiago de Chile <span>· <span data-l="fr">Enseignante</span><span data-l="en">Lecturer</span></span></h3><span class="dates"><span data-l="fr">mars 2020 – mars 2022</span><span data-l="en">Mar 2020 – Mar 2022</span></span></div>
+    <ul data-l="fr">
+      <li>Fondements théoriques et pratiques de la pensée logique et des algorithmes pour les étudiants en génie&nbsp;: fondements de la programmation, systèmes distribués.</li>
+    </ul>
+    <ul data-l="en">
+      <li>Theoretical and practical foundations of logical thinking and algorithms for engineering students: programming fundamentals, distributed systems.</li>
+    </ul>
+  </div>
+
+  <div class="two">
+    <div>
+      <h2><span data-l="fr">Compétences techniques</span><span data-l="en">Technical skills</span></h2>
+      <dl class="skills">
+        <dt>Backend</dt><dd>Go, Python, C, PHP, Django</dd>
+        <dt>Frontend</dt><dd>React, Vue.js, Angular, D3.js</dd>
+        <dt><span data-l="fr">Systèmes</span><span data-l="en">Systems</span></dt><dd><span data-l="fr">Linux, systèmes embarqués, programmation multithread, gestion de la mémoire, protocoles réseau</span><span data-l="en">Linux, embedded systems, multithreaded programming, memory management, network protocols</span></dd>
+        <dt><span data-l="fr">Données</span><span data-l="en">Data</span></dt><dd><span data-l="fr">MySQL, MongoDB, traitement en temps réel</span><span data-l="en">MySQL, MongoDB, real-time processing</span></dd>
+        <dt>DevOps</dt><dd>Docker, AWS, Nginx, Git, Jenkins</dd>
+        <dt><span data-l="fr">Langues</span><span data-l="en">Languages</span></dt><dd><span data-l="fr">Espagnol, anglais, français</span><span data-l="en">Spanish, English, French</span></dd>
+      </dl>
+    </div>
+    <div>
+      <h2><span data-l="fr">Projets</span><span data-l="en">Projects</span></h2>
+      <div class="projects" style="grid-template-columns: 1fr;">
+        <div><b>Orbit Tracker</b> — <span data-l="fr">démon, API et tableau de bord temps réel pour une monture de poursuite.</span><span data-l="en">daemon, API and real-time dashboard for a tracking mount.</span> <a href="https://github.com/katherinemli/orbit-tracker">github</a></div>
+        <div><b>Route Optimizer</b> — <span data-l="fr">API Go, trajet le plus court avec des goroutines.</span><span data-l="en">Go API, shortest route with goroutines.</span> <a href="https://github.com/katherinemli/backend">github</a></div>
+        <div><b>Hantavirus Tracker</b> — <span data-l="fr">carte en direct de cas géolocalisés.</span><span data-l="en">live map of geolocated cases.</span> <a href="https://github.com/katherinemli/hantavirustracker">github</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const l = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'fr';
+  document.documentElement.lang = l === 'en' ? 'en-CA' : 'fr-CA';
+  document.title = 'Katherine Liberona Irarrázabal — ' + (l === 'en' ? 'Resume' : 'CV');
+</script>
+</body>
+</html>
