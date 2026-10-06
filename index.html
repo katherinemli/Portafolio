@@ -589,7 +589,7 @@ const VoiceAvatar = {
       if (!c) return this.playing ? '' : (this.lang === 'en' ? 'Click me: I introduce myself (in French) ♥' : 'Clique-moi : je me présente ♥');
       return this.lang === 'en' ? c[3] : c[2];
     },
-    mouthH() { return 4 + this.level * 34; },
+    mouthH() { return 6 + this.level * 56; },
     speaking() { return CAPTIONS.some(([a, b]) => this.t >= a && this.t <= b); },
   },
   mounted() {
@@ -662,9 +662,9 @@ const VoiceAvatar = {
             <ellipse class="blush" cx="135" cy="395" rx="40" ry="20" :opacity=".35 + level * .4"/><ellipse class="blush" cx="372" cy="395" rx="40" ry="20" :opacity=".35 + level * .4"/>
             <path class="brow" :transform="'translate(0 ' + (-level * 26) + ') rotate(' + (-6 - level * 8) + ' 160 210)'" d="M108 222 Q160 188 214 210"/>
             <path class="brow" :transform="'translate(0 ' + (-level * 26) + ') rotate(' + (6 + level * 8) + ' 350 210)'" d="M298 210 Q352 188 404 222"/>
-            <path v-if="mouthH < 9 && !happy" class="w" d="M212 448 q20 22 40 0 q20 22 40 0"/>
-            <g v-else-if="!happy"><ellipse class="mouth-o" cx="252" cy="462" :rx="22 + level * 10" :ry="mouthH"/><ellipse class="tongue" cx="252" :cy="462 + mouthH * .45" :rx="12 + level * 6" :ry="Math.max(4, mouthH * .45)"/></g>
-            <path v-else class="w" d="M206 440 q46 50 92 0"/>
+            <path v-if="mouthH < 12 && !happy" class="w" d="M202 448 q25 28 50 0 q25 28 50 0"/>
+            <g v-else-if="!happy"><ellipse class="mouth-o" cx="252" cy="468" :rx="34 + level * 18" :ry="mouthH"/><ellipse class="tongue" cx="252" :cy="468 + mouthH * .48" :rx="20 + level * 10" :ry="Math.max(6, mouthH * .45)"/></g>
+            <path v-else class="w" d="M196 438 q56 62 112 0"/>
             <g class="shades" :opacity="shadesY < -300 ? 0 : 1" :transform="'translate(0 ' + shadesY + ')'"><rect x="96" y="236" width="340" height="14"/><rect x="112" y="244" width="112" height="40"/><rect x="126" y="284" width="84" height="14"/><rect x="126" y="252" width="14" height="14" class="shine"/><rect x="140" y="266" width="14" height="14" class="shine"/><rect x="310" y="244" width="112" height="40"/><rect x="324" y="284" width="84" height="14"/><rect x="324" y="252" width="14" height="14" class="shine"/><rect x="338" y="266" width="14" height="14" class="shine"/></g>
             <g v-if="happy" class="merci"><rect x="300" y="-10" width="210" height="70" rx="35"/><text x="405" y="38" text-anchor="middle">Merci ♥</text></g>
           </g>

@@ -49,23 +49,22 @@ footer { position: relative; padding-top: 48px !important; }
         a.classList.contains('cvlink') ? ['📄', '✦', '♥'] : ['♥', '✦', '✿', '★']);
     }));
 
-    // 2. The job title decodes itself on hover (text scramble), always ending on the real text.
+    // 2. The job title does a wave on hover: same letters, so its width never changes
+    //    (a random-letter scramble made the italic line wrap and the page jump).
     const role = document.querySelector('.role');
     if (role) {
-      const pool = 'abcdefghijklmnopqrstuvwxyz<>/{}#*01';
       let busy = false;
       on(role, 'pointerenter', () => {
         if (busy) return; busy = true;
-        const final = role.textContent, o = { p: 0 };
-        gsap.to(o, {
-          p: 1, duration: .9, ease: 'none',
-          onUpdate: () => {
-            const k = Math.floor(o.p * final.length);
-            role.textContent = final.slice(0, k) + [...final.slice(k)].map(c => c === ' ' ? ' ' : pool[Math.floor(Math.random() * pool.length)]).join('');
-          },
-          // end on the current language's text, even if FR/EN was switched mid-scramble
-          onComplete: () => { role.innerHTML = typeof T !== 'undefined' && typeof lang !== 'undefined' ? T[lang].role : final; busy = false; },
-        });
+        const st = SplitText.create(role, { type: 'chars' });
+        gsap.timeline({ onComplete: () => {
+          st.revert();
+          // end on the current language's text, even if FR/EN was switched mid-wave
+          if (typeof T !== 'undefined' && typeof lang !== 'undefined') role.innerHTML = T[lang].role;
+          busy = false;
+        } })
+          .to(st.chars, { y: -12, color: '#c45ad9', duration: .18, ease: 'power2.out', stagger: .03 })
+          .to(st.chars, { y: 0, clearProps: 'color', duration: .5, ease: 'bounce.out', stagger: .03 }, .18);
       });
     }
 
@@ -295,6 +294,7 @@ footer { position: relative; padding-top: 48px !important; }
 
     // 15. Double-click my name: the letters explode and come back.
     const h1 = document.querySelector('h1');
+    if (h1) on(h1, 'mousedown', e => { if (e.detail > 1) e.preventDefault(); });
     if (h1) on(h1, 'dblclick', () => {
       getSelection()?.removeAllRanges();
       const chars = h1.querySelectorAll('.name div, .name span');
