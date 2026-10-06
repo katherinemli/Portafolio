@@ -162,7 +162,7 @@ footer { padding-top: 24px; color: var(--muted); font-size: 14px; }
 body { margin: 0; }
 
 /* Motion (GSAP). Hidden only while the intro is pending. */
-.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .links, .anim .companies, .anim .facts, .anim .avatar-wrap, .anim .badge, .anim .bubbles { visibility: hidden; }
+.anim .strip, .anim .hero h1, .anim .hello, .anim .lede, .anim .links, .anim .companies, .anim .facts, .anim .avatar-wrap, .anim .badge { visibility: hidden; }
 .name .word { white-space: nowrap; }
 
 /* Curtain (Maison Auge): a rose sheet with the KL monogram, lifted with a curved edge. */
@@ -186,15 +186,6 @@ body { margin: 0; }
 .badge text { font: 500 10.5px var(--mono); letter-spacing: .2em; fill: var(--ink); }
 .badge .heart { font: 22px var(--body); fill: var(--accent); letter-spacing: 0; }
 
-/* Pastel bubbles (Deepa). */
-.bubbles { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.bubble { position: absolute; display: grid; place-items: center; line-height: 1; }
-/* sticker look: a white outline and a soft shadow, like the cat */
-.bubble span { display: block; filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 6px 8px rgba(43,27,46,.25)); }
-.bubble.b1 { right: 4%; top: 4%; font-size: 64px; }
-.bubble.b2 { right: 36%; top: 2%; font-size: 40px; }
-.bubble.b3 { right: 5%; top: 62%; font-size: 34px; }
-.bubble.b4 { right: 27%; bottom: 3%; font-size: 26px; }
 
 /* Tech ribbon that slides with the scroll (Noomo). */
 .marquee { overflow: hidden; border-bottom: 1px solid var(--rule); padding-block: 16px; }
@@ -449,7 +440,6 @@ body { padding-bottom: 96px; }
 
 @media (max-width: 720px) {
   .badge { width: 84px; height: 84px; right: 0; bottom: auto; top: 8px; }
-  .bubble.b1, .bubble.b2, .bubble.b4 { display: none; }
   .track { font-size: 21px; }
 }
 .spark {
@@ -482,7 +472,6 @@ body { padding-bottom: 96px; }
 
   <header class="hero">
     <div class="glow" aria-hidden="true"></div>
-    <div class="bubbles" aria-hidden="true"><i class="bubble b1"><span>🛰️</span></i><i class="bubble b2"><span>🌸</span></i><i class="bubble b3"><span>💾</span></i><i class="bubble b4"><span>⭐</span></i></div>
     <div>
       <p class="hello" aria-hidden="true"><span class="hello-word">Bonjour</span><span class="caret"></span></p>
       <h1><span class="name">Katherine Liberona Irarrázabal</span> <span class="role" data-t="role"></span></h1>
@@ -990,7 +979,7 @@ if (window.gsap) {
       document.documentElement.classList.remove('anim');
       const name = SplitText.create('.name', { type: 'words,chars', wordsClass: 'word', mask: 'words' });
 
-      gsap.set('.strip, .hero h1, .hello, .lede, .links, .companies, .facts, .avatar-wrap, .badge, .bubbles', { visibility: 'visible' });
+      gsap.set('.strip, .hero h1, .hello, .lede, .links, .companies, .facts, .avatar-wrap, .badge', { visibility: 'visible' });
       gsap.timeline({ defaults: { ease: 'power3.out' } })
         .from('.strip', { autoAlpha: 0, y: -8, duration: .4 })
         .from('.hello', { autoAlpha: 0, x: -12, duration: .4 }, '<')
@@ -999,7 +988,6 @@ if (window.gsap) {
         .from('.lede, .links, .companies, .facts', { autoAlpha: 0, y: 12, duration: .45, stagger: .07 }, '-=.35')
         .from('.avatar-wrap', { autoAlpha: 0, scale: .6, rotate: -8, duration: .8, ease: 'back.out(1.8)' }, '-=.6')
         .from('.glow', { autoAlpha: 0, scale: .6, duration: 1.6, ease: 'sine.out' }, '<')
-        .from('.bubble', { scale: 0, duration: 1, stagger: .12, ease: 'elastic.out(1, .5)' }, '-=1.2')
         .from('.badge', { autoAlpha: 0, scale: .4, rotate: -90, duration: .9, ease: 'back.out(1.8)' }, '-=.8')
         .add(typeGreetings);
 
@@ -1197,17 +1185,6 @@ if (window.gsap) {
         });
       }
 
-      // Bubbles float, and drift away from the mouse (Deepa).
-      // float the inner sticker so other effects (sleep, clicks) can move the outer one without killing this
-      gsap.utils.toArray('.bubble span').forEach((b, i) => {
-        gsap.to(b, { y: i % 2 ? 14 : -14, x: i % 2 ? -8 : 8, duration: 2.6 + i * .4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-      });
-      const bubbles = document.querySelector('.bubbles');
-      const bx = gsap.quickTo(bubbles, 'x', { duration: 1.2, ease: 'power3' });
-      const by = gsap.quickTo(bubbles, 'y', { duration: 1.2, ease: 'power3' });
-      const hero = document.querySelector('.hero');
-      hero.addEventListener('pointermove', e => { bx((innerWidth / 2 - e.clientX) * .03); by((innerHeight / 2 - e.clientY) * .03); });
-      hero.addEventListener('pointerleave', () => { bx(0); by(0); });
 
       return () => name.revert();
     });

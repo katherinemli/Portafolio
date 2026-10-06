@@ -262,11 +262,11 @@ footer { position: relative; padding-top: 48px !important; }
     } });
     cleanups.push(() => ufoST.kill());
 
-    // 14. Nobody touches anything for 10 s: zzz, and the bubbles fall asleep. Any move wakes them up.
+    // 14. Nobody touches anything for 10 s: zzz, and the cat dozes off. Any move wakes it up.
     let idle, sleeping = false, zzzTl;
     const sleep = () => {
       sleeping = true;
-      gsap.to('.bubble', { y: 60, rotate: 20, duration: 1.4, ease: 'power2.in', overwrite: 'auto' });
+      gsap.to('.avatar svg', { rotate: -10, y: 12, duration: 1.4, ease: 'power2.inOut', transformOrigin: '50% 90%', overwrite: 'auto' });
       const hero = document.querySelector('.hero h1');
       if (!hero) return;
       const r = hero.getBoundingClientRect();
@@ -284,7 +284,7 @@ footer { position: relative; padding-top: 48px !important; }
       if (sleeping) {
         sleeping = false;
         zzzTl?.kill(); document.querySelectorAll('.fx-zzz').forEach(z => z.remove());
-        gsap.to('.bubble', { y: -30, rotate: 0, duration: .3, ease: 'power2.out', overwrite: 'auto', onComplete: () => gsap.to('.bubble', { y: 0, duration: .8, ease: 'bounce.out' }) });
+        gsap.to('.avatar svg', { y: -24, rotate: 0, duration: .3, ease: 'power2.out', overwrite: 'auto', onComplete: () => gsap.to('.avatar svg', { y: 0, duration: .8, ease: 'bounce.out' }) });
       }
       idle = setTimeout(sleep, 10000);
     };
@@ -502,7 +502,7 @@ footer { position: relative; padding-top: 48px !important; }
 #about .skills li:active { cursor: grabbing; }
 #about { position: relative; }
 .avatar { touch-action: none; }
-.bubble { pointer-events: auto; cursor: pointer; }
+.badge { pointer-events: auto; cursor: pointer; }
 .fx-conf { position: fixed; z-index: 70; width: 9px; height: 14px; border-radius: 2px; pointer-events: none; }
 .now-pill { cursor: pointer; }
 .kpi b { cursor: pointer; }
@@ -561,8 +561,8 @@ footer { position: relative; padding-top: 48px !important; }
       }
     });
 
-    // 26. PhysicsProps: click a bubble and it flies off with friction, then floats back.
-    if (have('PhysicsPropsPlugin')) document.querySelectorAll('.bubble').forEach(b => on(b, 'click', e => {
+    // 26. PhysicsProps: click the round badge and it flies off with friction, then comes back.
+    if (have('PhysicsPropsPlugin')) document.querySelectorAll('.badge').forEach(b => on(b, 'click', e => {
       e.stopPropagation();
       gsap.timeline()
         .to(b, { physicsProps: { x: { velocity: rnd(-700, 700), friction: .08 }, y: { velocity: rnd(-600, -200), acceleration: 600, friction: .04 } }, rotation: rnd(-360, 360), duration: 1.6 })
@@ -584,7 +584,7 @@ footer { position: relative; padding-top: 48px !important; }
 
     // 29. CustomBounce: fruit that falls on empty clicks now squashes when it lands (overrides 11's motion).
     if (have('CustomBounce')) on(document, 'click', e => {
-      if (e.target.closest('a, button, input, .avatar, .job, .stats, h1, .tags, .plist, .lang, .fx-peek-box, .bubble, .now-pill')) return;
+      if (e.target.closest('a, button, input, .avatar, .job, .stats, h1, .tags, .plist, .lang, .fx-peek-box, .badge, .now-pill')) return;
       requestAnimationFrame(() => {
         const s = [...document.querySelectorAll('.fx-fall')].pop(); if (!s) return;
         gsap.killTweensOf(s);
@@ -628,6 +628,7 @@ footer { position: relative; padding-top: 48px !important; }
 .fx-scene.wherex    { background: radial-gradient(120% 90% at 30% 30%, #28b09540, #191d3814 70%, transparent); }
 .fx-scene.falabella { background: linear-gradient(180deg, transparent 30%, #aad50033 70%, #aad50055); }
 .fx-scene.citiaps   { background: radial-gradient(90% 70% at 50% 50%, #e8505b33, transparent 70%); }
+.fx-scene.me        { background: radial-gradient(110% 80% at 25% 25%, #ff7aa855, #c45ad933 55%, #ffd6e833); }
 .fx-sweep { position: absolute; left: 50%; top: 50%; width: 160vmax; height: 160vmax; margin: -80vmax 0 0 -80vmax; border-radius: 50%;
   background: conic-gradient(from 0deg, #e8505b55, transparent 14%, transparent); }
 `;
@@ -705,6 +706,23 @@ footer { position: relative; padding-top: 48px !important; }
       }
     }
 
+    // Me (hover my name or title): hearts rising, Montréal snow falling, my bike riding across.
+    {
+      const sc = scenes.me = scene('me');
+      for (let i = 0; i < 18; i++) {
+        const h = add(sc.svg, 'text', { x: rnd(0, W), y: H + 40, 'font-size': rnd(18, 40), fill: ['#b2466e', '#ff7aa8', '#c45ad9'][i % 3], 'text-anchor': 'middle' }); h.textContent = '♥';
+        sc.tl.fromTo(h, { attr: { y: H + 40 }, opacity: .8 }, { attr: { y: -40 }, opacity: 0, duration: rnd(2.5, 4), ease: 'sine.in' }, rnd(0, 3));
+      }
+      for (let i = 0; i < 26; i++) {
+        const s = add(sc.svg, 'text', { x: rnd(0, W), y: -20, 'font-size': rnd(12, 26), fill: '#ffffff', stroke: '#c45ad9', 'stroke-width': .6, 'text-anchor': 'middle' }); s.textContent = '❄';
+        sc.tl.fromTo(s, { attr: { y: -20 }, rotation: 0 }, { attr: { y: H + 20 }, x: rnd(-60, 60), rotation: rnd(-180, 180), svgOrigin: '0 0', duration: rnd(3, 5), ease: 'none' }, rnd(0, 3));
+      }
+      const bike = add(sc.svg, 'text', { x: 0, y: H - 40, 'font-size': 56, 'text-anchor': 'middle', transform: 'scale(-1 1)' }); bike.textContent = '🚲';
+      const bg = add(sc.svg, 'g', {}); bg.appendChild(bike);
+      sc.tl.fromTo(bg, { x: -80 }, { x: W + 80, duration: 4, ease: 'none' }, 0)
+        .to(bg, { y: -8, duration: .25, yoyo: true, repeat: 15, ease: 'sine.inOut' }, 0);
+    }
+
     // Card hover crossfades its scene in; leaving fades it out (a short delay avoids flicker between cards).
     let current = null, outTimer;
     const show = id => {
@@ -718,7 +736,7 @@ footer { position: relative; padding-top: 48px !important; }
     };
     const hide = () => { outTimer = setTimeout(() => { Object.values(scenes).forEach(sc => gsap.to(sc.el, { opacity: 0, duration: .7, overwrite: true, onComplete: () => sc.tl.pause() })); current = null; }, 150); };
     const cleanups = [() => stage.remove(), () => clearTimeout(outTimer)];
-    [['#job-comtech', 'comtech'], ['#job-wherex', 'wherex'], ['#job-falabella', 'falabella'], ['#job-citiaps', 'citiaps']].forEach(([sel, id]) => {
+    [['.hero h1', 'me'], ['#job-comtech', 'comtech'], ['#job-wherex', 'wherex'], ['#job-falabella', 'falabella'], ['#job-citiaps', 'citiaps']].forEach(([sel, id]) => {
       const card = document.querySelector(sel); if (!card) return;
       const enter = () => show(id), leave = () => hide();
       card.addEventListener('pointerenter', enter); card.addEventListener('pointerleave', leave);
