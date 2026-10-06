@@ -188,13 +188,13 @@ body { margin: 0; }
 
 /* Pastel bubbles (Deepa). */
 .bubbles { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
-.bubble { position: absolute; border-radius: 50%; }
-.bubble.b1 { width: 92px; height: 92px; right: 4%; top: 6%; background: radial-gradient(circle at 32% 30%, #fff 0 8%, #f7b6c8 22%, #e58aa6 72%); }
-.bubble.b2 { width: 54px; height: 54px; right: 34%; top: 2%; background: radial-gradient(circle at 32% 30%, #fff 0 8%, #d9c8f7 24%, #b39ae8 72%); }
-.bubble.b3 { width: 40px; height: 40px; right: 0; top: 58%; background: radial-gradient(circle at 32% 30%, #fff 0 8%, #fbd9c2 24%, #f2ad87 72%); }
-.bubble.b4 { width: 26px; height: 26px; right: 27%; bottom: 3%; background: radial-gradient(circle at 32% 30%, #fff 0 10%, #c8eedd 26%, #93d2b6 74%); }
-:root[data-theme="dark"] .bubble { opacity: .55; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .bubble { opacity: .55; } }
+.bubble { position: absolute; display: grid; place-items: center; line-height: 1; }
+/* sticker look: a white outline and a soft shadow, like the cat */
+.bubble span { display: block; filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 6px 8px rgba(43,27,46,.25)); }
+.bubble.b1 { right: 4%; top: 4%; font-size: 64px; }
+.bubble.b2 { right: 36%; top: 2%; font-size: 40px; }
+.bubble.b3 { right: 5%; top: 62%; font-size: 34px; }
+.bubble.b4 { right: 27%; bottom: 3%; font-size: 26px; }
 
 /* Tech ribbon that slides with the scroll (Noomo). */
 .marquee { overflow: hidden; border-bottom: 1px solid var(--rule); padding-block: 16px; }
@@ -482,7 +482,7 @@ body { padding-bottom: 96px; }
 
   <header class="hero">
     <div class="glow" aria-hidden="true"></div>
-    <div class="bubbles" aria-hidden="true"><i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i><i class="bubble b4"></i></div>
+    <div class="bubbles" aria-hidden="true"><i class="bubble b1"><span>🛰️</span></i><i class="bubble b2"><span>🌸</span></i><i class="bubble b3"><span>💾</span></i><i class="bubble b4"><span>⭐</span></i></div>
     <div>
       <p class="hello" aria-hidden="true"><span class="hello-word">Bonjour</span><span class="caret"></span></p>
       <h1><span class="name">Katherine Liberona Irarrázabal</span> <span class="role" data-t="role"></span></h1>
@@ -1198,7 +1198,8 @@ if (window.gsap) {
       }
 
       // Bubbles float, and drift away from the mouse (Deepa).
-      gsap.utils.toArray('.bubble').forEach((b, i) => {
+      // float the inner sticker so other effects (sleep, clicks) can move the outer one without killing this
+      gsap.utils.toArray('.bubble span').forEach((b, i) => {
         gsap.to(b, { y: i % 2 ? 14 : -14, x: i % 2 ? -8 : 8, duration: 2.6 + i * .4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
       });
       const bubbles = document.querySelector('.bubbles');

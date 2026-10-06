@@ -615,4 +615,115 @@ footer { position: relative; padding-top: 48px !important; }
 
     return () => cleanups.forEach(f => f());
   });
+
+  // ------------------------------------------------------------------
+  // Round 5: hovering a work card turns the whole page background into that company's world.
+  // ------------------------------------------------------------------
+  const css5 = document.createElement('style');
+  css5.textContent = `
+.fx-stage { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+.fx-scene { position: absolute; inset: 0; opacity: 0; }
+.fx-scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fx-scene.comtech   { background: radial-gradient(120% 90% at 70% 20%, #4d397c55, #1d113833 60%, transparent); }
+.fx-scene.wherex    { background: radial-gradient(120% 90% at 30% 30%, #28b09540, #191d3814 70%, transparent); }
+.fx-scene.falabella { background: linear-gradient(180deg, transparent 30%, #aad50033 70%, #aad50055); }
+.fx-scene.citiaps   { background: radial-gradient(90% 70% at 50% 50%, #e8505b33, transparent 70%); }
+.fx-sweep { position: absolute; left: 50%; top: 50%; width: 160vmax; height: 160vmax; margin: -80vmax 0 0 -80vmax; border-radius: 50%;
+  background: conic-gradient(from 0deg, #e8505b55, transparent 14%, transparent); }
+`;
+  document.head.appendChild(css5);
+
+  mm.add('(prefers-reduced-motion: no-preference) and (pointer: fine)', () => {
+    const NS = 'http://www.w3.org/2000/svg', W = 1000, H = 600;
+    const stage = document.createElement('div'); stage.className = 'fx-stage'; stage.setAttribute('aria-hidden', 'true');
+    document.body.prepend(stage);
+    const scene = id => {
+      const d = document.createElement('div'); d.className = 'fx-scene ' + id; stage.appendChild(d);
+      const s = document.createElementNS(NS, 'svg'); s.setAttribute('viewBox', `0 0 ${W} ${H}`); s.setAttribute('preserveAspectRatio', 'xMidYMid slice'); d.appendChild(s);
+      return { el: d, svg: s, tl: gsap.timeline({ paused: true, repeat: -1 }) };
+    };
+    const add = (svg, tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); svg.appendChild(e); return e; };
+    const scenes = {};
+
+    // Comtech: space — stars, two huge rotating orbits and a satellite riding one of them.
+    {
+      const sc = scenes.comtech = scene('comtech');
+      for (let i = 0; i < 90; i++) {
+        const st = add(sc.svg, 'circle', { cx: rnd(0, W), cy: rnd(0, H), r: rnd(.8, 2.6), fill: i % 5 ? '#7900a6' : '#ed1c5b' });
+        sc.tl.to(st, { opacity: rnd(.1, .4), duration: rnd(.5, 1.5), yoyo: true, repeat: 1, ease: 'sine.inOut' }, rnd(0, 2));
+      }
+      const g1 = add(sc.svg, 'g', {}), g2 = add(sc.svg, 'g', {});
+      add(g1, 'ellipse', { cx: 700, cy: 260, rx: 420, ry: 140, fill: 'none', stroke: '#7900a6', 'stroke-width': 2, 'stroke-dasharray': '4 10', opacity: .45 });
+      add(g2, 'ellipse', { cx: 700, cy: 260, rx: 300, ry: 220, fill: 'none', stroke: '#f7941d', 'stroke-width': 1.5, 'stroke-dasharray': '2 8', opacity: .4 });
+      const path = add(sc.svg, 'path', { d: 'M280 260 A420 140 0 1 0 1120 260 A420 140 0 1 0 280 260', fill: 'none', stroke: 'none' });
+      const sat = add(sc.svg, 'text', { 'font-size': 40, 'text-anchor': 'middle', 'dominant-baseline': 'middle' }); sat.textContent = '🛰️';
+      gsap.to(g1, { rotation: 360, svgOrigin: '700 260', duration: 60, repeat: -1, ease: 'none' });
+      gsap.to(g2, { rotation: -360, svgOrigin: '700 260', duration: 45, repeat: -1, ease: 'none' });
+      sc.tl.to(sat, { motionPath: { path, align: path, alignOrigin: [.5, .5] }, duration: 4, ease: 'none' }, 0);
+    }
+
+    // wherEX: a data network — nodes, links, and pulses running along the links.
+    {
+      const sc = scenes.wherex = scene('wherex');
+      const nodes = Array.from({ length: 22 }, () => ({ x: rnd(40, W - 40), y: rnd(40, H - 40) }));
+      const links = [];
+      nodes.forEach((a, i) => nodes.slice(i + 1).forEach(b => { if (Math.hypot(a.x - b.x, a.y - b.y) < 230) links.push([a, b]); }));
+      links.forEach(([a, b]) => add(sc.svg, 'line', { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: '#28b095', 'stroke-width': 1.2, opacity: .35 }));
+      nodes.forEach(n => { const c = add(sc.svg, 'circle', { cx: n.x, cy: n.y, r: 6, fill: '#191d38', stroke: '#28b095', 'stroke-width': 3, opacity: .55 });
+        sc.tl.to(c, { attr: { r: 10 }, duration: .4, yoyo: true, repeat: 1 }, rnd(0, 2.5)); });
+      links.slice(0, 26).forEach(([a, b]) => {
+        const p = add(sc.svg, 'circle', { r: 4, fill: '#21a8ba', cx: a.x, cy: a.y });
+        sc.tl.fromTo(p, { attr: { cx: a.x, cy: a.y }, opacity: 0 }, { attr: { cx: b.x, cy: b.y }, opacity: .9, duration: rnd(.8, 1.6), ease: 'power1.inOut' }, rnd(0, 1.5));
+      });
+    }
+
+    // Falabella: a road across the screen, the truck drives it, parcels float around.
+    {
+      const sc = scenes.falabella = scene('falabella');
+      const road = add(sc.svg, 'path', { d: 'M-60 470 C 180 380, 320 560, 520 460 S 820 360, 1060 450', fill: 'none', stroke: '#5d7400', 'stroke-width': 4, 'stroke-dasharray': '18 14', opacity: .45 });
+      [[150, 420], [520, 452], [880, 400]].forEach(([x, y]) => { const h = add(sc.svg, 'text', { x, y: y - 26, 'font-size': 34, 'text-anchor': 'middle' }); h.textContent = '🏠'; });
+      const truck = add(sc.svg, 'g', {}); const t = add(truck, 'text', { 'font-size': 48, 'text-anchor': 'middle', 'dominant-baseline': 'middle', transform: 'scale(-1 1)' }); t.textContent = '🚚';
+      sc.tl.to(truck, { motionPath: { path: road, align: road, alignOrigin: [.5, .8] }, duration: 4, ease: 'none' }, 0);
+      for (let i = 0; i < 10; i++) {
+        const b = add(sc.svg, 'text', { x: rnd(0, W), y: rnd(60, 340), 'font-size': rnd(20, 36) }); b.textContent = '📦';
+        sc.tl.to(b, { y: '+=' + rnd(20, 50), rotation: rnd(-30, 30), duration: rnd(1, 2), yoyo: true, repeat: 1, ease: 'sine.inOut' }, rnd(0, 1));
+      }
+    }
+
+    // CITIAPS: a radar — a rotating sweep and rings expanding, volunteers converging.
+    {
+      const sc = scenes.citiaps = scene('citiaps');
+      const sweep = document.createElement('div'); sweep.className = 'fx-sweep'; sc.el.appendChild(sweep);
+      gsap.to(sweep, { rotation: 360, duration: 3, repeat: -1, ease: 'none' });
+      for (let i = 0; i < 4; i++) {
+        const ring = add(sc.svg, 'circle', { cx: W / 2, cy: H / 2, r: 20, fill: 'none', stroke: '#e8505b', 'stroke-width': 3 });
+        sc.tl.fromTo(ring, { attr: { r: 20 }, opacity: .7 }, { attr: { r: 620 }, opacity: 0, duration: 4, ease: 'power1.out' }, i);
+      }
+      for (let i = 0; i < 14; i++) {
+        const v = add(sc.svg, 'circle', { cx: rnd(0, W), cy: rnd(0, H), r: 6, fill: '#7a4f9e', opacity: .5 });
+        sc.tl.to(v, { attr: { cx: W / 2 + rnd(-60, 60), cy: H / 2 + rnd(-60, 60) }, duration: 2, yoyo: true, repeat: 1, ease: 'power2.inOut' }, rnd(0, 1));
+      }
+    }
+
+    // Card hover crossfades its scene in; leaving fades it out (a short delay avoids flicker between cards).
+    let current = null, outTimer;
+    const show = id => {
+      clearTimeout(outTimer);
+      if (current === id) return;
+      Object.entries(scenes).forEach(([k, sc]) => {
+        if (k === id) { sc.tl.play(); gsap.to(sc.el, { opacity: 1, duration: .6, overwrite: true }); }
+        else gsap.to(sc.el, { opacity: 0, duration: .5, overwrite: true, onComplete: () => sc.tl.pause() });
+      });
+      current = id;
+    };
+    const hide = () => { outTimer = setTimeout(() => { Object.values(scenes).forEach(sc => gsap.to(sc.el, { opacity: 0, duration: .7, overwrite: true, onComplete: () => sc.tl.pause() })); current = null; }, 150); };
+    const cleanups = [() => stage.remove(), () => clearTimeout(outTimer)];
+    [['#job-comtech', 'comtech'], ['#job-wherex', 'wherex'], ['#job-falabella', 'falabella'], ['#job-citiaps', 'citiaps']].forEach(([sel, id]) => {
+      const card = document.querySelector(sel); if (!card) return;
+      const enter = () => show(id), leave = () => hide();
+      card.addEventListener('pointerenter', enter); card.addEventListener('pointerleave', leave);
+      cleanups.push(() => { card.removeEventListener('pointerenter', enter); card.removeEventListener('pointerleave', leave); });
+    });
+    return () => cleanups.forEach(f => f());
+  });
 })();
