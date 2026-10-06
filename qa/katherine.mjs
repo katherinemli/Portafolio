@@ -42,7 +42,13 @@ const verdict = (id, status, what) => { results.push({ id, status, what }); cons
 const findHidden = page => page.evaluate(() =>
   [...document.querySelectorAll('.hero *, section *')]
     .filter(e => !e.closest('[aria-hidden="true"]') && !e.closest('.scope .path'))
-    .filter(e => { const c = getComputedStyle(e); return c.visibility === 'hidden' || +c.opacity < 0.99; })
+    .filter(e => {
+      const c = getComputedStyle(e);
+      if (c.visibility === 'hidden' || +c.opacity < 0.99) return true;
+      // shrunk to nothing (scale 0, collapsed): text that exists but takes no space can't be read
+      const r = e.getBoundingClientRect();
+      return e.children.length === 0 && e.textContent.trim() && c.display !== 'none' && (r.width < 1 || r.height < 1);
+    })
     .map(e => `${e.tagName.toLowerCase()}.${e.getAttribute('class') || ''}`.replace(/\.$/, ''))
 );
 

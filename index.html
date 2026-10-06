@@ -282,7 +282,9 @@ body { margin: 0; }
 .lk-main:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 
 /* Hover: cards lift and blush, their illustration wakes up (JS), small things pop. */
-.job, .proof, .tags li, .plist li, .features li, .plist a { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .25s, background-color .25s, color .2s, padding .25s; }
+/* hover moves use the separate translate/scale properties: GSAP owns `transform`, and a CSS
+   transition on transform fights it (it left every tag stuck at scale 0) */
+.job, .proof, .tags li, .plist li, .features li, .plist a { transition: translate .35s cubic-bezier(.2,.8,.2,1), scale .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .25s, background-color .25s, color .2s, padding .25s; }
 .job:hover { border-color: var(--accent); box-shadow: 0 22px 44px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
 .jobs-past .job:hover { background: color-mix(in srgb, var(--accent-soft) 45%, var(--paper)); }
 .job-now:hover { background: color-mix(in srgb, var(--accent-soft) 85%, var(--paper)); }
@@ -302,8 +304,8 @@ body { margin: 0; }
 dl.spec dd { transition: color .2s; }
 dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
 @media (prefers-reduced-motion: no-preference) {
-  .job:hover { transform: translateY(-5px); }
-  .tags li:hover { transform: translateY(-2px) scale(1.06); }
+  .job:hover { translate: 0 -5px; }
+  .tags li:hover { translate: 0 -2px; scale: 1.06; }
 }
 
 /* Stats strip. */
@@ -377,6 +379,32 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
 .skills { gap: 8px; }
 .skills li { font-size: 13px; padding: 7px 13px; }
 .proof { padding: 10px 14px; }
+
+/* Each company card wears its own brand color (taken from their websites; CITIAPS has
+   none online, so a coral that fits). --accent is the readable text color, --brand the vivid one. */
+#job-comtech   { --accent: #4d397c; --accent-soft: #eae7f4; --brand: #7900a6; }
+#job-wherex    { --accent: #1c7a67; --accent-soft: #e2f8f4; --brand: #28b095; }
+#job-falabella { --accent: #5d7400; --accent-soft: #f8ffdb; --brand: #aad500; }
+#job-citiaps   { --accent: #d51c29; --accent-soft: #fbdfe1; --brand: #e8505b; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) #job-comtech   { --accent: #a998d0; --accent-soft: #231a38; --brand: #b388ff; }
+  :root:not([data-theme="light"]) #job-wherex    { --accent: #29b499; --accent-soft: #0f3b33; --brand: #28b095; }
+  :root:not([data-theme="light"]) #job-falabella { --accent: #aad500; --accent-soft: #2f3b00; --brand: #aad500; }
+  :root:not([data-theme="light"]) #job-citiaps   { --accent: #ef8289; --accent-soft: #3f0c11; --brand: #e8505b; }
+}
+:root[data-theme="dark"] #job-comtech   { --accent: #a998d0; --accent-soft: #231a38; --brand: #b388ff; }
+:root[data-theme="dark"] #job-wherex    { --accent: #29b499; --accent-soft: #0f3b33; --brand: #28b095; }
+:root[data-theme="dark"] #job-falabella { --accent: #aad500; --accent-soft: #2f3b00; --brand: #aad500; }
+:root[data-theme="dark"] #job-citiaps   { --accent: #ef8289; --accent-soft: #3f0c11; --brand: #e8505b; }
+.job { position: relative; isolation: isolate; }
+.jobs-past .job { border-top: 4px solid var(--brand); overflow: clip; } /* parts flying in (wherEX) must not widen the page */
+.job .ill .acc { fill: var(--brand); }
+.job .ill .soft { fill: color-mix(in srgb, var(--brand) 22%, var(--paper)); }
+#job-comtech::before {
+  content: ''; position: absolute; left: 24px; right: 24px; top: 0; height: 5px; border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, #f7941d, #ed1c5b, #7900a6);
+}
+.jobs-past .job:hover { background: color-mix(in srgb, var(--accent-soft) 70%, var(--paper)); }
 
 /* Ring cursor (Deepa). Decoration only: the system cursor stays. */
 .ring-cursor {
@@ -1151,6 +1179,7 @@ if (window.gsap) {
   });
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.15.0/Flip.min.js"></script>
 <script src="fx.js"></script>
 </body>
 </html>

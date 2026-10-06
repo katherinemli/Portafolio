@@ -334,7 +334,7 @@ footer { position: relative; padding-top: 48px !important; }
 
     // 19. Reach the very bottom: confetti and a thank-you.
     let thanked = false;
-    const endST = ScrollTrigger.create({ start: 'max -2', end: 'max', onEnter: () => {
+    const endST = ScrollTrigger.create({ trigger: 'footer', start: 'bottom bottom', onEnter: () => {
       if (thanked) return; thanked = true;
       rain(50); toast(L() === 'en' ? 'Thanks for scrolling all the way ♥' : 'Merci d’être venu·e jusqu’ici ♥');
     } });
@@ -350,6 +350,141 @@ footer { position: relative; padding-top: 48px !important; }
       gsap.timeline().to(peek, { y: -40, rotate: 20, duration: .25, ease: 'power2.out' }).to(peek, { y: 0, rotate: 0, duration: .6, ease: 'bounce.out' });
       toast('miaou ! 🐾', 1200);
     });
+
+    return () => cleanups.forEach(f => f());
+  });
+
+  // ------------------------------------------------------------------
+  // Round 3: one personal animation per experience card.
+  // ------------------------------------------------------------------
+  if (window.Flip) gsap.registerPlugin(Flip);
+  const css3 = document.createElement('style');
+  css3.textContent = `
+.fx-deco { position: absolute; pointer-events: none; z-index: -1; }
+.fx-stars { inset: 0; overflow: hidden; border-radius: inherit; }
+.fx-stars i { position: absolute; border-radius: 50%; background: var(--brand); }
+.fx-scan { left: 0; right: 0; height: 80px; border-radius: inherit; background: linear-gradient(transparent, color-mix(in srgb, var(--brand) 30%, transparent), transparent); opacity: 0; }
+.fx-orbit { z-index: 3; font-size: 24px; line-height: 1; left: 0; top: 0; opacity: 0; translate: -50% -50%; }
+.fx-box { position: absolute; z-index: 3; pointer-events: none; font-size: 22px; line-height: 1; }
+.fx-ping { z-index: 0; left: 50%; top: 42%; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; border: 3px solid var(--brand); opacity: 0; }
+.fx-siren-ico { position: absolute; z-index: 3; right: 14px; top: 12px; font-size: 26px; line-height: 1; pointer-events: none; opacity: 0; }
+.fx-rank { position: absolute; z-index: 3; pointer-events: none; font: 700 11px/1 var(--mono); color: var(--on-accent); background: var(--accent); padding: 3px 6px; border-radius: 999px; }
+.fx-siren { transition: none !important; }
+`;
+  document.head.appendChild(css3);
+
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    const cleanups = [];
+    const on = (el, ev, fn, opt) => { el.addEventListener(ev, fn, opt); cleanups.push(() => el.removeEventListener(ev, fn, opt)); };
+    const deco = (card, cls, tag = 'div') => {
+      const d = document.createElement(tag); d.className = 'fx-deco ' + cls; d.setAttribute('aria-hidden', 'true');
+      card.prepend(d); cleanups.push(() => d.remove()); return d;
+    };
+    const once = (card, fn) => ScrollTrigger.create({ trigger: card, start: 'top 80%', once: true, onEnter: fn });
+
+    // Comtech: a little starry sky in the card, a scan beam when it appears,
+    // and a satellite that orbits the card while the mouse is on it.
+    const ct = document.querySelector('#job-comtech');
+    if (ct) {
+      const sky = deco(ct, 'fx-stars');
+      for (let i = 0; i < 30; i++) {
+        const d = document.createElement('i'), z = rnd(2, 4.5);
+        Object.assign(d.style, { left: rnd(0, 100) + '%', top: rnd(0, 100) + '%', width: z + 'px', height: z + 'px' });
+        sky.appendChild(d);
+        gsap.fromTo(d, { opacity: .1 }, { opacity: rnd(.4, .9), duration: rnd(.6, 1.8), repeat: -1, yoyo: true, delay: rnd(0, 2), ease: 'sine.inOut' });
+      }
+      const scan = deco(ct, 'fx-scan');
+      once(ct, () => gsap.fromTo(scan, { top: -80, opacity: 1 }, { top: ct.offsetHeight, duration: 1.5, ease: 'power1.inOut', onComplete: () => gsap.set(scan, { opacity: 0 }) }));
+      const sat = deco(ct, 'fx-orbit'); sat.textContent = '🛰️';
+      let orbit;
+      on(ct, 'pointerenter', () => {
+        const w = ct.clientWidth, h = ct.clientHeight, m = 14;
+        orbit?.kill();
+        gsap.to(sat, { opacity: 1, duration: .3 });
+        orbit = gsap.fromTo(sat, { x: m, y: m }, {
+          motionPath: { path: [{ x: m, y: m }, { x: w - m, y: m }, { x: w - m, y: h - m }, { x: m, y: h - m }, { x: m, y: m }], curviness: 0 },
+          duration: 7, ease: 'none', repeat: -1,
+        });
+      });
+      on(ct, 'pointerleave', () => { orbit?.kill(); gsap.to(sat, { opacity: 0, duration: .3 }); });
+    }
+
+    // wherEX: the card's parts fly in from everywhere and snap together like microservices;
+    // on hover the tags re-rank themselves (their ranking algorithm) and #1 gets a badge.
+    const wx = document.querySelector('#job-wherex');
+    if (wx) {
+      const parts = [...wx.children].filter(c => !c.classList.contains('fx-deco'));
+      gsap.set(parts, { x: () => rnd(-90, 90), y: () => rnd(-70, 70), rotate: () => rnd(-14, 14) });
+      once(wx, () => gsap.to(parts, { x: 0, y: 0, rotate: 0, duration: .9, stagger: .08, ease: 'back.out(1.7)', clearProps: 'transform' }));
+      const ul = wx.querySelector('.tags');
+      if (ul && window.Flip) on(wx, 'pointerenter', () => {
+        const state = Flip.getState(ul.children);
+        [...ul.children].sort(() => Math.random() - .5).forEach(li => ul.appendChild(li));
+        Flip.from(state, { duration: .6, ease: 'power2.inOut', stagger: .04, onComplete: () => {
+          const first = ul.children[0], r1 = first.getBoundingClientRect(), rc = wx.getBoundingClientRect();
+          const b = document.createElement('span'); b.className = 'fx-rank'; b.setAttribute('aria-hidden', 'true'); b.textContent = '#1';
+          b.style.left = (r1.left - rc.left + r1.width - 10) + 'px'; b.style.top = (r1.top - rc.top - 10) + 'px';
+          wx.appendChild(b);
+          gsap.timeline({ onComplete: () => b.remove() }).from(b, { scale: 0, duration: .3, ease: 'back.out(3)' }).to(b, { opacity: 0, duration: .3 }, '+=.9');
+        } });
+      });
+    }
+
+    // Falabella: the card drives in from the left and brakes with a bump;
+    // on hover parcels drop in and the −80 % counts up again.
+    const fb = document.querySelector('#job-falabella');
+    if (fb) {
+      gsap.set(fb, { x: -140, skewX: 10 });
+      once(fb, () => gsap.timeline()
+        .to(fb, { x: 0, skewX: 0, duration: .8, ease: 'power3.out' })
+        .fromTo(fb, { skewX: -7 }, { skewX: 0, duration: .7, ease: 'elastic.out(1, .35)' })
+        .set(fb, { clearProps: 'x,skewX' }));
+      const kb = fb.querySelector('.kpi b'), kOrig = kb?.innerHTML;
+      let busy = false;
+      on(fb, 'pointerenter', () => {
+        if (busy) return; busy = true;
+        const k = kb?.getBoundingClientRect(), rc = fb.getBoundingClientRect();
+        for (let i = 0; i < 4; i++) {
+          const p = document.createElement('span'); p.className = 'fx-box'; p.setAttribute('aria-hidden', 'true'); p.textContent = '📦';
+          const x = (k ? k.left - rc.left + k.width : rc.width / 2) + rnd(0, 120), y = k ? k.top - rc.top : 120;
+          p.style.left = x + 'px'; p.style.top = '-30px';
+          fb.appendChild(p);
+          gsap.timeline({ delay: i * .12, onComplete: () => p.remove() })
+            .to(p, { y: y + 30, rotate: rnd(-40, 40), duration: .7, ease: 'bounce.out' })
+            .to(p, { opacity: 0, duration: .3 }, '+=.4');
+        }
+        if (kb) {
+          const o = { v: 0 };
+          gsap.to(o, { v: 80, duration: .9, ease: 'power2.out', onUpdate: () => { kb.innerHTML = '−' + Math.round(o.v) + '&nbsp;%'; },
+            onComplete: () => { kb.innerHTML = kOrig; busy = false; } });
+        } else busy = false;
+      });
+    }
+
+    // CITIAPS: a radar ping when it appears; on hover, emergency siren lights on the border.
+    const ci = document.querySelector('#job-citiaps');
+    if (ci) {
+      const ping = deco(ci, 'fx-ping');
+      once(ci, () => gsap.fromTo(ping, { scale: .2, opacity: .8 }, { scale: 4.5, opacity: 0, duration: 1.4, repeat: 2, ease: 'power1.out' }));
+      const ico = document.createElement('span'); ico.className = 'fx-siren-ico'; ico.setAttribute('aria-hidden', 'true'); ico.textContent = '🚨';
+      ci.appendChild(ico); cleanups.push(() => ico.remove());
+      let siren;
+      on(ci, 'pointerenter', () => {
+        ci.classList.add('fx-siren');
+        siren?.kill();
+        siren = gsap.timeline({ repeat: -1 })
+          .set(ci, { boxShadow: '0 0 0 3px #e8505b, 0 0 34px #e8505b99', borderColor: '#e8505b' })
+          .set(ci, { boxShadow: '0 0 0 3px #3b82f6, 0 0 34px #3b82f699', borderColor: '#3b82f6' }, .25)
+          .set({}, {}, .5);
+        gsap.to(ico, { opacity: 1, duration: .2 });
+        gsap.fromTo(ico, { rotate: -15 }, { rotate: 15, duration: .12, repeat: -1, yoyo: true, ease: 'none', id: 'sirenIco' });
+      });
+      on(ci, 'pointerleave', () => {
+        siren?.kill(); gsap.getById('sirenIco')?.kill();
+        gsap.set(ci, { clearProps: 'boxShadow,borderColor' }); ci.classList.remove('fx-siren');
+        gsap.to(ico, { opacity: 0, rotate: 0, duration: .2 });
+      });
+    }
 
     return () => cleanups.forEach(f => f());
   });
