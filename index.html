@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Katherine Liberona Irarrázabal — firmware et full-stack, Montréal.">
+<title>Katherine Liberona</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a component datasheet. Title block, features, then work as spec rows. */
+:root {
+  --paper: #f2f4f6;
+  --ink: #141c25;
+  --muted: #5b6774;
+  --rule: #cfd6dd;
+  --accent: #2346c4;
+  --accent-soft: #e2e8fb;
+  --signal: #b8730d;
+  --display: 'Archivo', 'Arial Narrow', system-ui, sans-serif;
+  --body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10151b; --ink: #dfe5eb; --muted: #8e9aa6; --rule: #2a333d;
+    --accent: #8aa3ff; --accent-soft: #1b2440; --signal: #e6a548; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10151b; --ink: #dfe5eb; --muted: #8e9aa6; --rule: #2a333d;
+  --accent: #8aa3ff; --accent-soft: #1b2440; --signal: #e6a548; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font: 17px/1.6 var(--body);
+  padding-inline: 20px; padding-block: 0 64px;
+}
+.sheet { max-width: 980px; margin: 0 auto; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.mono { font-family: var(--mono); }
+.label {
+  font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
+}
+
+/* Title block */
+.strip {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px;
+  padding-block: 14px; border-bottom: 2px solid var(--ink);
+}
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 32px; align-items: center;
+  padding-block: 40px 36px; border-bottom: 1px solid var(--rule);
+}
+h1 {
+  font: 800 clamp(44px, 8vw, 88px)/.92 var(--display);
+  font-stretch: 68%; letter-spacing: -.01em; margin: 0 0 18px; text-wrap: balance;
+}
+h1 span { display: block; color: var(--accent); }
+.lede { max-width: 56ch; margin: 0; font-size: 19px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 20px; color: var(--muted); font-size: 15px; }
+
+.scope { width: 100%; max-width: 260px; justify-self: end; }
+.scope .ring { fill: none; stroke: var(--rule); stroke-width: 1; }
+.scope .ax { fill: var(--muted); font: 500 9px var(--mono); text-anchor: middle; }
+.scope .path { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 2 3; opacity: .55; }
+.scope .tgt { stroke: var(--signal); stroke-width: 2; }
+.scope .mnt { fill: var(--accent); }
+.scope figcaption { font: 12px/1.4 var(--mono); color: var(--muted); text-align: center; margin-top: 6px; }
+
+/* Sections */
+section { padding-block: 36px; border-bottom: 1px solid var(--rule); }
+.sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; }
+h2 {
+  font: 700 26px/1.1 var(--display); font-stretch: 85%; margin: 0;
+}
+
+.features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 40px; margin: 0; padding: 0; list-style: none; }
+@media (max-width: 720px) { .features { grid-template-columns: 1fr; } }
+.features li { padding-left: 18px; position: relative; }
+.features li::before { content: ''; position: absolute; left: 0; top: .62em; width: 8px; height: 2px; background: var(--accent); }
+.features b { font-weight: 700; }
+
+/* Work rows */
+.work { display: grid; gap: 0; }
+.row {
+  display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 8px 28px;
+  padding-block: 22px; border-top: 1px solid var(--rule);
+}
+.row:first-child { border-top: 0; padding-top: 0; }
+.row h3 { font: 700 21px/1.15 var(--display); font-stretch: 90%; margin: 0 0 6px; }
+.row .kind { font: 12px/1.4 var(--mono); color: var(--muted); }
+.row p { margin: 0 0 10px; max-width: 64ch; }
+.row.lead h3 { color: var(--accent); }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0; list-style: none; }
+.tags li { font: 12px/1 var(--mono); padding: 5px 7px; border-radius: 3px; background: var(--accent-soft); color: var(--ink); }
+
+/* Earlier work table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 560px; }
+th { text-align: left; padding: 0 12px 10px 0; }
+td { padding: 10px 12px 10px 0; border-top: 1px solid var(--rule); vertical-align: top; }
+td:first-child { white-space: nowrap; font-weight: 700; }
+td.stack { font: 13px/1.5 var(--mono); color: var(--muted); }
+
+/* Background + contact */
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px 48px; }
+.two p { margin: 0 0 12px; max-width: 58ch; }
+dl.spec { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 20px; font-size: 15px; }
+dl.spec dt { color: var(--muted); }
+dl.spec dd { margin: 0; }
+
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.email { font: 500 18px var(--mono); user-select: all; }
+button {
+  font: 600 14px var(--body); color: var(--paper); background: var(--ink);
+  border: 0; border-radius: 4px; padding: 9px 14px; cursor: pointer;
+}
+button:hover { background: var(--accent); }
+footer { padding-top: 24px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 720px) {
+  body { font-size: 16px; padding-inline: 16px; }
+  .hero { grid-template-columns: 1fr; padding-block: 28px; }
+  .scope { justify-self: start; max-width: 200px; }
+  .row { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .scope animateMotion { display: none; } }
+
+.strip-right { display: flex; align-items: center; gap: 16px; }
+.lang { display: inline-flex; border: 1px solid var(--ink); border-radius: 3px; overflow: hidden; }
+.lang button { background: transparent; color: var(--ink); border-radius: 0; padding: 4px 9px; font: 500 11px/1 var(--mono); letter-spacing: .1em; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.lang button:hover { background: var(--accent); color: var(--paper); }
+
+body { margin: 0; }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="strip">
+    <span class="label" data-t="strip"></span>
+    <span class="strip-right">
+      <span class="label">Montréal, QC</span>
+      <span class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </span>
+    </span>
+  </div>
+
+  <header class="hero">
+    <div>
+      <h1>Katherine Liberona Irarrázabal <span data-t="role"></span></h1>
+      <p class="lede" data-t="lede"></p>
+      <div class="facts"><span data-t="f1"></span><span data-t="f2"></span><span data-t="f3"></span></div>
+    </div>
+    <figure class="scope" data-t-aria="scopeAria">
+      <svg viewBox="-110 -110 220 220" role="img">
+        <circle class="ring" r="96"/><circle class="ring" r="64"/><circle class="ring" r="32"/>
+        <line class="ring" x1="-96" y1="0" x2="96" y2="0"/><line class="ring" x1="0" y1="-96" x2="0" y2="96"/>
+        <text class="ax" x="0" y="-100">N</text><text class="ax" x="103" y="3">E</text>
+        <text class="ax" x="0" y="107">S</text><text class="ax" x="-103" y="3" data-t="west">W</text>
+        <path id="orbit" class="path" d="M -40 52 C -10 20, 20 10, 34 -12 C 46 -32, 22 -48, 0 -30 C -22 -12, -60 30, -40 52 Z"/>
+        <g class="tgt">
+          <line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/>
+          <animateMotion dur="14s" repeatCount="indefinite"><mpath href="#orbit"/></animateMotion>
+        </g>
+        <circle class="mnt" r="3.6">
+          <animateMotion dur="14s" begin="-.35s" repeatCount="indefinite"><mpath href="#orbit"/></animateMotion>
+        </circle>
+      </svg>
+      <figcaption data-t="scopeCap"></figcaption>
+    </figure>
+  </header>
+
+  <section id="features">
+    <div class="sec-head"><h2 data-t="featH"></h2><span class="label" data-t="featL"></span></div>
+    <ul class="features">
+      <li data-t="feat1"></li><li data-t="feat2"></li><li data-t="feat3"></li><li data-t="feat4"></li>
+    </ul>
+  </section>
+
+  <section id="work">
+    <div class="sec-head"><h2 data-t="workH"></h2><span class="label">2025 – 2026</span></div>
+    <div class="work">
+      <article class="row lead">
+        <div><h3>Orbit Tracker</h3><div class="kind" data-t="otK"></div></div>
+        <div>
+          <p data-t="otP"></p>
+          <div class="meta">
+            <ul class="tags"><li>Python</li><li>Vue 3</li><li data-t="tagSM"></li><li>SVG</li></ul>
+            <a href="https://github.com/katherinemli/orbit-tracker" data-t="code"></a>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <div><h3 data-t="hvH"></h3><div class="kind" data-t="hvK"></div></div>
+        <div>
+          <p data-t="hvP"></p>
+          <div class="meta">
+            <ul class="tags"><li>Vue 3</li><li>Leaflet</li><li>Vite</li><li>Netlify Functions</li><li>Python</li></ul>
+            <a href="https://github.com/katherinemli/hantavirustracker" data-t="code"></a>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <div><h3 data-t="tcfH"></h3><div class="kind" data-t="tcfK"></div></div>
+        <div>
+          <p data-t="tcfP"></p>
+          <div class="meta">
+            <ul class="tags"><li>Java / Android</li><li>Python</li><li>Vue</li><li>Bash</li></ul>
+            <a href="https://github.com/katherinemli/tcf-canada" data-t="code"></a>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <div><h3>Minou</h3><div class="kind" data-t="miK"></div></div>
+        <div>
+          <p data-t="miP"></p>
+          <div class="meta">
+            <ul class="tags"><li>Python</li><li>PyQt5</li><li>Ollama</li></ul>
+            <a href="https://github.com/katherinemli/French-cat-writing-motivator-" data-t="code"></a>
+          </div>
+        </div>
+      </article>
+      <article class="row">
+        <div><h3>Hazel Outdoor</h3><div class="kind" data-t="hzK"></div></div>
+        <div>
+          <p data-t="hzP"></p>
+          <div class="meta">
+            <ul class="tags"><li>React</li><li>Vite</li></ul>
+            <a href="https://github.com/hazeloutdoorclothing-max/tactical-store" data-t="code"></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="earlier">
+    <div class="sec-head"><h2 data-t="earlyH"></h2><span class="label">2018 – 2022</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th class="label" data-t="thP"></th><th class="label" data-t="thW"></th><th class="label" data-t="thS"></th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://github.com/katherinemli/backend" data-t="e1n"></a></td><td data-t="e1"></td><td class="stack">Go · MySQL</td></tr>
+          <tr><td><a href="https://github.com/katherinemli/backendecommerce" data-t="e2n"></a></td><td data-t="e2"></td><td class="stack">Django REST · PostgreSQL</td></tr>
+          <tr><td><a href="https://github.com/katherinemli/Evic2018Usach">EVIC 2018</a></td><td data-t="e3"></td><td class="stack">Vue 2 · Firebase</td></tr>
+          <tr><td><a href="https://github.com/katherinemli/mapLeafletExample" data-t="e4n"></a></td><td data-t="e4"></td><td class="stack">Vue 2 · Leaflet</td></tr>
+          <tr><td><a href="https://github.com/katherinemli/nginx-httpsScript">Nginx HTTPS</a></td><td data-t="e5"></td><td class="stack">Shell · Nginx</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-head"><h2 data-t="bgH"></h2></div>
+    <div class="two">
+      <div><p data-t="bg1"></p><p data-t="bg2"></p></div>
+      <dl class="spec">
+        <dt data-t="dLang"></dt><dd>C, Python, JavaScript, Go</dd>
+        <dt>Frontend</dt><dd>Vue 2/3, React, Leaflet, D3, CSS</dd>
+        <dt>Backend</dt><dd>Flask, Django REST, Go, SQLite, PostgreSQL</dd>
+        <dt data-t="dSys"></dt><dd data-t="dSysV"></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="contact" style="border-bottom:0">
+    <div class="sec-head"><h2 data-t="ctH"></h2></div>
+    <div class="contact">
+      <span class="email" id="email">katherine.lib.ira@gmail.com</span>
+      <button type="button" id="copy" data-t="copy"></button>
+      <a href="https://github.com/katherinemli">github.com/katherinemli</a>
+    </div>
+  </section>
+
+  <footer>Katherine Liberona Irarrázabal · Montréal</footer>
+</div>
+
+<script>
+const T = {
+  fr: {
+    strip: 'Fiche technique · Rév. 2026-10',
+    role: 'Firmware et full-stack',
+    lede: 'Je conçois des appareils Linux embarqués et les tableaux de bord web qui servent à les piloter&nbsp;: le C et le Python près du matériel, l’API au milieu, l’interface par-dessus.',
+    f1: 'Originaire de Santiago, Chili', f2: 'À Montréal depuis 2022', f3: 'Espagnol · anglais · français',
+    scopeAria: 'Tracé du ciel animé, tiré du projet Orbit Tracker', west: 'O',
+    scopeCap: 'monture ● qui suit la cible ✕',
+    featH: 'Caractéristiques', featL: 'ce que j’apporte',
+    feat1: '<b>Du matériel au navigateur.</b> Démons, API REST et tableaux de bord Vue, pris en charge de bout en bout.',
+    feat2: '<b>Linux embarqué.</b> C, Python, services systemd, paquets Debian, étalonnage de capteurs sur Raspberry Pi.',
+    feat3: '<b>Interfaces en temps réel.</b> Télémétrie en direct, cartes, graphiques et machines à états fiables pour les opérateurs.',
+    feat4: '<b>Pédagogue avant tout.</b> Six ans à enseigner la programmation&nbsp;; j’écris une documentation qu’on peut vraiment suivre.',
+    workH: 'Projets choisis', code: 'Code', tagSM: 'machine à états',
+    otK: 'système de commande · démo',
+    otP: 'Une monture de poursuite à deux axes avec un démon superviseur, une API sans dépendances et un tableau de bord en direct. Une machine à états avec hystérésis mène la monture de l’acquisition à la poursuite et la fait se remettre des perturbations. Le matériel est simulé&nbsp;: tout roule partout avec une seule commande.',
+    hvH: 'Suivi hantavirus', hvK: 'carte de santé publique',
+    hvP: 'Carte en direct d’une éclosion liée à un navire de croisière&nbsp;: cas confirmés et sous surveillance par pays, trajet du navire et fil de nouvelles tiré de l’OMS, du CDC et de l’ECDC. Les filtres et la recherche partagent leur état entre la carte et la liste&nbsp;; interface bilingue.',
+    tcfH: 'Entraîneur TCF Canada', tcfK: 'système d’étude · PC + Android',
+    tcfP: 'Le système qui m’a servi à préparer l’examen de français&nbsp;: un tableau de bord pour la compréhension orale et l’expression écrite avec une banque de 991 questions, et une appli Android qui chronomètre et enregistre les réponses orales. Le téléphone envoie les enregistrements au PC par un point d’accès isolé qui se ferme seul après 20 minutes. Entièrement hors ligne.',
+    miK: 'compagnon de bureau',
+    miP: 'Un petit chat qui se promène sur l’écran et jase en français quand on clique dessus, pour garder l’habitude d’écrire chaque jour. Il compte les jours d’affilée et peut utiliser un LLM local avec Ollama, sinon il revient à des réponses préécrites.',
+    hzK: 'boutique en ligne',
+    hzP: 'Site catalogue pour une boutique de vêtements tactiques et de plein air, avec filtres par catégorie, mise en page pensée pour le mobile et commande directe par WhatsApp ou courriel.',
+    earlyH: 'Projets antérieurs', thP: 'Projet', thW: 'Ce qu’il fait', thS: 'Technologies',
+    e1n: 'Optimiseur d’itinéraire', e1: 'Trouve le trajet le plus court entre plusieurs arrêts en explorant les permutations dans des goroutines en parallèle',
+    e2n: 'API commerce en ligne', e2: 'Produits, inventaire, coupons et paniers&nbsp;; jumelée à <a href="https://github.com/katherinemli/frontecommerce">une vitrine Quasar</a>',
+    e3: 'Site d’un congrès scientifique à l’USACH, contenu géré dans Firebase',
+    e4n: 'Carte Leaflet', e4: 'Points d’intérêt d’une API affichés en marqueurs personnalisés avec infobulles',
+    e5: 'Configuration HTTPS en une commande avec un certificat autosigné',
+    bgH: 'Parcours',
+    bg1: 'J’ai commencé en développement web au Chili, sur des plateformes de logistique, des logiciels d’approvisionnement et du commerce en ligne, et j’ai enseigné la programmation pendant six ans.',
+    bg2: 'Depuis mon arrivée à Montréal, je travaille plus près du matériel&nbsp;: firmware, démons, gestion réseau et étalonnage de capteurs, tout en gardant la main sur les tableaux de bord.',
+    dLang: 'Langages', dSys: 'Systèmes', dSysV: 'Linux embarqué, Raspberry Pi, systemd, paquets Debian, SNMP, Nginx',
+    ctH: 'Me joindre', copy: 'Copier le courriel', copied: 'Copié', selected: 'Sélectionné',
+  },
+  en: {
+    strip: 'Developer datasheet · Rev. 2026-10',
+    role: 'Firmware &amp; full-stack',
+    lede: 'I build embedded Linux devices and the web dashboards people use to run them: the C and Python close to the hardware, the API in the middle, and the interface on top.',
+    f1: 'From Santiago, Chile', f2: 'In Montréal since 2022', f3: 'Spanish · English · French',
+    scopeAria: 'Animated sky plot from the Orbit Tracker project', west: 'W',
+    scopeCap: 'mount ● following target ✕',
+    featH: 'Features', featL: 'what I bring',
+    feat1: '<b>Hardware to browser.</b> Device daemons, REST APIs and Vue dashboards, owned end to end.',
+    feat2: '<b>Embedded Linux.</b> C, Python, systemd services, Debian packaging, sensor calibration on Raspberry Pi.',
+    feat3: '<b>Real-time interfaces.</b> Live telemetry, maps, charts and state machines that operators can trust.',
+    feat4: '<b>Teacher first.</b> Six years teaching programming; I write docs and READMEs people can follow.',
+    workH: 'Selected work', code: 'Code', tagSM: 'state machine',
+    otK: 'control system · demo',
+    otP: 'A two-axis tracking mount with a supervisor daemon, a stdlib-only API and a live dashboard. A state machine with lock hysteresis takes the mount from acquisition to tracking and recovers from disturbances. The hardware is simulated, so it runs anywhere with one command.',
+    hvH: 'Hantavirus Tracker', hvK: 'public health map',
+    hvP: 'Live map of an outbreak linked to a cruise ship: confirmed and monitored cases by country, the ship’s route, and a news feed from WHO, CDC and ECDC sources. Filters and search share state between the map and the case list; bilingual interface.',
+    tcfH: 'TCF Canada Trainer', tcfK: 'study system · PC + Android',
+    tcfP: 'The setup I used to prepare for the French exam: a desktop dashboard for listening and writing practice with a 991-question bank, and an Android app that times and records oral answers. The phone sends recordings to the PC over an isolated hotspot that closes itself after 20 minutes. Fully offline.',
+    miK: 'desktop companion',
+    miP: 'A small cat that walks across the screen and chats in French when you click it, to keep a daily writing habit. Tracks writing streaks and can use a local LLM through Ollama, falling back to scripted replies when it isn’t installed.',
+    hzK: 'e-commerce storefront',
+    hzP: 'Catalog site for a tactical and outdoor clothing shop, with category filters, a mobile-first layout and direct ordering through WhatsApp and email.',
+    earlyH: 'Earlier work', thP: 'Project', thW: 'What it does', thS: 'Stack',
+    e1n: 'Route Optimizer', e1: 'Finds the shortest route through a set of stops, exploring permutations in parallel goroutines',
+    e2n: 'E-commerce API', e2: 'Products, inventory, coupons and carts; paired with <a href="https://github.com/katherinemli/frontecommerce">a Quasar storefront</a>',
+    e3: 'Website for a scientific conference at USACH, content managed in Firebase',
+    e4n: 'Leaflet Map', e4: 'Points of interest from an API as custom markers with tooltips and popups',
+    e5: 'One-command HTTPS setup with a self-signed certificate',
+    bgH: 'Background',
+    bg1: 'I started in web development in Chile, working on logistics platforms, procurement software and e-commerce, and spent six years teaching programming.',
+    bg2: 'Since moving to Montréal I have worked closer to the hardware: firmware, device daemons, network management and sensor calibration, while keeping ownership of the dashboards on top.',
+    dLang: 'Languages', dSys: 'Systems', dSysV: 'Embedded Linux, Raspberry Pi, systemd, Debian packages, SNMP, Nginx',
+    ctH: 'Contact', copy: 'Copy email', copied: 'Copied', selected: 'Selected',
+  },
+};
+
+let lang = 'fr';
+
+function apply(next) {
+  lang = T[next] ? next : 'fr';
+  const d = T[lang];
+  document.documentElement.lang = lang === 'fr' ? 'fr-CA' : 'en-CA';
+  document.querySelectorAll('[data-t]').forEach(el => { el.innerHTML = d[el.dataset.t]; });
+  document.querySelectorAll('[data-t-aria]').forEach(el => el.setAttribute('aria-label', d[el.dataset.tAria]));
+  document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  try { localStorage.setItem('lang', lang); } catch {}
+}
+
+let start = 'fr';
+if (location.hash === '#en' || location.hash === '#fr') start = location.hash.slice(1);
+else { try { start = localStorage.getItem('lang') || 'fr'; } catch {} }
+apply(start);
+
+document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => apply(b.dataset.lang)));
+
+document.getElementById('copy').addEventListener('click', async (e) => {
+  const btn = e.currentTarget, text = document.getElementById('email').textContent;
+  try { await navigator.clipboard.writeText(text); btn.textContent = T[lang].copied; }
+  catch {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = T[lang].selected;
+  }
+  setTimeout(() => { btn.textContent = T[lang].copy; }, 1800);
+});
+</script>
+</body>
+</html>
