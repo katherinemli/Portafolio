@@ -10,7 +10,7 @@
 
 Portfolio personnel de Katherine Liberona Irarrázabal, développeuse firmware et full-stack à Montréal. En français par défaut, en anglais avec le bouton FR/EN (ou `#en`).
 
-Un seul fichier statique `index.html` : aucune étape de compilation, aucune dépendance.
+Un seul fichier statique `index.html` : aucune étape de compilation; seule dépendance, GSAP chargé depuis cdnjs.
 
 **Publication :** GitHub Pages, à partir de la branche `main`, dossier `/ (root)`.
 
@@ -26,7 +26,7 @@ La version précédente en Quasar (2021) se trouve dans l'historique git.
 
 Personal portfolio of Katherine Liberona Irarrázabal, firmware and full-stack developer in Montréal. French by default, English with the FR/EN toggle (or `#en`).
 
-A single static `index.html`: no build step, no dependencies.
+A single static `index.html`: no build step; the only dependency is GSAP, loaded from cdnjs.
 
 **Published with:** GitHub Pages, from branch `main`, folder `/ (root)`.
 
