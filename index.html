@@ -368,6 +368,16 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
 .caption { min-height: 3.6em; font: italic 500 14px/1.35 var(--display); text-align: center; color: var(--ink); max-width: 250px; }
 @media (max-width: 720px) { .avatar-wrap { justify-self: center; } }
 
+/* Short and scannable. */
+.kpi { display: flex; align-items: baseline; gap: 10px; margin: 2px 0 10px; }
+.kpi b { font: 600 40px/1 var(--display); color: var(--accent); letter-spacing: -.02em; }
+.kpi span { font-size: 13.5px; color: var(--muted); max-width: 16ch; line-height: 1.3; }
+.more { margin: 22px 0 0; text-align: center; color: var(--muted); font-size: 15px; }
+.more a { font-weight: 600; }
+.skills { gap: 8px; }
+.skills li { font-size: 13px; padding: 7px 13px; }
+.proof { padding: 10px 14px; }
+
 /* Ring cursor (Deepa). Decoration only: the system cursor stays. */
 .ring-cursor {
   position: fixed; left: 0; top: 0; z-index: 40; width: 30px; height: 30px; margin: -15px 0 0 -15px;
@@ -449,9 +459,9 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
         <span class="now-pill" data-t="xNow"></span>
         <h3>Comtech Telecommunications</h3>
         <div class="job-meta"><b data-t="xFS"></b> · <span data-t="x1d"></span> · Montréal, QC</div>
-        <ul class="job-list"><li data-t="x1a"></li><li data-t="x1b"></li><li data-t="x1c"></li><li data-t="x1e"></li></ul>
+        <ul class="job-list"><li data-t="x1a"></li><li data-t="x1b"></li><li data-t="x1c"></li></ul>
         <ul class="tags"><li data-t="tSat"></li><li data-t="tNet"></li><li>Vue.js</li><li>Linux</li><li>Docker</li><li>Jenkins</li><li>Git</li></ul>
-        <a class="proof" href="https://github.com/katherinemli/orbit-tracker"><span class="label" data-t="proofL"></span><b>Orbit Tracker <span aria-hidden="true">→</span></b><span data-t="pr1"></span></a>
+        <a class="proof" href="https://github.com/katherinemli/orbit-tracker"><span class="label" data-t="proofL"></span><b>Orbit Tracker <span aria-hidden="true">→</span></b></a>
       </div>
       <svg class="ill big ill-sat" viewBox="0 0 320 160" aria-hidden="true">
         <path id="x-link" class="faint" d="M40 126 L160 34 L280 126" stroke-dasharray="3 4"/>
@@ -479,9 +489,9 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
             <g class="svc" transform="translate(106 58)"><rect class="soft" x="-15" y="-10" width="30" height="20" rx="5"/><rect class="ln" x="-15" y="-10" width="30" height="20" rx="5"/><text class="acc" x="0" y="3.5" text-anchor="middle">Go</text></g>
             <g class="svc" transform="translate(142 58)"><rect class="soft" x="-15" y="-10" width="30" height="20" rx="5"/><rect class="ln" x="-15" y="-10" width="30" height="20" rx="5"/><text class="acc" x="0" y="3.5" text-anchor="middle">React</text></g>
           </svg>
-        <ul class="job-list"><li data-t="x2a"></li><li data-t="x2b"></li><li data-t="x2c"></li><li data-t="x2e"></li></ul>
+        <ul class="job-list"><li data-t="x2a"></li><li data-t="x2b"></li></ul>
         <ul class="tags"><li>Go</li><li>React</li><li>PHP</li><li>Angular</li></ul>
-        <a class="proof" href="https://github.com/katherinemli/backendecommerce"><span class="label" data-t="proofL"></span><b>E-commerce API <span aria-hidden="true">→</span></b><span data-t="pr2"></span></a>
+        <a class="proof" href="https://github.com/katherinemli/backendecommerce"><span class="label" data-t="proofL"></span><b>E-commerce API <span aria-hidden="true">→</span></b></a>
       </article>
       <article class="job" id="job-falabella">
         <span class="label" data-t="x3d"></span>
@@ -494,9 +504,10 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
             <g transform="translate(148 38)"><path class="soft" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><path class="ln" d="M-7 0 v-8 l7 -6 l7 6 v8z"/><text class="acc chk" x="-4" y="-17">✓</text></g>
             <g class="truck" transform="translate(96 44)"><text class="emoji" x="0" y="6" text-anchor="middle" style="font-size:18px">🚚</text></g>
           </svg>
-        <ul class="job-list"><li data-t="x3a"></li><li data-t="x3b"></li><li data-t="x3c"></li><li data-t="x3e"></li><li data-t="x3f"></li></ul>
+        <div class="kpi"><b>−80&nbsp;%</b><span data-t="x3kpi"></span></div>
+        <ul class="job-list"><li data-t="x3a"></li></ul>
         <ul class="tags"><li>Go</li><li>React</li></ul>
-        <a class="proof" href="https://github.com/katherinemli/backend"><span class="label" data-t="proofL"></span><b>Route Optimizer <span aria-hidden="true">→</span></b><span data-t="pr3"></span></a>
+        <a class="proof" href="https://github.com/katherinemli/backend"><span class="label" data-t="proofL"></span><b>Route Optimizer <span aria-hidden="true">→</span></b></a>
       </article>
       <article class="job" id="job-citiaps">
         <span class="label" data-t="x4d"></span>
@@ -509,11 +520,12 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
             <g class="vol"><circle class="sig" cx="24" cy="20" r="3"/><circle class="sig" cx="136" cy="18" r="3"/><circle class="sig" cx="30" cy="64" r="3"/><circle class="sig" cx="128" cy="62" r="3"/><circle class="sig" cx="62" cy="14" r="3"/></g>
             <g class="notif" transform="translate(124 30)"><rect class="acc" x="-20" y="-9" width="40" height="18" rx="9"/><text x="0" y="3.5" text-anchor="middle" fill="#fff">🔔 SOS</text></g>
           </svg>
-        <ul class="job-list"><li data-t="x4a"></li><li data-t="x4b"></li><li data-t="x4c"></li><li data-t="x4e"></li></ul>
+        <ul class="job-list"><li data-t="x4a"></li><li data-t="x4b"></li></ul>
         <ul class="tags"><li>Vue.js</li><li>D3.js</li><li>Java</li><li>Google Maps</li></ul>
-        <a class="proof" href="https://github.com/katherinemli/hantavirustracker"><span class="label" data-t="proofL"></span><b>Hantavirus Tracker <span aria-hidden="true">→</span></b><span data-t="pr4"></span></a>
+        <a class="proof" href="https://github.com/katherinemli/hantavirustracker"><span class="label" data-t="proofL"></span><b>Hantavirus Tracker <span aria-hidden="true">→</span></b></a>
       </article>
     </div>
+    <p class="more"><span data-t="moreL"></span> <a class="cvlink" href="cv-fr.pdf" download data-t="moreCV"></a> · <a href="https://www.linkedin.com/in/katherine-liberona-irarrazabal-76a843150/" target="_blank" rel="noopener">LinkedIn</a></p>
   </section>
 
 
@@ -521,25 +533,10 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
 
 
   <section id="about">
-    <div class="sec-head"><h2 data-t="bgH"></h2></div>
-    <div class="two">
-      <div><p data-t="bg1"></p><p data-t="bg2"></p></div>
-      <dl class="spec">
-        <dt>Backend</dt><dd>Go, Python, C, PHP, Django</dd>
-        <dt>Frontend</dt><dd>React, Vue.js, Angular, D3.js</dd>
-        <dt data-t="dSys"></dt><dd data-t="dSysV"></dd>
-        <dt data-t="dData"></dt><dd data-t="dDataV"></dd>
-        <dt>DevOps</dt><dd>Docker, AWS, Nginx, Git, Jenkins</dd>
-      </dl>
-    </div>
+    <div class="sec-head"><h2 data-t="skH"></h2></div>
+    <ul class="tags skills"><li>Go</li><li>Python</li><li>C</li><li>PHP</li><li>Django</li><li>React</li><li>Vue.js</li><li>Angular</li><li>D3.js</li><li>Linux</li><li data-t="skEmb"></li><li data-t="skNet"></li><li>MySQL</li><li>MongoDB</li><li>Docker</li><li>AWS</li><li>Nginx</li><li>Jenkins</li><li>Git</li></ul>
   </section>
 
-  <section id="features">
-    <div class="sec-head"><h2 data-t="featH"></h2><span class="label" data-t="featL"></span></div>
-    <ul class="features">
-      <li data-t="feat1"></li><li data-t="feat2"></li><li data-t="feat3"></li><li data-t="feat4"></li>
-    </ul>
-  </section>
 
   <div class="marquee" aria-hidden="true">
     <div class="track"><span>C <i>✿</i></span><span>Python <i>✿</i></span><span>Vue <i>✿</i></span><span>Go <i>✿</i></span><span>Linux embarqué <i>✿</i></span><span>systemd <i>✿</i></span><span>Leaflet <i>✿</i></span><span>Raspberry Pi <i>✿</i></span><span>Django <i>✿</i></span></div>
@@ -548,17 +545,17 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
   <section id="projects">
     <div class="sec-head"><h2 data-t="plH"></h2><span class="label" data-t="plL"></span></div>
     <ul class="plist">
-        <li><a href="https://github.com/katherinemli/orbit-tracker">Orbit Tracker</a><span class="pd" data-t="pl1"></span><span class="st">Python · Vue 3</span></li>
-        <li><a href="https://github.com/katherinemli/hantavirustracker" data-t="pl2n"></a><span class="pd" data-t="pl2"></span><span class="st">Vue 3 · Leaflet · Python</span></li>
-        <li><a href="https://github.com/katherinemli/backend" data-t="pl3n"></a><span class="pd" data-t="pl3"></span><span class="st">Go · MySQL</span></li>
-        <li><a href="https://github.com/katherinemli/backendecommerce" data-t="pl4n"></a><span class="pd" data-t="pl4"></span><span class="st">Django REST · PostgreSQL · Quasar</span></li>
-        <li><a href="https://github.com/katherinemli/carwatch">CarWatch</a><span class="pd" data-t="pl5"></span><span class="st">Python · Flask · Vue</span></li>
-        <li><a href="https://github.com/katherinemli/tcf-canada" data-t="pl6n"></a><span class="pd" data-t="pl6"></span><span class="st">Android · Python · Vue</span></li>
-        <li><a href="https://github.com/katherinemli/mapLeafletExample" data-t="pl7n"></a><span class="pd" data-t="pl7"></span><span class="st">Vue 2 · Leaflet</span></li>
-        <li><a href="https://github.com/katherinemli/Evic2018Usach">EVIC 2018</a><span class="pd" data-t="pl8"></span><span class="st">Vue 2 · Firebase</span></li>
-        <li><a href="https://github.com/hazeloutdoorclothing-max/tactical-store">Hazel Outdoor</a><span class="pd" data-t="pl9"></span><span class="st">React · Vite</span></li>
-        <li><a href="https://github.com/katherinemli/nginx-httpsScript">Nginx HTTPS</a><span class="pd" data-t="pl10"></span><span class="st">Shell · Nginx</span></li>
-        <li><a href="https://github.com/katherinemli/French-cat-writing-motivator-">Minou</a><span class="pd" data-t="pl11"></span><span class="st">Python · PyQt5</span></li>
+        <li><a href="https://github.com/katherinemli/orbit-tracker">Orbit Tracker</a><span class="st">Python · Vue 3</span></li>
+        <li><a href="https://github.com/katherinemli/hantavirustracker" data-t="pl2n"></a><span class="st">Vue 3 · Leaflet · Python</span></li>
+        <li><a href="https://github.com/katherinemli/backend" data-t="pl3n"></a><span class="st">Go · MySQL</span></li>
+        <li><a href="https://github.com/katherinemli/backendecommerce" data-t="pl4n"></a><span class="st">Django REST · PostgreSQL · Quasar</span></li>
+        <li><a href="https://github.com/katherinemli/carwatch">CarWatch</a><span class="st">Python · Flask · Vue</span></li>
+        <li><a href="https://github.com/katherinemli/tcf-canada" data-t="pl6n"></a><span class="st">Android · Python · Vue</span></li>
+        <li><a href="https://github.com/katherinemli/mapLeafletExample" data-t="pl7n"></a><span class="st">Vue 2 · Leaflet</span></li>
+        <li><a href="https://github.com/katherinemli/Evic2018Usach">EVIC 2018</a><span class="st">Vue 2 · Firebase</span></li>
+        <li><a href="https://github.com/hazeloutdoorclothing-max/tactical-store">Hazel Outdoor</a><span class="st">React · Vite</span></li>
+        <li><a href="https://github.com/katherinemli/nginx-httpsScript">Nginx HTTPS</a><span class="st">Shell · Nginx</span></li>
+        <li><a href="https://github.com/katherinemli/French-cat-writing-motivator-">Minou</a><span class="st">Python · PyQt5</span></li>
     </ul>
   </section>
 
@@ -699,7 +696,7 @@ const T = {
   fr: {
     strip: 'Fiche technique · Rév. 2026-10',
     role: 'Développeuse full stack',
-    lede: '7&nbsp;ans d’expérience en logiciels, applications web et systèmes distribués. Actuellement chez <b>Comtech</b>&nbsp;: communications satellitaires et gestion de réseaux.',
+    lede: '7&nbsp;ans en logiciel et web. Aujourd’hui chez <b>Comtech</b>&nbsp;: réseaux satellitaires.',
     proofL: 'Ce que j’en ai appris, en code',
     pr1: 'Démon superviseur, API et tableau de bord en temps réel pour une monture qui suit un satellite.',
     pr2: 'API REST de catalogue&nbsp;: produits, inventaire, coupons et paniers, avec sa vitrine séparée.',
@@ -720,26 +717,27 @@ const T = {
     lkMail: 'Courriel', linksAria: 'Liens de contact',
     st1: 'ans d’expérience', st2: 'entreprises', st3: 'langues', st4: 'projets sur GitHub',
     catCredit: 'Photo du chat :',
+    x3kpi: 'sur la taille de l’équipe de livraison', moreL: 'Tous les détails&nbsp;:', moreCV: 'CV complet', skH: 'Compétences', skEmb: 'systèmes embarqués', skNet: 'protocoles réseau',
     xpH: 'Expérience', xNow: 'Actuellement', xFS: 'Développeuse full stack',
     x1d: 'juin 2022 – aujourd’hui', tSat: 'communications satellitaires', tNet: 'gestion de réseaux',
-    x1a: 'Développé des solutions logicielles pour des systèmes de communications satellitaires et de gestion de réseaux, intégrant des systèmes embarqués, des protocoles réseau et des interfaces web modernes.',
-    x1b: 'Développé des outils de gestion et de surveillance réseau avec Vue.js, permettant l’interaction avec les équipements et la visualisation des données en temps réel.',
-    x1c: 'Développé des interfaces de visualisation de données et des cartes vectorielles optimisées pour les environnements à faible bande passante.',
+    x1a: 'Supervision de réseaux satellitaires en temps réel (Vue.js)',
+    x1b: 'Cartes vectorielles pour faible bande passante',
+    x1c: 'Tests et déploiement automatisés (Jenkins, Docker)',
     x1e: 'Automatisé les tests et le déploiement logiciel dans des environnements Linux avec Git, Jenkins et Docker.',
     x2d: 'sept. 2020 – févr. 2022', x2k: 'développeuse full stack · Chili',
-    x2a: 'Mené la migration complète d’une plateforme PHP/Angular vers une architecture de microservices avec Go et React.',
-    x2b: 'Conçu et développé des services backend et des interfaces web pour traiter et visualiser des données à grande échelle.',
+    x2a: 'Migration PHP/Angular → microservices Go + React',
+    x2b: 'Algorithme de classement pour les recommandations',
     x2c: 'Mis en place un algorithme de classement utilisant les profils utilisateurs et les données du marché afin d’améliorer les recommandations.',
     x2e: 'Développé des solutions évolutives en collaboration avec différentes équipes techniques et produit.',
     x3d: 'févr. 2018 – juin 2018', x3k: 'développeuse full stack · Chili',
-    x3a: 'Conçu et développé de bout en bout un système de logistique du dernier kilomètre pour un grand détaillant, avec Go et React.',
+    x3a: 'Logistique du dernier kilomètre et géocodage automatisé',
     x3b: 'Automatisé des processus logistiques clés, réduisant les coûts opérationnels et optimisant de plus de 80&nbsp;% la taille de l’équipe de livraison.',
     x3c: 'Conçu et déployé un système de géocodage automatisé traitant des milliers d’adresses par jour.',
     x3e: 'Optimisé les itinéraires de livraison en collaboration avec différentes équipes afin de mieux répondre aux besoins opérationnels.',
     x3f: 'Développé un système prédictif permettant d’estimer avec précision les plages horaires de livraison.',
     x4d: 'mars 2017 – janv. 2018', x4k: 'développeuse front-end · Santiago, Chili',
-    x4a: 'Développé une plateforme d’intervention d’urgence soutenue par le gouvernement avec Vue.js, permettant le suivi des bénévoles en temps réel et l’envoi de notifications mobiles.',
-    x4b: 'Développé un système d’analyse des émotions basé sur Java et l’IA pour traiter les données provenant de plusieurs caméras.',
+    x4a: 'Plateforme d’urgence gouvernementale (Vue.js)',
+    x4b: 'Suivi des bénévoles en temps réel, cartes D3',
     x4c: 'Créé des visualisations de données interactives avec Vue.js et D3.js pour l’analyse de données géolocalisées.',
     x4e: 'Développé un système interactif de suivi d’itinéraires pour une visite papale avec Vue.js et l’API Google Maps.',
     f1: 'Montréal, QC', f2: 'Originaire de Santiago, Chili', f3: 'Espagnol · anglais · français',
@@ -777,7 +775,7 @@ const T = {
   en: {
     strip: 'Developer datasheet · Rev. 2026-10',
     role: 'Full stack developer',
-    lede: '7 years of experience in software, web applications and distributed systems. Currently at <b>Comtech</b>: satellite communications and network management.',
+    lede: '7 years in software and web. Now at <b>Comtech</b>: satellite networks.',
     proofL: 'What I learned there, in code',
     pr1: 'Supervisor daemon, API and real-time dashboard for a mount that tracks a satellite.',
     pr2: 'Catalog REST API: products, inventory, coupons and carts, with its own storefront.',
@@ -798,26 +796,27 @@ const T = {
     lkMail: 'Email', linksAria: 'Contact links',
     st1: 'years of experience', st2: 'companies', st3: 'languages', st4: 'projects on GitHub',
     catCredit: 'Cat photo:',
+    x3kpi: 'delivery team size', moreL: 'All the details:', moreCV: 'full resume', skH: 'Skills', skEmb: 'embedded systems', skNet: 'network protocols',
     xpH: 'Experience', xNow: 'Currently', xFS: 'Full stack developer',
     x1d: 'Jun 2022 – present', tSat: 'satellite communications', tNet: 'network management',
-    x1a: 'Built software for satellite communication and network management systems, integrating embedded systems, network protocols and modern web interfaces.',
-    x1b: 'Built network management and monitoring tools in Vue.js to interact with equipment and visualize data in real time.',
-    x1c: 'Built data visualization interfaces and vector maps optimized for low-bandwidth environments.',
+    x1a: 'Real-time satellite network monitoring (Vue.js)',
+    x1b: 'Vector maps for low-bandwidth links',
+    x1c: 'Automated testing and deployment (Jenkins, Docker)',
     x1e: 'Automated software testing and deployment on Linux with Git, Jenkins and Docker.',
     x2d: 'Sep 2020 – Feb 2022', x2k: 'full stack developer · Chile',
-    x2a: 'Led the full migration of a PHP/Angular platform to a microservices architecture with Go and React.',
-    x2b: 'Designed and built backend services and web interfaces to process and visualize data at scale.',
+    x2a: 'PHP/Angular → Go + React microservices migration',
+    x2b: 'Ranking algorithm for recommendations',
     x2c: 'Implemented a ranking algorithm using user profiles and market data to improve recommendations.',
     x2e: 'Built scalable solutions together with engineering and product teams.',
     x3d: 'Feb 2018 – Jun 2018', x3k: 'full stack developer · Chile',
-    x3a: 'Designed and built, end to end, a last-mile logistics system for a major retailer, with Go and React.',
+    x3a: 'Last-mile logistics and automated geocoding',
     x3b: 'Automated key logistics processes, cutting operating costs and optimizing delivery team size by more than 80%.',
     x3c: 'Designed and deployed an automated geocoding system processing thousands of addresses a day.',
     x3e: 'Optimized delivery routes together with several teams to better meet operational needs.',
     x3f: 'Built a predictive system that accurately estimates delivery time windows.',
     x4d: 'Mar 2017 – Jan 2018', x4k: 'front-end developer · Santiago, Chile',
-    x4a: 'Built a government-backed emergency response platform in Vue.js, with real-time volunteer tracking and mobile notifications.',
-    x4b: 'Built a Java and AI-based emotion analysis system processing data from multiple cameras.',
+    x4a: 'Government emergency response platform (Vue.js)',
+    x4b: 'Real-time volunteer tracking, D3 maps',
     x4c: 'Created interactive data visualizations with Vue.js and D3.js for geolocated data analysis.',
     x4e: 'Built an interactive route-tracking system for a papal visit with Vue.js and the Google Maps API.',
     f1: 'Montréal, QC', f2: 'From Santiago, Chile', f3: 'Spanish · English · French',
@@ -936,7 +935,7 @@ if (window.gsap) {
         const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 82%', once: true }, defaults: { ease: 'power3.out' } });
         tl.from(sec.querySelector('h2'), { autoAlpha: 0, y: 26, duration: .7 })
           .from(sec.querySelectorAll('.sec-head .label'), { autoAlpha: 0, x: -10, duration: .5 }, '-=.4');
-        const items = sec.querySelectorAll('.job-now, .jobs-past .job, .features li, .plist li, .two > *, .contact > *');
+        const items = sec.querySelectorAll('.job-now, .jobs-past .job, .more, .plist li, .contact > *');
         if (items.length) tl.from(items, { autoAlpha: 0, y: 30, duration: .7, stagger: .09 }, '-=.35');
         const tags = sec.querySelectorAll('.tags li');
         if (tags.length) tl.from(tags, { scale: 0, autoAlpha: 0, duration: .45, stagger: .03, ease: 'back.out(2.2)' }, '-=.5');
@@ -1152,5 +1151,6 @@ if (window.gsap) {
   });
 }
 </script>
+<script src="fx.js"></script>
 </body>
 </html>
