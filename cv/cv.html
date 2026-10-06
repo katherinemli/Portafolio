@@ -35,6 +35,7 @@ h2::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
 ul { margin: 2px 0 0; padding-left: 14px; }
 li { margin: 1px 0; }
 li::marker { color: var(--accent); }
+li b { font-weight: 600; }
 .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 22px; }
 .projects div { break-inside: avoid; }
 .projects b { font-weight: 600; }
@@ -71,16 +72,18 @@ html[lang="fr-CA"] [data-l="fr"], html[lang="en-CA"] [data-l="en"] { display: re
   <div class="job now">
     <div class="job-head"><h3>Comtech Telecommunications <span>· <span data-l="fr">Développeuse full stack · Montréal, QC</span><span data-l="en">Full stack developer · Montréal, QC</span></span></h3><span class="dates"><span data-l="fr">juin 2022 – aujourd’hui</span><span data-l="en">Jun 2022 – present</span></span></div>
     <ul data-l="fr">
-      <li>Développé des solutions logicielles pour des systèmes de communications satellitaires et de gestion de réseaux, intégrant des systèmes embarqués, des protocoles réseau et des interfaces web modernes.</li>
-      <li>Développé des outils de gestion et de surveillance réseau avec Vue.js, permettant l’interaction avec les équipements et la visualisation des données en temps réel.</li>
-      <li>Développé des interfaces de visualisation de données et des cartes vectorielles optimisées pour les environnements à faible bande passante.</li>
-      <li>Automatisé les tests et le déploiement logiciel dans des environnements Linux avec Git, Jenkins et Docker.</li>
+      <li><b>Firmware C bare-metal</b> de modems satellites (ARM, 3&nbsp;Mo de RAM, sans OS)&nbsp;: SSH (curve25519, ed25519, entropie matérielle) en remplacement de Telnet.</li>
+      <li><b>NMS de réseaux satellitaires</b>&nbsp;: interface Vue.js (ag-Grid, Leaflet, ApexCharts) et services en C&nbsp;; intégration SNMP des équipements&nbsp;; cartes vectorielles hors ligne pour liaisons à faible débit.</li>
+      <li><b>Sécurité</b>&nbsp;: infrastructure mTLS (autorité de certification, serveur et clients), HTTPS et proxy inverse Nginx.</li>
+      <li><b>Contrôleur d’antenne (ACU)</b> en C sur Raspberry Pi&nbsp;5&nbsp;: pointage d’antennes à balayage électronique (GPS, IMU, verrouillage du modem) via le protocole AMIP&nbsp;; étalonnage des capteurs.</li>
+      <li><b>Livraison</b>&nbsp;: paquets Debian, Docker, Jenkins et tests de bout en bout automatisés (Playwright) qui rejouent les gestes réels des clients.</li>
     </ul>
     <ul data-l="en">
-      <li>Built software for satellite communication and network management systems, integrating embedded systems, network protocols and modern web interfaces.</li>
-      <li>Built network management and monitoring tools in Vue.js to interact with equipment and visualize data in real time.</li>
-      <li>Built data visualization interfaces and vector maps optimized for low-bandwidth environments.</li>
-      <li>Automated software testing and deployment on Linux with Git, Jenkins and Docker.</li>
+      <li><b>Bare-metal C firmware</b> for satellite modems (ARM, 3 MB RAM, no OS): SSH (curve25519, ed25519, hardware entropy) replacing Telnet.</li>
+      <li><b>Satellite network NMS</b>: Vue.js interface (ag-Grid, Leaflet, ApexCharts) and C services; SNMP integration of network equipment; offline vector maps for low-bandwidth links.</li>
+      <li><b>Security</b>: mTLS infrastructure (certificate authority, server and clients), HTTPS and Nginx reverse proxy.</li>
+      <li><b>Antenna control unit (ACU)</b> in C on Raspberry Pi 5: points electronically steered antennas (GPS, IMU, modem lock) over the AMIP protocol; sensor calibration.</li>
+      <li><b>Delivery</b>: Debian packages, Docker, Jenkins and automated end-to-end tests (Playwright) that replay real customer actions.</li>
     </ul>
   </div>
 

@@ -327,6 +327,7 @@ footer { position: relative; padding-top: 48px !important; }
       typed = (typed + (e.key || '').toLowerCase()).slice(-6);
       if (typed !== 'fiesta') return;
       typed = '';
+      window.count?.('fiesta');
       document.documentElement.classList.add('fx-disco'); rain(80);
       toast('🪩 FIESTA 🪩', 2400);
       setTimeout(() => document.documentElement.classList.remove('fx-disco'), 4000);
