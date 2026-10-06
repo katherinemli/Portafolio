@@ -193,7 +193,7 @@ footer { position: relative; padding-top: 48px !important; }
 .fx-star::after { content: '✦'; position: absolute; right: -8px; top: -9px; font-size: 16px; color: var(--accent); }
 .fx-ufo { position: fixed; z-index: 66; pointer-events: none; font-size: 44px; line-height: 1; top: 18%; left: 0; }
 .fx-zzz { position: fixed; z-index: 66; pointer-events: none; font: italic 600 28px var(--display); color: var(--accent); }
-.fx-toast { position: fixed; z-index: 80; left: 50%; bottom: 28px; translate: -50% 0; pointer-events: none;
+.fx-toast { position: fixed; z-index: 80; left: 50%; bottom: 92px; translate: -50% 0; pointer-events: none;
   background: var(--ink); color: var(--paper); font: 600 15px var(--body); padding: 12px 20px; border-radius: 999px; white-space: nowrap; }
 .fx-disco .sheet { animation: fx-hue 1.2s linear infinite; }
 @keyframes fx-hue { to { filter: hue-rotate(360deg); } }

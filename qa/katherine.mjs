@@ -211,6 +211,30 @@ for (const [label, viewport] of [['ordi', { width: 1440, height: 900 }], ['tél�
   await page.close();
 }
 
+// K15 — au milieu de la page, le contact reste à portée : en-tête et barre du bas visibles,
+// avec LinkedIn, le CV de la bonne langue et le bouton qui copie le courriel.
+for (const [label, viewport] of [['ordi', { width: 1440, height: 900 }], ['téléphone', { width: 390, height: 844 }]]) {
+  const page = await open({ viewport });
+  await page.goto(TARGET); await page.waitForTimeout(2000);
+  await page.evaluate(() => scrollTo(0, document.documentElement.scrollHeight / 2)); await page.waitForTimeout(800);
+  const st = await page.evaluate(() => {
+    const inView = el => { if (!el) return false; const r = el.getBoundingClientRect(), c = getComputedStyle(el); return r.top >= 0 && r.bottom <= innerHeight && r.width > 0 && c.visibility === 'visible' && +c.opacity > .95; };
+    return {
+      header: inView(document.querySelector('.strip')),
+      headerLinkedIn: inView(document.querySelector('.strip a[href*="linkedin.com/in/"]')),
+      dockLinkedIn: inView(document.querySelector('.dock a[href*="linkedin.com/in/"]')),
+      dockCV: document.querySelector('.dock .cvlink')?.getAttribute('href') === 'cv-fr.pdf' && inView(document.querySelector('.dock .cvlink')),
+      dockCopy: inView(document.querySelector('.dock .copybtn')),
+    };
+  });
+  await page.click('.dock .copybtn'); await page.waitForTimeout(200);
+  const copied = await page.$eval('.dock .copybtn', b => b.textContent);
+  const missing = Object.entries(st).filter(([, v]) => !v).map(([k]) => k);
+  if (!missing.length && /Copi|Sélect|Selected/.test(copied)) verdict('K15', 'PASS', `${label} : en-tête + barre de contact visibles au milieu de la page, copie OK (« ${copied} »)`);
+  else verdict('K15', 'DEFECT', `${label} : manque ${missing.join(', ') || '—'} ; bouton copie = « ${copied} »`);
+  await page.close();
+}
+
 // K5 — sur téléphone : aucun défilement horizontal.
 {
   const page = await open({ viewport: { width: 390, height: 844 } });
