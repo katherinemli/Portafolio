@@ -194,7 +194,7 @@ for (const [label, viewport] of [['ordi', { width: 1440, height: 900 }], ['tél�
   await page.click('.avatar'); await page.waitForTimeout(3500);
   const playing = await page.evaluate(() => {
     const a = document.querySelector('#avatar audio');
-    const ry = +document.querySelector('.avatar .mouth').getAttribute('ry');
+    const ry = document.querySelector('.avatar .mouth-o') ? 'ouverte' : 'fermée';
     return { t: a.currentTime, paused: a.paused, caption: document.querySelector('.caption').textContent.trim(), ry };
   });
   await page.click('.avatar'); await page.waitForTimeout(400);

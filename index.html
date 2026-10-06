@@ -332,11 +332,33 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
 /* Voice avatar (Vue component): a rose orb whose mouth follows my real voice. */
 .avatar-wrap { justify-self: end; width: 100%; max-width: 250px; }
 .avatar-box { display: grid; justify-items: center; gap: 10px; }
-.avatar, .avatar:hover { position: relative; width: 190px; height: 190px; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 50%; box-shadow: none; }
+.avatar, .avatar:hover { position: relative; width: 200px; height: 228px; border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 50%; box-shadow: none; }
 .avatar svg { width: 100%; height: 100%; overflow: visible; display: block; }
 .avatar .ring { fill: none; stroke: var(--accent); }
+.avatar svg > g { transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+.avatar .sticker { fill: #fff; stroke: #fff; stroke-width: 34; stroke-linejoin: round; filter: drop-shadow(0 10px 14px rgba(43,27,46,.22)); }
+.avatar .brow { fill: none; stroke: #1b1220; stroke-width: 16; stroke-linecap: round; }
+.avatar .blush { fill: #ff5c93; }
+.avatar .tongue { fill: #ff7aa8; }
+.avatar .shades { fill: #111; }
+.avatar .shades .shine { fill: #fff; }
+.avatar .sparks path { stroke: #c45ad9; stroke-width: 10; stroke-linecap: round; }
+.avatar .merci rect { fill: #ffe14d; stroke: #1b1220; stroke-width: 5; }
+.avatar .merci text { font: italic 700 36px var(--display); fill: #1b1220; }
+.avatar .fur { fill: #f4a3bd; stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; }
+.avatar .ear-in { fill: #e2708f; }
+.avatar .tuft { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.avatar .eye-w { fill: #fff; stroke: var(--ink); stroke-width: 4; }
+.avatar .pupil { fill: var(--ink); }
+.avatar .glint { fill: #fff; }
+.avatar .happy { fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+.avatar .nose { fill: var(--ink); stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+.avatar .w { fill: none; stroke: #1b1220; stroke-width: 9; stroke-linecap: round; }
+.avatar .mouth-o { fill: #2a0f1c; stroke: #1b1220; stroke-width: 7; }
+.avatar .whisk { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.avatar .play { fill: var(--accent); stroke: #fff; stroke-width: 8; }
 .avatar .face { fill: var(--accent); }
-.avatar .cheek { fill: #f6a5bf; opacity: .75; }
+.avatar .cheek { fill: #e2708f; opacity: .55; }
 .avatar .eye { fill: var(--on-accent); }
 .avatar .mouth { fill: var(--ink); }
 .avatar .hair { fill: var(--ink); }
@@ -551,7 +573,7 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
     </div>
   </section>
 
-  <footer>Katherine Liberona Irarrázabal · Montréal</footer>
+  <footer>Katherine Liberona Irarrázabal · Montréal · <span data-t="catCredit"></span> <a href="https://commons.wikimedia.org/wiki/File:Wide-eyed_tiger_cat_(Unsplash).jpg">Caleb Woods / Unsplash (CC0)</a></footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.13/vue.global.prod.min.js"></script>
@@ -561,14 +583,16 @@ dl.spec dt:hover + dd, dl.spec dd:hover { color: var(--accent); }
 const CAPTIONS = [[1.52, 10.52, "Bonjour, je m'appelle Katherine, je suis chilienne, j'ai 33 ans et j'habite à Montréal depuis 5 ans.", "Hello, my name is Katherine, I'm Chilean, I'm 33 and I've lived in Montréal for 5 years."], [10.52, 16.71, "J'ai étudié l'ingénie informatique et j'adore la programmation.", "I studied computer engineering and I love programming."], [16.71, 22.9, "J'ai choisi Montréal parce que c'est un pôle de technologie au Canada.", "I chose Montréal because it's a technology hub in Canada."], [22.9, 29.97, "J'ai 6 ans d'expérience, 3 ans au Chili et 3 ans à Montréal.", "I have 6 years of experience, 3 in Chile and 3 in Montréal."], [29.97, 34.35, "Et j'ai trouvé un travail il y a 3 mois.", "And I found a job 3 months ago."], [34.35, 39.35, "J'ai aussi été professeur à l'université au Chili.", "I was also a university professor in Chile."], [39.35, 46.22, "J'aime beaucoup faire du vélo, j'aime faire depuis que je suis enfant.", "I really like cycling, I've done it since I was a child."], [46.22, 51.22, "Mais ici, grâce à la neige, j'ai commencé de nouveau hobby.", "But here, thanks to the snow, I started a new hobby."], [51.22, 54.31, "La planche à neige est le ski de fond.", "Snowboarding and cross-country skiing."], [54.31, 61.31, "Pour la planche à neige, je vais à un montant près de Montréal qui s'appelle Saint-Bruno.", "For snowboarding, I go to a mountain near Montréal called Saint-Bruno."], [61.31, 66.54, "Et pour le ski de fond, j'ai pris un course au Mont Royal.", "And for cross-country skiing, I took a course on Mount Royal."], [66.54, 71.14, "Le Canada n'est pas le premier pays où j'habite.", "Canada isn't the first country I've lived in."], [71.14, 79.14, "J'ai aussi habité en Allemagne pendant un an et au Danemark pendant un an.", "I also lived in Germany for a year and in Denmark for a year."], [79.14, 83.14, "Je travaillais avec une femme de ménage.", "I worked as a cleaner."], [83.14, 88.23, "Je suis une personne avec une personnalité ouverte.", "I'm a person with an open personality."], [88.23, 93.26, "Je n'ai pas pour parler avec la jeune.", "I like talking with people."], [93.26, 100.26, "Mais je préférerais aussi rester seule et passer du thème avec moi-même.", "But I also like being alone and spending time with myself."], [100.26, 105.3, "Ici, j'habite seule, sans ma famille. Merci.", "Here, I live alone, without my family. Thank you."]];
 const VoiceAvatar = {
   props: { src: String, lang: String },
-  data: () => ({ playing: false, level: 0, t: 0, dur: 1, blink: false, ripples: [] }),
+  data: () => ({ playing: false, level: 0, t: 0, dur: 1, blink: false, ripples: [], look: { x: 0, y: 0 }, tilt: 0, happy: false,
+    shadesY: -420,
+    CAT: 'M70 300 C45 250 50 190 60 170 L40 70 Q44 22 78 32 L178 138 Q260 120 334 134 L428 40 Q466 28 472 72 L442 210 C472 270 462 360 420 420 Q330 522 255 516 Q170 522 110 440 C80 400 70 350 70 300 Z' }),
   computed: {
     caption() {
       const c = CAPTIONS.find(([a, b]) => this.t >= a && this.t <= b);
       if (!c) return this.playing ? '' : (this.lang === 'en' ? 'Click me: I introduce myself (in French) ♥' : 'Clique-moi : je me présente ♥');
       return this.lang === 'en' ? c[3] : c[2];
     },
-    mouthH() { return 4 + this.level * 30; },
+    mouthH() { return 4 + this.level * 34; },
     speaking() { return CAPTIONS.some(([a, b]) => this.t >= a && this.t <= b); },
   },
   mounted() {
@@ -589,8 +613,20 @@ const VoiceAvatar = {
     };
     loop();
     this.blinker = setInterval(() => { this.blink = true; setTimeout(() => this.blink = false, 140); }, 3200);
+    // pupils follow the mouse anywhere on the page
+    this.onMove = e => {
+      const r = this.$el.querySelector('.avatar').getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy) || 1;
+      const k = Math.min(1, d / 300) * 6;
+      this.look = { x: dx / d * k, y: dy / d * k };
+    };
+    addEventListener('pointermove', this.onMove);
+    const btn = this.$el.querySelector('.avatar');
+    // hover: head tilts and the pixel shades drop in ("deal with it")
+    btn.addEventListener('pointerenter', () => { this.tilt = -6; this.drop(0); });
+    btn.addEventListener('pointerleave', () => { this.tilt = 0; this.drop(-420); });
   },
-  unmounted() { cancelAnimationFrame(this.raf); clearInterval(this.blinker); },
+  unmounted() { cancelAnimationFrame(this.raf); clearInterval(this.blinker); removeEventListener('pointermove', this.onMove); },
   methods: {
     toggle() {
       const a = this.$refs.audio;
@@ -608,28 +644,39 @@ const VoiceAvatar = {
     },
     rippleStyle(r) {
       const k = (performance.now() - r.born) / 1400;
-      return { r: 70 + k * 40, opacity: (1 - k) * .5 };
+      return { r: 270 + k * 90, opacity: (1 - k) * .5 };
+    },
+    drop(to) {
+      if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.to(this, { shadesY: to, duration: to ? .35 : .7, ease: to ? 'power2.in' : 'bounce.out', overwrite: true });
+      else this.shadesY = to;
     },
   },
   template: `
     <div class="avatar-box">
       <button class="avatar" type="button" @click="toggle" :aria-label="lang === 'en' ? (playing ? 'Pause my introduction' : 'Play my introduction') : (playing ? 'Mettre en pause ma présentation' : 'Écouter ma présentation')" :aria-pressed="playing">
-        <svg viewBox="-100 -100 200 200" aria-hidden="true">
-          <circle v-for="r in ripples" :key="r.id" class="ring" :r="rippleStyle(r).r" :opacity="rippleStyle(r).opacity" stroke-width="2"/>
-          <circle class="ring" r="86" stroke-width="1.5" opacity=".35" :transform="'scale(' + (1 + level * .08) + ')'"/>
-          <g :transform="'translate(0 ' + (-level * 4) + ') scale(' + (1 + level * .05) + ')'">
-            <circle class="face" r="70"/>
-            <path class="hair" d="M-66 -18 C -64 -70, 64 -76, 68 -14 C 50 -46, 10 -40, -8 -54 C -24 -36, -50 -40, -66 -18 Z"/>
-            <ellipse class="cheek" cx="-38" cy="16" rx="11" ry="7"/><ellipse class="cheek" cx="38" cy="16" rx="11" ry="7"/>
-            <ellipse class="eye" cx="-24" cy="-4" rx="7" :ry="blink ? 1 : 9"/><ellipse class="eye" cx="24" cy="-4" rx="7" :ry="blink ? 1 : 9"/>
-            <ellipse class="mouth" cx="0" cy="26" :rx="9 + level * 6" :ry="mouthH / 2"/>
+        <svg viewBox="-20 -20 560 640" aria-hidden="true">
+          <defs><clipPath id="catClip"><path :d="CAT"/></clipPath></defs>
+          <circle v-for="r in ripples" :key="r.id" class="ring" cx="260" cy="310" :r="rippleStyle(r).r" :opacity="rippleStyle(r).opacity" stroke-width="6"/>
+          <g :transform="'rotate(' + tilt + ' 260 330) translate(0 ' + (-level * 10) + ')'">
+            <path class="sticker" :d="CAT"/>
+            <image href="media/cat.jpg" width="520" height="600" clip-path="url(#catClip)"/>
+            <!-- doodles -->
+            <g class="sparks" :opacity="playing ? .9 : 0"><path d="M30 120 l-28 -16 M18 170 l-32 0 M490 120 l28 -16 M502 170 l32 0 M250 10 l0 -30 M200 18 l-12 -26 M300 18 l12 -26"/></g>
+            <ellipse class="blush" cx="135" cy="395" rx="40" ry="20" :opacity=".35 + level * .4"/><ellipse class="blush" cx="372" cy="395" rx="40" ry="20" :opacity=".35 + level * .4"/>
+            <path class="brow" :transform="'translate(0 ' + (-level * 26) + ') rotate(' + (-6 - level * 8) + ' 160 210)'" d="M108 222 Q160 188 214 210"/>
+            <path class="brow" :transform="'translate(0 ' + (-level * 26) + ') rotate(' + (6 + level * 8) + ' 350 210)'" d="M298 210 Q352 188 404 222"/>
+            <path v-if="mouthH < 9 && !happy" class="w" d="M212 448 q20 22 40 0 q20 22 40 0"/>
+            <g v-else-if="!happy"><ellipse class="mouth-o" cx="252" cy="462" :rx="22 + level * 10" :ry="mouthH"/><ellipse class="tongue" cx="252" :cy="462 + mouthH * .45" :rx="12 + level * 6" :ry="Math.max(4, mouthH * .45)"/></g>
+            <path v-else class="w" d="M206 440 q46 50 92 0"/>
+            <g class="shades" :opacity="shadesY < -300 ? 0 : 1" :transform="'translate(0 ' + shadesY + ')'"><rect x="96" y="236" width="340" height="14"/><rect x="112" y="244" width="112" height="40"/><rect x="126" y="284" width="84" height="14"/><rect x="126" y="252" width="14" height="14" class="shine"/><rect x="140" y="266" width="14" height="14" class="shine"/><rect x="310" y="244" width="112" height="40"/><rect x="324" y="284" width="84" height="14"/><rect x="324" y="252" width="14" height="14" class="shine"/><rect x="338" y="266" width="14" height="14" class="shine"/></g>
+            <g v-if="happy" class="merci"><rect x="300" y="-10" width="210" height="70" rx="35"/><text x="405" y="38" text-anchor="middle">Merci ♥</text></g>
           </g>
-          <g v-if="!playing" transform="translate(52 52)"><circle r="17" class="face" stroke="var(--paper)" stroke-width="3"/><path d="M-5 -8 L9 0 L-5 8 Z" fill="var(--on-accent)"/></g>
+          <g v-if="!playing" transform="translate(470 540)"><circle r="46" class="play"/><path d="M-14 -22 L24 0 L-14 22 Z" fill="var(--on-accent)"/></g>
         </svg>
       </button>
       <div class="avatar-cta" aria-hidden="true"><span>{{ playing ? '♪' : '▶' }} {{ Math.floor(t / 60) }}:{{ String(Math.floor(t % 60)).padStart(2, '0') }}</span><span class="bar"><i :style="{ width: (t / dur * 100) + '%' }"></i></span></div>
       <p class="caption" aria-live="polite">{{ caption }}</p>
-      <audio ref="audio" :src="src" preload="metadata" @play="playing = true" @pause="playing = false" @ended="playing = false; t = 0"></audio>
+      <audio ref="audio" :src="src" preload="metadata" @play="playing = true" @pause="playing = false" @ended="playing = false; t = 0; happy = true; setTimeout(() => happy = false, 2500)"></audio>
     </div>`,
 };
 const avatarApp = Vue.createApp({
@@ -672,6 +719,7 @@ const T = {
     pl11: 'Un chat de bureau qui jase en français',
     lkMail: 'Courriel', linksAria: 'Liens de contact',
     st1: 'ans d’expérience', st2: 'entreprises', st3: 'langues', st4: 'projets sur GitHub',
+    catCredit: 'Photo du chat :',
     xpH: 'Expérience', xNow: 'Actuellement', xFS: 'Développeuse full stack',
     x1d: 'juin 2022 – aujourd’hui', tSat: 'communications satellitaires', tNet: 'gestion de réseaux',
     x1a: 'Développé des solutions logicielles pour des systèmes de communications satellitaires et de gestion de réseaux, intégrant des systèmes embarqués, des protocoles réseau et des interfaces web modernes.',
@@ -749,6 +797,7 @@ const T = {
     pl11: 'A desktop cat that chats in French',
     lkMail: 'Email', linksAria: 'Contact links',
     st1: 'years of experience', st2: 'companies', st3: 'languages', st4: 'projects on GitHub',
+    catCredit: 'Cat photo:',
     xpH: 'Experience', xNow: 'Currently', xFS: 'Full stack developer',
     x1d: 'Jun 2022 – present', tSat: 'satellite communications', tNet: 'network management',
     x1a: 'Built software for satellite communication and network management systems, integrating embedded systems, network protocols and modern web interfaces.',
